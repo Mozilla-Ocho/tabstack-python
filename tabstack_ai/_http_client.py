@@ -1,4 +1,5 @@
 """Internal HTTP client for TABStack AI SDK."""
+
 import json
 from typing import Any, AsyncIterator, Dict, Optional
 
@@ -10,7 +11,6 @@ from .exceptions import (
     InvalidURLError,
     ServerError,
     ServiceUnavailableError,
-    TABStackError,
     UnauthorizedError,
 )
 

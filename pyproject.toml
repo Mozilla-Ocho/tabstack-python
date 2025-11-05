@@ -35,7 +35,6 @@ dependencies = [
 dev = [
     "pytest>=7.0.0",
     "mypy>=1.0.0",
-    "black>=22.0.0",
     "ruff>=0.1.0",
 ]
 
@@ -52,10 +51,6 @@ include = ["tabstack_ai*"]
 [tool.setuptools.package-data]
 tabstack_ai = ["py.typed"]
 
-[tool.black]
-line-length = 100
-target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
-
 [tool.mypy]
 python_version = "3.8"
 strict = true
@@ -66,3 +61,28 @@ disallow_untyped_defs = true
 [tool.ruff]
 line-length = 100
 target-version = "py38"
+fix = true
+
+[tool.ruff.lint]
+# Enable pycodestyle (E), Pyflakes (F), and isort (I) rules
+select = [
+    "E",   # pycodestyle errors
+    "F",   # Pyflakes (includes F401 - unused imports)
+    "I",   # isort
+    "W",   # pycodestyle warnings
+]
+
+# F401: Unused imports - enforced and auto-fixable
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+# test_sdk.py intentionally imports things to test that they're importable
+"test_sdk.py" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["tabstack_ai"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"

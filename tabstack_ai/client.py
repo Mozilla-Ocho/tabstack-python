@@ -1,5 +1,6 @@
 """Main client for TABStack AI SDK."""
-from typing import Any, Optional
+
+from typing import Any
 
 from ._http_client import HTTPClient
 from .automate import Automate
@@ -42,7 +43,7 @@ class TABStack:
             api_key: Your TABStack API key for authentication
             base_url: Base URL for the TABStack API (default: https://api.tabstack.ai/)
             max_connections: Maximum number of connections in the pool (default: 100)
-            max_keepalive_connections: Maximum number of idle connections to keep alive (default: 20)
+            max_keepalive_connections: Maximum idle connections to keep alive (default: 20)
             keepalive_expiry: Time in seconds to keep idle connections alive (default: 30.0)
             timeout: Default timeout for requests in seconds (default: 60.0)
 

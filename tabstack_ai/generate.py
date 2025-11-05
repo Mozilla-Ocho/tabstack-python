@@ -1,4 +1,5 @@
 """Generate operator for TABStack AI SDK."""
+
 from typing import Any, Dict
 
 from ._http_client import HTTPClient

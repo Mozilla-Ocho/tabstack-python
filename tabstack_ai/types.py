@@ -1,5 +1,6 @@
 """Type definitions and response models for TABStack AI SDK."""
-from typing import Any, Dict, Optional, TYPE_CHECKING
+
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
 if TYPE_CHECKING:
     from .schema import Schema

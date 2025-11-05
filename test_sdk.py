@@ -1,18 +1,19 @@
 """Test script to verify SDK functionality."""
+
 import sys
 
 sys.path.insert(0, ".")
 
 from tabstack_ai import (
-    TABStack,
     BadRequestError,
-    UnauthorizedError,
     InvalidURLError,
     ServerError,
     ServiceUnavailableError,
+    TABStack,
     TABStackError,
+    UnauthorizedError,
 )
-from tabstack_ai.schema import Schema, String, Number, Boolean, Array, Object
+from tabstack_ai.schema import Array, Boolean, Number, Object, Schema, String
 
 
 def test_imports():
@@ -20,15 +21,15 @@ def test_imports():
     print("Testing imports...")
     try:
         from tabstack_ai import (
-            Extract,
-            Generate,
             Automate,
-            MarkdownResponse,
-            SchemaResponse,
-            JsonResponse,
-            Metadata,
             AutomateEvent,
             EventData,
+            Extract,
+            Generate,
+            JsonResponse,
+            MarkdownResponse,
+            Metadata,
+            SchemaResponse,
         )
 
         print("✓ All imports successful")
@@ -156,14 +157,14 @@ def test_response_models():
     """Test response model creation."""
     print("\nTesting response models...")
     try:
+        from tabstack_ai.schema import Schema
         from tabstack_ai.types import (
+            AutomateEvent,
+            JsonResponse,
             MarkdownResponse,
             Metadata,
             SchemaResponse,
-            JsonResponse,
-            AutomateEvent,
         )
-        from tabstack_ai.schema import Schema
 
         # Test Metadata
         metadata = Metadata.from_dict(

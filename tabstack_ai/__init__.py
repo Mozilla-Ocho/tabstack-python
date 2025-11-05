@@ -46,9 +46,9 @@ from .types import (
     AutomateEvent,
     EventData,
     JsonResponse,
-    SchemaResponse,
     MarkdownResponse,
     Metadata,
+    SchemaResponse,
 )
 
 __version__ = "1.0.0"

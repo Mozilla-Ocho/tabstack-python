@@ -82,24 +82,28 @@ uv run mypy tabstack_ai
 mypy tabstack_ai
 ```
 
-### Code Formatting
+### Code Formatting and Linting
+
+We use Ruff for both linting and formatting. Ruff automatically enforces code style, removes unused imports, and formats code.
 
 ```bash
-# With uv (if dev dependencies installed)
-uv run black tabstack_ai
-
-# Or with pip-installed black
-black tabstack_ai
-```
-
-### Linting
-
-```bash
-# With uv (if dev dependencies installed)
+# Check for issues (with uv)
 uv run ruff check tabstack_ai
 
 # Or with pip-installed ruff
 ruff check tabstack_ai
+
+# Auto-fix issues including removing unused imports (with uv)
+uv run ruff check --fix tabstack_ai
+
+# Or with pip-installed ruff
+ruff check --fix tabstack_ai
+
+# Format code (with uv)
+uv run ruff format tabstack_ai
+
+# Or with pip-installed ruff
+ruff format tabstack_ai
 ```
 
 ## Project Structure

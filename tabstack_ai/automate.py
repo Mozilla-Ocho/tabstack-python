@@ -1,4 +1,5 @@
 """Automate operator for TABStack AI SDK."""
+
 import json
 from typing import Any, AsyncIterator, Dict, Optional
 

@@ -2,7 +2,8 @@
 
 This module provides a DSL for defining JSON schemas in a Pythonic way.
 """
-from typing import Any, Dict, List, Optional, Union
+
+from typing import Any, Dict, Optional, Union
 
 
 class SchemaType:

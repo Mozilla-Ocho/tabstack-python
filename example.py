@@ -1,4 +1,5 @@
 """Example usage of TABStack AI SDK."""
+
 import asyncio
 import os
 
@@ -40,7 +41,9 @@ async def main():
             # result.schema is a Schema object that can be used directly
             print(f"Generated schema (JSON): {result.schema.to_json_schema()}")
             # You can now use this schema directly with extract.json()
-            # data = await tabs.extract.json(url="https://news.ycombinator.com", schema=result.schema)
+            # data = await tabs.extract.json(
+            #     url="https://news.ycombinator.com", schema=result.schema
+            # )
         except Exception as e:
             print(f"Error: {e}")
 
