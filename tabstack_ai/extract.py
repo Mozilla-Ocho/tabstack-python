@@ -9,7 +9,7 @@ from .types import JsonResponse, SchemaResponse, MarkdownResponse
 class Extract:
     """Extract operator for converting and extracting web content.
 
-    This class provides methods for extracting content from URLs in various formats:
+    This class provides async methods for extracting content from URLs in various formats:
     - Markdown conversion
     - Schema generation
     - Structured JSON extraction
@@ -23,7 +23,7 @@ class Extract:
         """
         self._http = http_client
 
-    def markdown(
+    async def markdown(
         self, url: str, metadata: bool = False, nocache: bool = False
     ) -> MarkdownResponse:
         """Convert URL content to Markdown format.
@@ -47,13 +47,13 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> tabs = TABStack(api_key="your-key")
-            >>> result = tabs.extract.markdown(
-            ...     url="https://example.com/blog/article",
-            ...     metadata=True
-            ... )
-            >>> print(result.content)
-            >>> print(result.metadata.title)
+            >>> async with TABStack(api_key="your-key") as tabs:
+            ...     result = await tabs.extract.markdown(
+            ...         url="https://example.com/blog/article",
+            ...         metadata=True
+            ...     )
+            ...     print(result.content)
+            ...     print(result.metadata.title)
         """
         request_data: Dict[str, Any] = {"url": url}
         if metadata:
@@ -61,10 +61,10 @@ class Extract:
         if nocache:
             request_data["nocache"] = nocache
 
-        response = self._http.post("v1/extract/markdown", request_data)
+        response = await self._http.post("v1/extract/markdown", request_data)
         return MarkdownResponse.from_dict(response)
 
-    def schema(
+    async def schema(
         self, url: str, instructions: Optional[str] = None, nocache: bool = False
     ) -> SchemaResponse:
         """Generate schema from URL content.
@@ -87,13 +87,16 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> tabs = TABStack(api_key="your-key")
-            >>> result = tabs.extract.schema(
-            ...     url="https://news.ycombinator.com",
-            ...     instructions="extract top stories with title, points, and author"
-            ... )
-            >>> # result.schema is a Schema object
-            >>> data = tabs.extract.json(url="https://news.ycombinator.com", schema=result.schema)
+            >>> async with TABStack(api_key="your-key") as tabs:
+            ...     result = await tabs.extract.schema(
+            ...         url="https://news.ycombinator.com",
+            ...         instructions="extract top stories with title, points, and author"
+            ...     )
+            ...     # result.schema is a Schema object
+            ...     data = await tabs.extract.json(
+            ...         url="https://news.ycombinator.com",
+            ...         schema=result.schema
+            ...     )
         """
         request_data: Dict[str, Any] = {"url": url}
         if instructions:
@@ -101,10 +104,10 @@ class Extract:
         if nocache:
             request_data["nocache"] = nocache
 
-        response = self._http.post("v1/extract/json/schema", request_data)
+        response = await self._http.post("v1/extract/json/schema", request_data)
         return SchemaResponse.from_dict(response)
 
-    def json(self, url: str, schema: Schema, nocache: bool = False) -> JsonResponse:
+    async def json(self, url: str, schema: Schema, nocache: bool = False) -> JsonResponse:
         """Extract structured JSON from URL content.
 
         Fetches a URL and extracts structured data according to the provided JSON schema.
@@ -125,21 +128,21 @@ class Extract:
 
         Example:
             >>> from tabstack_ai.schema import Schema, String, Number, Array, Object
-            >>> tabs = TABStack(api_key="your-key")
-            >>> schema = Schema(
-            ...     stories=Array(
-            ...         Object(
-            ...             title=String,
-            ...             points=Number,
-            ...             author=String,
+            >>> async with TABStack(api_key="your-key") as tabs:
+            ...     schema = Schema(
+            ...         stories=Array(
+            ...             Object(
+            ...                 title=String,
+            ...                 points=Number,
+            ...                 author=String,
+            ...             )
             ...         )
             ...     )
-            ... )
-            >>> result = tabs.extract.json(
-            ...     url="https://news.ycombinator.com",
-            ...     schema=schema
-            ... )
-            >>> print(result.data["stories"])
+            ...     result = await tabs.extract.json(
+            ...         url="https://news.ycombinator.com",
+            ...         schema=schema
+            ...     )
+            ...     print(result.data["stories"])
         """
         request_data: Dict[str, Any] = {
             "url": url,
@@ -148,5 +151,5 @@ class Extract:
         if nocache:
             request_data["nocache"] = nocache
 
-        response = self._http.post("v1/extract/json", request_data)
+        response = await self._http.post("v1/extract/json", request_data)
         return JsonResponse.from_dict(response)

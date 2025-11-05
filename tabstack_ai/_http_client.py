@@ -1,8 +1,8 @@
 """Internal HTTP client for TABStack AI SDK."""
-import http.client
 import json
-from typing import Any, Dict, Iterator, Optional
-from urllib.parse import urlparse
+from typing import Any, AsyncIterator, Dict, Optional
+
+import httpx
 
 from .exceptions import (
     APIError,
@@ -16,33 +16,69 @@ from .exceptions import (
 
 
 class HTTPClient:
-    """HTTP client for making requests to TABStack API."""
+    """Async HTTP client for making requests to TABStack API with connection pooling."""
 
-    def __init__(self, api_key: str, base_url: str = "https://api.tabstack.ai/") -> None:
-        """Initialize HTTP client.
+    def __init__(
+        self,
+        api_key: str,
+        base_url: str = "https://api.tabstack.ai/",
+        max_connections: int = 100,
+        max_keepalive_connections: int = 20,
+        keepalive_expiry: float = 30.0,
+        timeout: float = 60.0,
+    ) -> None:
+        """Initialize async HTTP client with connection pooling.
 
         Args:
             api_key: API key for authentication
             base_url: Base URL for the API
+            max_connections: Maximum number of connections in the pool
+            max_keepalive_connections: Maximum number of idle connections to keep alive
+            keepalive_expiry: Time in seconds to keep idle connections alive
+            timeout: Default timeout for requests in seconds
         """
         self.api_key = api_key
         self.base_url = base_url.rstrip("/")
-        self.parsed_url = urlparse(self.base_url)
 
-        # Determine if we should use HTTPS
-        self.use_https = self.parsed_url.scheme == "https"
+        # Configure connection pooling limits
+        limits = httpx.Limits(
+            max_connections=max_connections,
+            max_keepalive_connections=max_keepalive_connections,
+            keepalive_expiry=keepalive_expiry,
+        )
 
-    def _get_connection(self) -> http.client.HTTPConnection:
-        """Get HTTP or HTTPS connection.
+        # Create async client with connection pooling
+        self._client: Optional[httpx.AsyncClient] = None
+        self._limits = limits
+        self._timeout = timeout
+
+    async def _get_client(self) -> httpx.AsyncClient:
+        """Get or create the async HTTP client.
 
         Returns:
-            HTTP connection instance
+            Configured async HTTP client
         """
-        host = self.parsed_url.netloc
-        if self.use_https:
-            return http.client.HTTPSConnection(host, timeout=60)
-        else:
-            return http.client.HTTPConnection(host, timeout=60)
+        if self._client is None:
+            self._client = httpx.AsyncClient(
+                base_url=self.base_url,
+                limits=self._limits,
+                timeout=self._timeout,
+            )
+        return self._client
+
+    async def close(self) -> None:
+        """Close the HTTP client and release connections."""
+        if self._client is not None:
+            await self._client.aclose()
+            self._client = None
+
+    async def __aenter__(self) -> "HTTPClient":
+        """Async context manager entry."""
+        return self
+
+    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        """Async context manager exit."""
+        await self.close()
 
     def _get_headers(self, content_type: str = "application/json") -> Dict[str, str]:
         """Get default headers for requests.
@@ -89,8 +125,8 @@ class HTTPClient:
         else:
             raise APIError(error_message, status)
 
-    def post(self, path: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Make a POST request.
+    async def post(self, path: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Make an async POST request.
 
         Args:
             path: API endpoint path
@@ -102,35 +138,30 @@ class HTTPClient:
         Raises:
             TABStackError: On API errors
         """
-        conn = self._get_connection()
-        try:
-            # Prepare request body
-            body = json.dumps(data) if data else "{}"
-            headers = self._get_headers()
+        client = await self._get_client()
+        headers = self._get_headers()
 
-            # Make request
-            full_path = f"{self.parsed_url.path}/{path.lstrip('/')}"
-            conn.request("POST", full_path, body=body, headers=headers)
+        # Make the request
+        response = await client.post(
+            path,
+            json=data,
+            headers=headers,
+        )
 
-            # Get response
-            response = conn.getresponse()
-            response_body = response.read()
+        # Handle errors
+        if response.status_code >= 400:
+            self._handle_error_response(response.status_code, response.content)
 
-            # Handle errors
-            if response.status >= 400:
-                self._handle_error_response(response.status, response_body)
+        # Parse successful response
+        if response.content:
+            return response.json()
+        else:
+            return {}
 
-            # Parse successful response
-            if response_body:
-                return json.loads(response_body.decode("utf-8"))
-            else:
-                return {}
-
-        finally:
-            conn.close()
-
-    def post_stream(self, path: str, data: Optional[Dict[str, Any]] = None) -> Iterator[str]:
-        """Make a POST request with streaming response (Server-Sent Events).
+    async def post_stream(
+        self, path: str, data: Optional[Dict[str, Any]] = None
+    ) -> AsyncIterator[str]:
+        """Make an async POST request with streaming response (Server-Sent Events).
 
         Args:
             path: API endpoint path
@@ -142,32 +173,20 @@ class HTTPClient:
         Raises:
             TABStackError: On API errors
         """
-        conn = self._get_connection()
-        try:
-            # Prepare request body
-            body = json.dumps(data) if data else "{}"
-            headers = self._get_headers()
-            headers["Accept"] = "text/event-stream"
+        client = await self._get_client()
+        headers = self._get_headers()
+        headers["Accept"] = "text/event-stream"
 
-            # Make request
-            full_path = f"{self.parsed_url.path}/{path.lstrip('/')}"
-            conn.request("POST", full_path, body=body, headers=headers)
-
-            # Get response
-            response = conn.getresponse()
-
-            # Check for errors first (non-streaming error responses)
-            if response.status >= 400:
-                error_body = response.read()
-                self._handle_error_response(response.status, error_body)
+        # Make streaming request
+        async with client.stream("POST", path, json=data, headers=headers) as response:
+            # Check for errors first
+            if response.status_code >= 400:
+                error_body = await response.aread()
+                self._handle_error_response(response.status_code, error_body)
 
             # Stream the response
             buffer = b""
-            while True:
-                chunk = response.read(1024)
-                if not chunk:
-                    break
-
+            async for chunk in response.aiter_bytes(chunk_size=1024):
                 buffer += chunk
                 # Process complete lines
                 while b"\n" in buffer:
@@ -181,6 +200,3 @@ class HTTPClient:
                 line = buffer.decode("utf-8", errors="replace").rstrip("\r\n")
                 if line:
                     yield line
-
-        finally:
-            conn.close()

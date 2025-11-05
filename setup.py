@@ -32,7 +32,9 @@ setup(
         "Topic :: Internet :: WWW/HTTP",
     ],
     python_requires=">=3.8",
-    install_requires=[],
+    install_requires=[
+        "httpx>=0.27.0",
+    ],
     extras_require={
         "dev": [
             "pytest>=7.0.0",

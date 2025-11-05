@@ -9,7 +9,7 @@ from .types import JsonResponse
 class Generate:
     """Generate operator for AI-powered content transformation.
 
-    This class provides methods for generating transformed content from URLs using AI,
+    This class provides async methods for generating transformed content from URLs using AI,
     allowing you to create summaries, restructure data, and enhance content based on
     custom instructions.
     """
@@ -22,7 +22,7 @@ class Generate:
         """
         self._http = http_client
 
-    def json(
+    async def json(
         self, url: str, schema: Schema, instructions: str, nocache: bool = False
     ) -> JsonResponse:
         """Generate transformed JSON with AI.
@@ -47,22 +47,22 @@ class Generate:
 
         Example:
             >>> from tabstack_ai.schema import Schema, String, Array, Object
-            >>> tabs = TABStack(api_key="your-key")
-            >>> schema = Schema(
-            ...     summaries=Array(
-            ...         Object(
-            ...             title=String,
-            ...             category=String,
-            ...             summary=String,
+            >>> async with TABStack(api_key="your-key") as tabs:
+            ...     schema = Schema(
+            ...         summaries=Array(
+            ...             Object(
+            ...                 title=String,
+            ...                 category=String,
+            ...                 summary=String,
+            ...             )
             ...         )
             ...     )
-            ... )
-            >>> result = tabs.generate.json(
-            ...     url="https://news.ycombinator.com",
-            ...     schema=schema,
-            ...     instructions="Categorize each story and write a one-sentence summary"
-            ... )
-            >>> print(result.data["summaries"])
+            ...     result = await tabs.generate.json(
+            ...         url="https://news.ycombinator.com",
+            ...         schema=schema,
+            ...         instructions="Categorize each story and write a one-sentence summary"
+            ...     )
+            ...     print(result.data["summaries"])
         """
         request_data: Dict[str, Any] = {
             "url": url,
@@ -72,5 +72,5 @@ class Generate:
         if nocache:
             request_data["nocache"] = nocache
 
-        response = self._http.post("v1/generate/json", request_data)
+        response = await self._http.post("v1/generate/json", request_data)
         return JsonResponse.from_dict(response)

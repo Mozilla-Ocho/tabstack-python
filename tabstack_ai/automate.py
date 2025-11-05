@@ -1,6 +1,6 @@
 """Automate operator for TABStack AI SDK."""
 import json
-from typing import Any, Dict, Iterator, Optional
+from typing import Any, AsyncIterator, Dict, Optional
 
 from ._http_client import HTTPClient
 from .types import AutomateEvent
@@ -9,7 +9,7 @@ from .types import AutomateEvent
 class Automate:
     """Automate operator for AI-powered web automation.
 
-    This class provides methods for executing complex web automation tasks using
+    This class provides async methods for executing complex web automation tasks using
     natural language instructions. The automation runs in a browser and streams
     real-time progress updates.
     """
@@ -22,7 +22,7 @@ class Automate:
         """
         self._http = http_client
 
-    def execute(
+    async def execute(
         self,
         task: str,
         url: Optional[str] = None,
@@ -30,7 +30,7 @@ class Automate:
         guardrails: Optional[str] = None,
         max_iterations: int = 50,
         max_validation_attempts: int = 3,
-    ) -> Iterator[AutomateEvent]:
+    ) -> AsyncIterator[AutomateEvent]:
         """Execute AI-powered browser automation task with streaming updates.
 
         This method streams real-time progress updates as Server-Sent Events (SSE).
@@ -54,18 +54,18 @@ class Automate:
             ServiceUnavailableError: If automate service is not available
 
         Example:
-            >>> tabs = TABStack(api_key="your-key")
-            >>> for event in tabs.automate.execute(
-            ...     task="Find the top 3 trending repositories",
-            ...     url="https://github.com/trending",
-            ...     guardrails="browse and extract only"
-            ... ):
-            ...     if event.type == "task:completed":
-            ...         print(f"Result: {event.data.final_answer}")
-            ...     elif event.type == "agent:extracted":
-            ...         print(f"Extracted: {event.data.extracted_data}")
-            ...     elif event.type == "error":
-            ...         print(f"Error: {event.data.get('error')}")
+            >>> async with TABStack(api_key="your-key") as tabs:
+            ...     async for event in tabs.automate.execute(
+            ...         task="Find the top 3 trending repositories",
+            ...         url="https://github.com/trending",
+            ...         guardrails="browse and extract only"
+            ...     ):
+            ...         if event.type == "task:completed":
+            ...             print(f"Result: {event.data.final_answer}")
+            ...         elif event.type == "agent:extracted":
+            ...             print(f"Extracted: {event.data.extracted_data}")
+            ...         elif event.type == "error":
+            ...             print(f"Error: {event.data.get('error')}")
 
         Event Types:
             Task Events:
@@ -118,7 +118,7 @@ class Automate:
         current_event_type: Optional[str] = None
         current_event_data: str = ""
 
-        for line in self._http.post_stream("v1/automate", request_data):
+        async for line in self._http.post_stream("v1/automate", request_data):
             # SSE format: "event: <type>" or "data: <json>"
             if line.startswith("event:"):
                 # If we have a pending event, yield it before starting a new one
