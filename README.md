@@ -4,6 +4,16 @@ Python SDK for TABStack AI - Extract, Generate, and Automate web content using A
 
 ## Installation
 
+### Using uv (recommended)
+```bash
+uv pip install tabstack-ai
+```
+
+Or add to your project:
+```bash
+uv add tabstack-ai
+```
+
 ### Using pip
 ```bash
 pip install tabstack-ai

@@ -4,9 +4,23 @@
 
 ### Prerequisites
 - Python 3.8 or higher
-- pip, poetry, or pipenv
+- uv, pip, poetry, or pipenv
 
 ### Installation for Development
+
+#### Using uv (recommended)
+```bash
+# Clone the repository
+git clone https://github.com/tabstack/tabs-python.git
+cd tabs-python
+
+# Create a virtual environment and install in development mode
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install package with dev dependencies
+uv pip install -e ".[dev]"
+```
 
 #### Using pip
 ```bash
@@ -61,30 +75,30 @@ python example.py
 ### Type Checking
 
 ```bash
-# Install mypy if not already installed
-pip install mypy
+# With uv (if dev dependencies installed)
+uv run mypy tabstack_ai
 
-# Run type checker
+# Or with pip-installed mypy
 mypy tabstack_ai
 ```
 
 ### Code Formatting
 
 ```bash
-# Install black if not already installed
-pip install black
+# With uv (if dev dependencies installed)
+uv run black tabstack_ai
 
-# Format code
+# Or with pip-installed black
 black tabstack_ai
 ```
 
 ### Linting
 
 ```bash
-# Install ruff if not already installed
-pip install ruff
+# With uv (if dev dependencies installed)
+uv run ruff check tabstack_ai
 
-# Run linter
+# Or with pip-installed ruff
 ruff check tabstack_ai
 ```
 
@@ -136,8 +150,10 @@ tabs-python/
 1. Update version in `pyproject.toml`, `setup.py`, and `tabstack_ai/__init__.py`
 2. Update CHANGELOG.md
 3. Create a git tag: `git tag v1.0.0`
-4. Build the package: `python setup.py sdist bdist_wheel`
-5. Upload to PyPI: `twine upload dist/*`
+4. Build the package:
+   - With uv: `uv build`
+   - Or with build: `python -m build`
+5. Upload to PyPI: `uv publish` or `twine upload dist/*`
 
 ## Questions or Issues?
 
