@@ -1,13 +1,19 @@
 """Type definitions and response models for TABStack AI SDK."""
 
-from typing import TYPE_CHECKING, Any, Dict, Optional
-
-if TYPE_CHECKING:
-    from .schema import Schema
+from typing import Any, Dict, Optional
 
 
 class Metadata:
-    """Metadata extracted from a web page."""
+    """Metadata extracted from a web page.
+
+    Contains Open Graph tags and HTML meta tags extracted from the page.
+    All fields are optional and will be None if not found on the page.
+
+    Example:
+        >>> result = await tabs.extract.markdown(url="https://example.com", metadata=True)
+        >>> print(result.metadata.title)
+        >>> print(result.metadata.description)
+    """
 
     def __init__(
         self,
@@ -89,7 +95,23 @@ class Metadata:
 
 
 class MarkdownResponse:
-    """Response from markdown extraction."""
+    """Response from markdown extraction.
+
+    Contains the converted markdown content and optional metadata. The metadata
+    field is only populated when metadata=True is passed to extract.markdown().
+    When metadata=False (default), metadata is embedded as YAML frontmatter
+    in the content string.
+
+    Attributes:
+        url: The URL that was converted
+        content: The markdown content (may include YAML frontmatter if metadata=False)
+        metadata: Extracted metadata object (only present when metadata=True)
+
+    Example:
+        >>> result = await tabs.extract.markdown(url="https://example.com", metadata=True)
+        >>> print(result.content)  # Clean markdown without frontmatter
+        >>> print(result.metadata.title)  # Access metadata separately
+    """
 
     def __init__(self, url: str, content: str, metadata: Optional[Metadata] = None) -> None:
         """Initialize markdown response.
@@ -121,13 +143,29 @@ class MarkdownResponse:
 
 
 class SchemaResponse:
-    """Response from schema generation."""
+    """Response from schema generation.
 
-    def __init__(self, schema: "Schema") -> None:
+    Contains a JSON Schema dict that describes the structure of data found on a page.
+    The schema can be used directly with extract.json() to extract structured data.
+
+    Attributes:
+        schema: JSON Schema dict describing the data structure
+
+    Example:
+        >>> # Generate a schema
+        >>> result = await tabs.extract.schema(
+        ...     url="https://news.ycombinator.com",
+        ...     instructions="extract stories with title and points"
+        ... )
+        >>> # Use the schema to extract data
+        >>> data = await tabs.extract.json(url="https://news.ycombinator.com", schema=result.schema)
+    """
+
+    def __init__(self, schema: Dict[str, Any]) -> None:
         """Initialize schema response.
 
         Args:
-            schema: The generated Schema object
+            schema: The generated JSON Schema dict
         """
         self.schema = schema
 
@@ -141,15 +179,24 @@ class SchemaResponse:
         Returns:
             SchemaResponse instance
         """
-        # Import here to avoid circular import
-        from .schema import Schema
-
-        schema = Schema.from_json_schema(data)
-        return cls(schema=schema)
+        return cls(schema=data)
 
 
 class JsonResponse:
-    """Response from JSON extraction or generation."""
+    """Response from JSON extraction or generation.
+
+    Contains structured data extracted or generated according to your JSON Schema.
+    The data attribute contains a dict/list matching your schema structure.
+
+    Attributes:
+        data: The extracted or generated data (dict or list)
+
+    Example:
+        >>> result = await tabs.extract.json(url="https://example.com", schema=my_schema)
+        >>> print(result.data["stories"][0]["title"])
+        >>> for item in result.data["items"]:
+        ...     print(item["name"])
+    """
 
     def __init__(self, data: Any) -> None:
         """Initialize JSON response.
@@ -173,7 +220,23 @@ class JsonResponse:
 
 
 class AutomateEvent:
-    """Event from the automate streaming endpoint."""
+    """Event from the automate streaming endpoint.
+
+    Represents a single Server-Sent Event (SSE) from the automation stream.
+    Each event has a type (e.g., "task:completed", "agent:extracted") and
+    associated data.
+
+    Attributes:
+        type: Event type string (see automate.execute() docstring for full list)
+        data: EventData object providing attribute and dict-style access to event fields
+
+    Example:
+        >>> async for event in tabs.automate.execute(task="Extract data", url="https://example.com"):
+        ...     if event.type == "task:completed":
+        ...         print(f"Done: {event.data.final_answer}")
+        ...     elif event.type == "agent:extracted":
+        ...         print(f"Data: {event.data.extracted_data}")
+    """
 
     def __init__(self, type: str, data: Dict[str, Any]) -> None:
         """Initialize automate event.
@@ -191,7 +254,20 @@ class AutomateEvent:
 
 
 class EventData:
-    """Event data with attribute access."""
+    """Event data with convenient attribute access.
+
+    Provides both attribute-style (event.data.field_name) and dict-style
+    (event.data.get('field_name')) access to event fields. Automatically converts
+    Python snake_case to API camelCase (e.g., final_answer → finalAnswer).
+
+    The API returns fields in camelCase, but you can access them using Python-style
+    snake_case for convenience.
+
+    Example:
+        >>> event.data.final_answer  # Automatically finds 'finalAnswer' in the data
+        >>> event.data.get('finalAnswer')  # Direct dict access also works
+        >>> event.data.raw  # Access the raw dictionary
+    """
 
     def __init__(self, data: Dict[str, Any]) -> None:
         """Initialize event data.
@@ -217,7 +293,7 @@ class EventData:
         if name in self.raw:
             return self.raw[name]
 
-        # Try camelCase conversion for common patterns
+        # API returns camelCase, but allow Pythonic snake_case for convenience
         camel_name = self._to_camel_case(name)
         if camel_name in self.raw:
             return self.raw[camel_name]

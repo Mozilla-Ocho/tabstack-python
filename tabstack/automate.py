@@ -8,11 +8,20 @@ from .types import AutomateEvent
 
 
 class Automate:
-    """Automate operator for AI-powered web automation.
+    """Automate operator for AI-powered browser automation.
 
-    This class provides async methods for executing complex web automation tasks using
-    natural language instructions. The automation runs in a browser and streams
-    real-time progress updates.
+    The Automate operator enables complex, multi-step web automation tasks using
+    natural language instructions. An AI agent navigates a real browser, performing
+    actions like clicking, filling forms, and extracting data.
+
+    Use cases include:
+    - Web scraping from complex sites requiring interaction
+    - Automated form filling and submission
+    - Multi-step workflows (login → navigate → extract → download)
+    - Tasks requiring browser state (cookies, sessions, JavaScript)
+
+    Results stream in real-time as Server-Sent Events (SSE), allowing you to
+    monitor progress and handle events as they occur.
     """
 
     def __init__(self, http_client: HTTPClient) -> None:

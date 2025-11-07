@@ -3,8 +3,7 @@
 import asyncio
 import os
 
-from tabstack_ai import TABStack
-from tabstack_ai.schema import Array, Number, Object, Schema, String
+from tabstack import TABStack
 
 
 async def main():
@@ -38,8 +37,8 @@ async def main():
                 url="https://news.ycombinator.com",
                 instructions="extract top stories with title, points, and author",
             )
-            # result.schema is a Schema object that can be used directly
-            print(f"Generated schema (JSON): {result.schema.to_json_schema()}")
+            # result.schema is a JSON Schema dict that can be used directly
+            print(f"Generated schema: {result.schema}")
             # You can now use this schema directly with extract.json()
             # data = await tabs.extract.json(
             #     url="https://news.ycombinator.com", schema=result.schema
@@ -53,15 +52,22 @@ async def main():
         print("Example 3: Extract Structured JSON")
         print("-" * 50)
         try:
-            schema = Schema(
-                stories=Array(
-                    Object(
-                        title=String,
-                        points=Number,
-                        author=String,
-                    )
-                )
-            )
+            schema = {
+                "type": "object",
+                "properties": {
+                    "stories": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "title": {"type": "string"},
+                                "points": {"type": "number"},
+                                "author": {"type": "string"},
+                            },
+                        },
+                    }
+                },
+            }
 
             result = await tabs.extract.json(url="https://news.ycombinator.com", schema=schema)
             print(f"Extracted data: {result.data}")
@@ -74,15 +80,22 @@ async def main():
         print("Example 4: Generate Transformed Content")
         print("-" * 50)
         try:
-            summary_schema = Schema(
-                summaries=Array(
-                    Object(
-                        title=String,
-                        category=String,
-                        summary=String,
-                    )
-                )
-            )
+            summary_schema = {
+                "type": "object",
+                "properties": {
+                    "summaries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "title": {"type": "string"},
+                                "category": {"type": "string"},
+                                "summary": {"type": "string"},
+                            },
+                        },
+                    }
+                },
+            }
 
             result = await tabs.generate.json(
                 url="https://news.ycombinator.com",

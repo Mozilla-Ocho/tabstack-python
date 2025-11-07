@@ -21,7 +21,10 @@ class TABStackError(Exception):
 class BadRequestError(TABStackError):
     """Exception for 400 Bad Request errors.
 
-    Raised when the request is malformed or missing required fields.
+    Raised when the request is malformed or missing required fields
+    (e.g., invalid JSON schema, missing task description, invalid parameters).
+
+    This error indicates a client-side problem. Do not retry.
     """
 
     def __init__(self, message: str) -> None:
@@ -36,7 +39,11 @@ class BadRequestError(TABStackError):
 class UnauthorizedError(TABStackError):
     """Exception for 401 Unauthorized errors.
 
-    Raised when the API key is invalid or missing.
+    Raised when the API key is invalid or missing. Verify your API key
+    is correct and has not expired.
+
+    This error indicates an authentication problem. Do not retry without
+    fixing the API key.
     """
 
     def __init__(self, message: str = "Unauthorized - Invalid or missing API key") -> None:
@@ -51,7 +58,11 @@ class UnauthorizedError(TABStackError):
 class InvalidURLError(TABStackError):
     """Exception for 422 Unprocessable Entity errors related to URLs.
 
-    Raised when the provided URL is invalid or inaccessible.
+    Raised when the provided URL is invalid, inaccessible, or returns an error
+    (e.g., 404 Not Found, connection timeout, invalid domain).
+
+    This error indicates a problem with the URL itself. Do not retry without
+    fixing the URL.
     """
 
     def __init__(self, message: str = "Invalid or inaccessible URL") -> None:
@@ -67,6 +78,10 @@ class ServerError(TABStackError):
     """Exception for 500 Internal Server Error.
 
     Raised when the server encounters an error processing the request.
+    This is typically a temporary issue.
+
+    This error is retryable. Consider implementing exponential backoff
+    when retrying.
     """
 
     def __init__(self, message: str = "Internal server error") -> None:
@@ -81,7 +96,11 @@ class ServerError(TABStackError):
 class ServiceUnavailableError(TABStackError):
     """Exception for 503 Service Unavailable errors.
 
-    Raised when a service (e.g., automate) is not available or not configured.
+    Raised when a service (e.g., automate) is temporarily unavailable,
+    overloaded, or not configured for your account.
+
+    This error may be retryable after a delay. Check service status or
+    contact support if the issue persists.
     """
 
     def __init__(self, message: str = "Service unavailable") -> None:

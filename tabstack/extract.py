@@ -3,17 +3,20 @@
 from typing import Any, Dict, Optional
 
 from ._http_client import HTTPClient
-from .schema import Schema
 from .types import JsonResponse, MarkdownResponse, SchemaResponse
+from .utils import validate_json_schema
 
 
 class Extract:
     """Extract operator for converting and extracting web content.
 
-    This class provides async methods for extracting content from URLs in various formats:
-    - Markdown conversion
-    - Schema generation
-    - Structured JSON extraction
+    The Extract operator converts web content into structured formats without
+    AI transformation. Use Extract when you want to:
+    - Convert HTML to clean Markdown
+    - Discover data structure automatically with schema generation
+    - Extract structured data that exists in the page (no summarization/transformation)
+
+    For AI-powered transformation of content, use the Generate operator instead.
     """
 
     def __init__(self, http_client: HTTPClient) -> None:
@@ -29,17 +32,19 @@ class Extract:
     ) -> MarkdownResponse:
         """Convert URL content to Markdown format.
 
-        Fetches a URL and converts its HTML content to clean Markdown format with
-        optional metadata extraction.
+        Extracts Open Graph and HTML meta tags from the page. When metadata=True,
+        metadata is returned as a separate field (result.metadata). When metadata=False,
+        metadata is embedded as YAML frontmatter at the start of the markdown content.
 
         Args:
             url: URL to fetch and convert to markdown
-            metadata: Include extracted metadata as a separate field in the response.
-                     If False, metadata is included as YAML frontmatter in the content.
+            metadata: If True, metadata is returned as a separate field. If False,
+                     metadata is embedded as YAML frontmatter in the content string.
             nocache: Bypass cache and force fresh data retrieval
 
         Returns:
-            MarkdownResponse containing the converted content and optional metadata
+            MarkdownResponse with converted content. The metadata field is only
+            populated when metadata=True.
 
         Raises:
             BadRequestError: If URL is missing or invalid
@@ -68,23 +73,28 @@ class Extract:
     async def schema(
         self, url: str, instructions: Optional[str] = None, nocache: bool = False
     ) -> SchemaResponse:
-        """Generate schema from URL content.
+        """Generate JSON Schema from URL content using AI.
 
-        Analyzes URL content and generates a schema that describes the structure
-        of the data. Use this to create schemas for the json() method.
+        Analyzes the structure of content on a page and generates a JSON Schema
+        that describes it. The generated schema can then be used with extract.json()
+        to extract data from similar pages.
+
+        Instructions help guide the AI to focus on specific data. Keep instructions
+        under 1000 characters for best results.
 
         Args:
             url: URL to analyze and extract schema from
-            instructions: Optional instructions to guide schema generation (max 1000 chars)
+            instructions: Optional guidance for schema generation (max 1000 characters).
+                         Example: "extract top stories with title, points, and author"
             nocache: Bypass cache and force fresh data retrieval
 
         Returns:
-            SchemaResponse containing the generated Schema object
+            SchemaResponse containing the generated JSON Schema dict
 
         Raises:
-            BadRequestError: If URL is missing or instructions are invalid
+            BadRequestError: If URL is missing or instructions exceed 1000 characters
             UnauthorizedError: If API key is invalid
-            InvalidURLError: If URL is invalid
+            InvalidURLError: If URL is invalid or inaccessible
             ServerError: If server encounters an error
 
         Example:
@@ -93,7 +103,6 @@ class Extract:
             ...         url="https://news.ycombinator.com",
             ...         instructions="extract top stories with title, points, and author"
             ...     )
-            ...     # result.schema is a Schema object
             ...     data = await tabs.extract.json(
             ...         url="https://news.ycombinator.com",
             ...         schema=result.schema
@@ -108,46 +117,60 @@ class Extract:
         response = await self._http.post("v1/extract/json/schema", request_data)
         return SchemaResponse.from_dict(response)
 
-    async def json(self, url: str, schema: Schema, nocache: bool = False) -> JsonResponse:
-        """Extract structured JSON from URL content.
+    async def json(self, url: str, schema: Dict[str, Any], nocache: bool = False) -> JsonResponse:
+        """Extract structured JSON data from URL content.
 
-        Fetches a URL and extracts structured data according to the provided JSON schema.
+        Extracts data that exists on the page according to the provided JSON Schema.
+        This method performs direct extraction without AI transformation.
+
+        Use extract.json() when you want the data as-is from the page.
+        Use generate.json() when you need AI to transform, summarize, or
+        enhance the data (e.g., categorization, summarization, translation).
 
         Args:
             url: URL to fetch and extract data from
-            schema: Schema object defining the structure of data to extract
+            schema: JSON Schema dict defining the structure of data to extract
             nocache: Bypass cache and force fresh data retrieval
 
         Returns:
             JsonResponse containing the extracted data matching the schema
 
         Raises:
-            BadRequestError: If URL or schema is missing or invalid
+            ValueError: If schema is invalid (basic validation only)
+            BadRequestError: If URL or schema is missing or malformed
             UnauthorizedError: If API key is invalid
-            InvalidURLError: If URL is invalid
+            InvalidURLError: If URL is invalid or inaccessible
             ServerError: If server encounters an error
 
         Example:
-            >>> from tabstack_ai.schema import Schema, String, Number, Array, Object
             >>> async with TABStack(api_key="your-key") as tabs:
-            ...     schema = Schema(
-            ...         stories=Array(
-            ...             Object(
-            ...                 title=String,
-            ...                 points=Number,
-            ...                 author=String,
-            ...             )
-            ...         )
-            ...     )
+            ...     schema = {
+            ...         "type": "object",
+            ...         "properties": {
+            ...             "stories": {
+            ...                 "type": "array",
+            ...                 "items": {
+            ...                     "type": "object",
+            ...                     "properties": {
+            ...                         "title": {"type": "string"},
+            ...                         "points": {"type": "number"},
+            ...                         "author": {"type": "string"}
+            ...                     }
+            ...                 }
+            ...             }
+            ...         }
+            ...     }
             ...     result = await tabs.extract.json(
             ...         url="https://news.ycombinator.com",
             ...         schema=schema
             ...     )
             ...     print(result.data["stories"])
         """
+        validate_json_schema(schema)
+
         request_data: Dict[str, Any] = {
             "url": url,
-            "json_schema": schema.to_json_schema(),
+            "json_schema": schema,
         }
         if nocache:
             request_data["nocache"] = nocache

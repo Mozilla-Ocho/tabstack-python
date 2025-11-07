@@ -18,7 +18,7 @@ class TABStack:
     Example:
         >>> import asyncio
         >>> import os
-        >>> from tabstack_ai import TABStack
+        >>> from tabstack import TABStack
         >>>
         >>> async def main():
         ...     async with TABStack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
@@ -32,10 +32,10 @@ class TABStack:
         self,
         api_key: str,
         base_url: str = "https://api.tabstack.ai/",
-        max_connections: int = 100,
-        max_keepalive_connections: int = 20,
-        keepalive_expiry: float = 30.0,
-        timeout: float = 60.0,
+        max_connections: int = 100,  # Allows high concurrency for batch processing
+        max_keepalive_connections: int = 20,  # Balance between reuse and memory
+        keepalive_expiry: float = 30.0,  # API's connection timeout is ~30s
+        timeout: float = 60.0,  # Web scraping/AI operations can take time
     ) -> None:
         """Initialize TABStack async client with connection pooling.
 
@@ -61,6 +61,7 @@ class TABStack:
         if not api_key:
             raise ValueError("api_key is required")
 
+        # HTTPClient uses httpx which is thread-safe for async operations
         self._http_client = HTTPClient(
             api_key=api_key,
             base_url=base_url,
@@ -70,7 +71,7 @@ class TABStack:
             timeout=timeout,
         )
 
-        # Initialize operators
+        # Initialize operators (each shares the same HTTP client for connection reuse)
         self.extract = Extract(self._http_client)
         self.generate = Generate(self._http_client)
         self.automate = Automate(self._http_client)

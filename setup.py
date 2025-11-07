@@ -1,5 +1,6 @@
 """Setup script for tabstack-ai package."""
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 # Read the contents of README file
 try:

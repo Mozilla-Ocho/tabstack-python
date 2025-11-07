@@ -1,0 +1,41 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-python-3.12-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            pip-${{ runner.os }}-python-3.12-
+            pip-${{ runner.os }}-
+
+      - name: Install build dependencies
+        run: |
+          python3.12 -m pip install --upgrade pip
+          python3.12 -m pip install build twine
+
+      - name: Build package
+        run: |
+          python3.12 -m build
+
+      - name: Check package
+        run: |
+          python3.12 -m twine check dist/*
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          python3.12 -m twine upload dist/*

@@ -16,7 +16,16 @@ from .exceptions import (
 
 
 class HTTPClient:
-    """Async HTTP client for making requests to TABStack API with connection pooling."""
+    """Internal async HTTP client for TABStack API requests.
+
+    Handles HTTP communication with the TABStack API, including:
+    - Connection pooling and keepalive for performance
+    - Request authentication with API keys
+    - Error response parsing and exception mapping
+    - Server-Sent Events (SSE) streaming for automate endpoint
+
+    This is an internal class. Users should use the TABStack client instead.
+    """
 
     def __init__(
         self,
@@ -106,12 +115,14 @@ class HTTPClient:
         Raises:
             TABStackError: Appropriate exception based on status code
         """
+        # Try to parse JSON error response, fall back to raw text if not JSON
         try:
             error_data = json.loads(body.decode("utf-8"))
             error_message = error_data.get("error", "Unknown error")
         except (json.JSONDecodeError, UnicodeDecodeError):
             error_message = body.decode("utf-8", errors="replace") if body else "Unknown error"
 
+        # Map HTTP status codes to specific exception types
         if status == 400:
             raise BadRequestError(error_message)
         elif status == 401:
@@ -184,7 +195,7 @@ class HTTPClient:
                 error_body = await response.aread()
                 self._handle_error_response(response.status_code, error_body)
 
-            # Stream the response
+            # SSE streams are line-based; buffer bytes until we have complete lines
             buffer = b""
             async for chunk in response.aiter_bytes(chunk_size=1024):
                 buffer += chunk
