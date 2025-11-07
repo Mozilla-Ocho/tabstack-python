@@ -1,4 +1,4 @@
-"""Tests for HTTPClient class."""
+"""Tests for HTTPClientSync class."""
 
 import json
 from typing import Any
@@ -6,7 +6,7 @@ from typing import Any
 import httpx
 import pytest
 
-from tabstack._http_client import HTTPClient
+from tabstack._http_client_sync import HTTPClientSync
 from tabstack._shared import get_http_headers, handle_error_response
 from tabstack.exceptions import (
     APIError,
@@ -18,18 +18,18 @@ from tabstack.exceptions import (
 )
 
 
-class TestHTTPClientInitialization:
-    """Tests for HTTPClient initialization."""
+class TestHTTPClientSyncInitialization:
+    """Tests for HTTPClientSync initialization."""
 
     def test_initialization_with_defaults(self) -> None:
-        """Test HTTPClient initialization with default values."""
-        client = HTTPClient(api_key="test_key")
+        """Test HTTPClientSync initialization with default values."""
+        client = HTTPClientSync(api_key="test_key")
         assert client.api_key == "test_key"
         assert client.base_url == "https://api.tabstack.ai"
 
     def test_initialization_with_custom_values(self) -> None:
-        """Test HTTPClient initialization with custom values."""
-        client = HTTPClient(
+        """Test HTTPClientSync initialization with custom values."""
+        client = HTTPClientSync(
             api_key="test_key",
             base_url="https://custom.api.com/",
             max_connections=50,
@@ -41,11 +41,11 @@ class TestHTTPClientInitialization:
 
     def test_base_url_trailing_slash_removed(self) -> None:
         """Test trailing slash is removed from base_url."""
-        client = HTTPClient(api_key="test_key", base_url="https://api.example.com/")
+        client = HTTPClientSync(api_key="test_key", base_url="https://api.example.com/")
         assert client.base_url == "https://api.example.com"
 
 
-class TestHTTPClientHeaders:
+class TestHTTPClientSyncHeaders:
     """Tests for HTTP headers generation."""
 
     def test_get_headers_default(self) -> None:
@@ -62,7 +62,7 @@ class TestHTTPClientHeaders:
         assert headers["Content-Type"] == "text/plain"
 
 
-class TestHTTPClientErrorHandling:
+class TestHTTPClientSyncErrorHandling:
     """Tests for error response handling."""
 
     def test_handle_error_400_bad_request(self) -> None:
@@ -114,12 +114,12 @@ class TestHTTPClientErrorHandling:
             handle_error_response(400, b"")
 
 
-class TestHTTPClientPost:
+class TestHTTPClientSyncPost:
     """Tests for POST requests."""
 
-    async def test_post_success(self, mocker: Any) -> None:
+    def test_post_success(self, mocker: Any) -> None:
         """Test successful POST request."""
-        client = HTTPClient(api_key="test_key")
+        client = HTTPClientSync(api_key="test_key")
 
         # Mock the httpx response
         mock_response = mocker.Mock(spec=httpx.Response)
@@ -128,128 +128,128 @@ class TestHTTPClientPost:
         mock_response.json.return_value = {"result": "success"}
 
         # Mock the httpx client
-        mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+        mock_httpx_client = mocker.Mock(spec=httpx.Client)
         mock_httpx_client.post.return_value = mock_response
 
         # Inject mock client
         client._client = mock_httpx_client
 
         # Make request
-        result = await client.post("/test", data={"key": "value"})
+        result = client.post("/test", data={"key": "value"})
 
         assert result == {"result": "success"}
         mock_httpx_client.post.assert_called_once()
 
-    async def test_post_error_response(self, mocker: Any) -> None:
+    def test_post_error_response(self, mocker: Any) -> None:
         """Test POST request with error response."""
-        client = HTTPClient(api_key="test_key")
+        client = HTTPClientSync(api_key="test_key")
 
         # Mock error response
         mock_response = mocker.Mock(spec=httpx.Response)
         mock_response.status_code = 400
         mock_response.content = b'{"error": "Bad request"}'
 
-        mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+        mock_httpx_client = mocker.Mock(spec=httpx.Client)
         mock_httpx_client.post.return_value = mock_response
 
         client._client = mock_httpx_client
 
         with pytest.raises(BadRequestError):
-            await client.post("/test", data={"key": "value"})
+            client.post("/test", data={"key": "value"})
 
-    async def test_post_empty_response(self, mocker: Any) -> None:
+    def test_post_empty_response(self, mocker: Any) -> None:
         """Test POST request with empty response body."""
-        client = HTTPClient(api_key="test_key")
+        client = HTTPClientSync(api_key="test_key")
 
         mock_response = mocker.Mock(spec=httpx.Response)
         mock_response.status_code = 200
         mock_response.content = b""
 
-        mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+        mock_httpx_client = mocker.Mock(spec=httpx.Client)
         mock_httpx_client.post.return_value = mock_response
 
         client._client = mock_httpx_client
 
-        result = await client.post("/test")
+        result = client.post("/test")
         assert result == {}
 
 
-class TestHTTPClientStreaming:
+class TestHTTPClientSyncStreaming:
     """Tests for streaming POST requests."""
 
-    async def test_post_stream_success(self, mocker: Any) -> None:
+    def test_post_stream_success(self, mocker: Any) -> None:
         """Test successful streaming POST request."""
-        client = HTTPClient(api_key="test_key")
+        client = HTTPClientSync(api_key="test_key")
 
         # Mock streaming response
-        mock_response = mocker.AsyncMock()
+        mock_response = mocker.Mock()
         mock_response.status_code = 200
 
         # Simulate SSE data chunks
-        async def mock_aiter_bytes(chunk_size: int):  # type: ignore
+        def mock_iter_bytes(chunk_size: int):  # type: ignore
             yield b"event: start\n"
             yield b'data: {"message": "Starting"}\n\n'
             yield b"event: complete\n"
             yield b'data: {"message": "Done"}\n\n'
 
-        mock_response.aiter_bytes = mock_aiter_bytes
+        mock_response.iter_bytes = mock_iter_bytes
 
-        # Create proper async context manager mock
+        # Create proper context manager mock
         mock_stream_cm = mocker.MagicMock()
-        mock_stream_cm.__aenter__ = mocker.AsyncMock(return_value=mock_response)
-        mock_stream_cm.__aexit__ = mocker.AsyncMock(return_value=None)
+        mock_stream_cm.__enter__ = mocker.Mock(return_value=mock_response)
+        mock_stream_cm.__exit__ = mocker.Mock(return_value=None)
 
-        mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+        mock_httpx_client = mocker.Mock(spec=httpx.Client)
         mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
         client._client = mock_httpx_client
 
         # Collect streamed lines
         lines = []
-        async for line in client.post_stream("/automate", data={"task": "test"}):
+        for line in client.post_stream("/automate", data={"task": "test"}):
             lines.append(line)
 
         assert len(lines) > 0
         assert any("start" in line for line in lines)
 
-    async def test_post_stream_error_response(self, mocker: Any) -> None:
+    def test_post_stream_error_response(self, mocker: Any) -> None:
         """Test streaming POST request with error."""
-        client = HTTPClient(api_key="test_key")
+        client = HTTPClientSync(api_key="test_key")
 
-        mock_response = mocker.AsyncMock()
+        mock_response = mocker.Mock()
         mock_response.status_code = 503
-        mock_response.aread.return_value = b'{"error": "Service unavailable"}'
+        mock_response.iter_bytes.return_value = iter([b'{"error": "Service unavailable"}'])
 
-        # Create proper async context manager mock
+        # Create proper context manager mock
         mock_stream_cm = mocker.MagicMock()
-        mock_stream_cm.__aenter__ = mocker.AsyncMock(return_value=mock_response)
-        mock_stream_cm.__aexit__ = mocker.AsyncMock(return_value=None)
+        mock_stream_cm.__enter__ = mocker.Mock(return_value=mock_response)
+        mock_stream_cm.__exit__ = mocker.Mock(return_value=None)
 
-        mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+        mock_httpx_client = mocker.Mock(spec=httpx.Client)
         mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
         client._client = mock_httpx_client
 
         with pytest.raises(ServiceUnavailableError):
-            async for _ in client.post_stream("/automate", data={"task": "test"}):
+            for _ in client.post_stream("/automate", data={"task": "test"}):
                 pass
 
 
-class TestHTTPClientContextManager:
-    """Tests for async context manager support."""
+class TestHTTPClientSyncContextManager:
+    """Tests for context manager support."""
 
-    async def test_context_manager_close(self, mocker: Any) -> None:
+    def test_context_manager_close(self, mocker: Any) -> None:
         """Test context manager properly closes client."""
-        async with HTTPClient(api_key="test_key") as client:
+        with HTTPClientSync(api_key="test_key") as client:
             # Create a mock client
-            mock_httpx_client = mocker.AsyncMock(spec=httpx.AsyncClient)
+            mock_httpx_client = mocker.Mock(spec=httpx.Client)
             client._client = mock_httpx_client
 
         # Client should be closed
-        mock_httpx_client.aclose.assert_called_once()
+        mock_httpx_client.close.assert_called_once()
 
-    async def test_close_when_no_client(self) -> None:
+    def test_close_when_no_client(self) -> None:
         """Test close when httpx client was never created."""
-        client = HTTPClient(api_key="test_key")
-        await client.close()  # Should not raise
+        client = HTTPClientSync(api_key="test_key")
+        client.close()  # Should not raise
         assert client._client is None

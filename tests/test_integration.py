@@ -50,7 +50,7 @@ class TestSchemaGenerationToExtraction:
         mock_httpx_client.post.side_effect = [mock_response_1, mock_response_2]
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             # Step 1: Generate schema
             schema_result = await tabs.extract.schema(
@@ -93,10 +93,10 @@ class TestExtractTransformWorkflow:
         mock_httpx_client.post.side_effect = [mock_response_1, mock_response_2]
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
-            # Step 1: Extract markdown
-            markdown_result = await tabs.extract.markdown(url="https://example.com")
+            # Step 1: Extract markdown (just to test the workflow)
+            await tabs.extract.markdown(url="https://example.com")
 
             # Step 2: Transform with AI
             transform_schema = {
@@ -107,9 +107,9 @@ class TestExtractTransformWorkflow:
                 },
             }
             transform_result = await tabs.generate.json(
-                markdown=markdown_result.content,
-                instructions="Summarize and extract topics",
+                url="https://example.com",
                 schema=transform_schema,
+                instructions="Summarize and extract topics",
             )
 
             assert "summary" in transform_result.data
@@ -139,12 +139,16 @@ class TestBrowserAutomationWorkflow:
 
         mock_response.aiter_bytes = mock_aiter_bytes
 
+        # Create proper async context manager mock
+        mock_stream_cm = mocker.MagicMock()
+        mock_stream_cm.__aenter__ = mocker.AsyncMock(return_value=mock_response)
+        mock_stream_cm.__aexit__ = mocker.AsyncMock(return_value=None)
+
         mock_httpx_client = mocker.AsyncMock()
-        mock_httpx_client.stream = mocker.AsyncMock()
-        mock_httpx_client.stream.return_value.__aenter__.return_value = mock_response
+        mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             schema = {
                 "type": "object",
@@ -183,7 +187,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client.post.return_value = mock_response
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(InvalidURLError, match="URL not found"):
                 await tabs.extract.markdown(url="https://invalid-url.example.com")
@@ -200,7 +204,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client.post.return_value = mock_response
 
         async with TABStack(api_key="bad_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(UnauthorizedError, match="Invalid API key"):
                 await tabs.extract.markdown(url="https://example.com")
@@ -217,7 +221,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client.post.return_value = mock_response
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(ServerError, match="Internal server error"):
                 await tabs.extract.markdown(url="https://example.com")
@@ -237,7 +241,7 @@ class TestMultipleOperations:
         mock_httpx_client.post.return_value = mock_response
 
         async with TABStack(api_key="test_key") as tabs:
-            tabs._http._client = mock_httpx_client
+            tabs._http_client._client = mock_httpx_client
 
             # Perform multiple operations
             result1 = await tabs.extract.markdown(url="https://example1.com")

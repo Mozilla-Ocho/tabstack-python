@@ -1,14 +1,14 @@
-"""Internal HTTP client for TABStack AI SDK."""
+"""Synchronous HTTP client for TABStack AI SDK."""
 
-from typing import Any, AsyncIterator, Dict, Optional
+from typing import Any, Dict, Iterator, Optional
 
 import httpx
 
 from ._shared import get_http_headers, handle_error_response
 
 
-class HTTPClient:
-    """Internal async HTTP client for TABStack API requests.
+class HTTPClientSync:
+    """Synchronous HTTP client for TABStack API requests.
 
     Handles HTTP communication with the TABStack API, including:
     - Connection pooling and keepalive for performance
@@ -16,7 +16,7 @@ class HTTPClient:
     - Error response parsing and exception mapping
     - Server-Sent Events (SSE) streaming for automate endpoint
 
-    This is an internal class. Users should use the TABStack client instead.
+    This is an internal class. Users should use the TABStackSync client instead.
     """
 
     def __init__(
@@ -28,7 +28,7 @@ class HTTPClient:
         keepalive_expiry: float = 30.0,
         timeout: float = 60.0,
     ) -> None:
-        """Initialize async HTTP client with connection pooling.
+        """Initialize sync HTTP client with connection pooling.
 
         Args:
             api_key: API key for authentication
@@ -48,41 +48,41 @@ class HTTPClient:
             keepalive_expiry=keepalive_expiry,
         )
 
-        # Create async client with connection pooling
-        self._client: Optional[httpx.AsyncClient] = None
+        # Create sync client with connection pooling
+        self._client: Optional[httpx.Client] = None
         self._limits = limits
         self._timeout = timeout
 
-    async def _get_client(self) -> httpx.AsyncClient:
-        """Get or create the async HTTP client.
+    def _get_client(self) -> httpx.Client:
+        """Get or create the sync HTTP client.
 
         Returns:
-            Configured async HTTP client
+            Configured sync HTTP client
         """
         if self._client is None:
-            self._client = httpx.AsyncClient(
+            self._client = httpx.Client(
                 base_url=self.base_url,
                 limits=self._limits,
                 timeout=self._timeout,
             )
         return self._client
 
-    async def close(self) -> None:
+    def close(self) -> None:
         """Close the HTTP client and release connections."""
         if self._client is not None:
-            await self._client.aclose()
+            self._client.close()
             self._client = None
 
-    async def __aenter__(self) -> "HTTPClient":
-        """Async context manager entry."""
+    def __enter__(self) -> "HTTPClientSync":
+        """Sync context manager entry."""
         return self
 
-    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        """Async context manager exit."""
-        await self.close()
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        """Sync context manager exit."""
+        self.close()
 
-    async def post(self, path: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Make an async POST request.
+    def post(self, path: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Make a sync POST request.
 
         Args:
             path: API endpoint path
@@ -94,11 +94,11 @@ class HTTPClient:
         Raises:
             TABStackError: On API errors
         """
-        client = await self._get_client()
+        client = self._get_client()
         headers = get_http_headers(self.api_key)
 
         # Make the request
-        response = await client.post(
+        response = client.post(
             path,
             json=data,
             headers=headers,
@@ -114,10 +114,8 @@ class HTTPClient:
         else:
             return {}
 
-    async def post_stream(
-        self, path: str, data: Optional[Dict[str, Any]] = None
-    ) -> AsyncIterator[str]:
-        """Make an async POST request with streaming response (Server-Sent Events).
+    def post_stream(self, path: str, data: Optional[Dict[str, Any]] = None) -> Iterator[str]:
+        """Make a sync POST request with streaming response (Server-Sent Events).
 
         Args:
             path: API endpoint path
@@ -129,20 +127,20 @@ class HTTPClient:
         Raises:
             TABStackError: On API errors
         """
-        client = await self._get_client()
+        client = self._get_client()
         headers = get_http_headers(self.api_key)
         headers["Accept"] = "text/event-stream"
 
         # Make streaming request
-        async with client.stream("POST", path, json=data, headers=headers) as response:
+        with client.stream("POST", path, json=data, headers=headers) as response:
             # Check for errors first
             if response.status_code >= 400:
-                error_body = await response.aread()
+                error_body = b"".join(response.iter_bytes())
                 handle_error_response(response.status_code, error_body)
 
             # SSE streams are line-based; buffer bytes until we have complete lines
             buffer = b""
-            async for chunk in response.aiter_bytes(chunk_size=1024):
+            for chunk in response.iter_bytes(chunk_size=1024):
                 buffer += chunk
                 # Process complete lines
                 while b"\n" in buffer:

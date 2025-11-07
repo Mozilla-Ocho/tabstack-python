@@ -1,15 +1,15 @@
-"""Extract operator for TABStack AI SDK."""
+"""Synchronous Extract operator for TABStack AI SDK."""
 
 from typing import Any, Dict, Optional
 
-from ._http_client import HTTPClient
+from ._http_client_sync import HTTPClientSync
 from ._shared import build_json_extract_request, build_markdown_request, build_schema_request
 from .types import JsonResponse, MarkdownResponse, SchemaResponse
 from .utils import validate_json_schema
 
 
-class Extract:
-    """Extract operator for converting and extracting web content.
+class ExtractSync:
+    """Synchronous Extract operator for converting and extracting web content.
 
     The Extract operator converts web content into structured formats without
     AI transformation. Use Extract when you want to:
@@ -20,17 +20,15 @@ class Extract:
     For AI-powered transformation of content, use the Generate operator instead.
     """
 
-    def __init__(self, http_client: HTTPClient) -> None:
+    def __init__(self, http_client: HTTPClientSync) -> None:
         """Initialize Extract operator.
 
         Args:
-            http_client: HTTP client for making API requests
+            http_client: Sync HTTP client for making API requests
         """
         self._http = http_client
 
-    async def markdown(
-        self, url: str, metadata: bool = False, nocache: bool = False
-    ) -> MarkdownResponse:
+    def markdown(self, url: str, metadata: bool = False, nocache: bool = False) -> MarkdownResponse:
         """Convert URL content to Markdown format.
 
         Extracts Open Graph and HTML meta tags from the page. When metadata=True,
@@ -54,8 +52,8 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
-            ...     result = await tabs.extract.markdown(
+            >>> with TABStackSync(api_key="your-key") as tabs:
+            ...     result = tabs.extract.markdown(
             ...         url="https://example.com/blog/article",
             ...         metadata=True
             ...     )
@@ -63,10 +61,10 @@ class Extract:
             ...     print(result.metadata.title)
         """
         request_data = build_markdown_request(url, metadata, nocache)
-        response = await self._http.post("v1/extract/markdown", request_data)
+        response = self._http.post("v1/extract/markdown", request_data)
         return MarkdownResponse.from_dict(response)
 
-    async def schema(
+    def schema(
         self, url: str, instructions: Optional[str] = None, nocache: bool = False
     ) -> SchemaResponse:
         """Generate JSON Schema from URL content using AI.
@@ -94,21 +92,21 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
-            ...     result = await tabs.extract.schema(
+            >>> with TABStackSync(api_key="your-key") as tabs:
+            ...     result = tabs.extract.schema(
             ...         url="https://news.ycombinator.com",
             ...         instructions="extract top stories with title, points, and author"
             ...     )
-            ...     data = await tabs.extract.json(
+            ...     data = tabs.extract.json(
             ...         url="https://news.ycombinator.com",
             ...         schema=result.schema
             ...     )
         """
         request_data = build_schema_request(url, instructions, nocache)
-        response = await self._http.post("v1/extract/json/schema", request_data)
+        response = self._http.post("v1/extract/json/schema", request_data)
         return SchemaResponse.from_dict(response)
 
-    async def json(self, url: str, schema: Dict[str, Any], nocache: bool = False) -> JsonResponse:
+    def json(self, url: str, schema: Dict[str, Any], nocache: bool = False) -> JsonResponse:
         """Extract structured JSON data from URL content.
 
         Extracts data that exists on the page according to the provided JSON Schema.
@@ -134,7 +132,7 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> with TABStackSync(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {
@@ -151,7 +149,7 @@ class Extract:
             ...             }
             ...         }
             ...     }
-            ...     result = await tabs.extract.json(
+            ...     result = tabs.extract.json(
             ...         url="https://news.ycombinator.com",
             ...         schema=schema
             ...     )
@@ -161,5 +159,5 @@ class Extract:
         request_data = build_json_extract_request(url, schema, nocache)
         # Note: API expects json_schema field
         request_data["json_schema"] = request_data.pop("schema")
-        response = await self._http.post("v1/extract/json", request_data)
+        response = self._http.post("v1/extract/json", request_data)
         return JsonResponse.from_dict(response)

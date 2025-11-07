@@ -16,12 +16,12 @@ class TestTABStackInitialization:
     def test_initialization_with_api_key(self) -> None:
         """Test client initialization with API key."""
         client = TABStack(api_key="test_key_123")
-        assert client._http.api_key == "test_key_123"
+        assert client._http_client.api_key == "test_key_123"
 
     def test_initialization_with_custom_base_url(self) -> None:
         """Test client initialization with custom base URL."""
         client = TABStack(api_key="test_key", base_url="https://custom.api.com")
-        assert client._http.base_url == "https://custom.api.com"
+        assert client._http_client.base_url == "https://custom.api.com"
 
     def test_initialization_missing_api_key(self) -> None:
         """Test initialization without API key raises error."""
@@ -39,9 +39,9 @@ class TestTABStackInitialization:
         """Test all operators share the same HTTP client."""
         client = TABStack(api_key="test_key")
         # All operators should use the same HTTP client instance
-        assert client.extract._http is client._http
-        assert client.generate._http is client._http
-        assert client.automate._http is client._http
+        assert client.extract._http is client._http_client
+        assert client.generate._http is client._http_client
+        assert client.automate._http is client._http_client
 
 
 class TestTABStackContextManager:
@@ -61,7 +61,7 @@ class TestTABStackContextManager:
 
         # Mock the close method
         mock_close = mocker.AsyncMock()
-        client._http.close = mock_close
+        client._http_client.close = mock_close
 
         async with client:
             pass
@@ -73,7 +73,7 @@ class TestTABStackContextManager:
         client = TABStack(api_key="test_key")
 
         mock_close = mocker.AsyncMock()
-        client._http.close = mock_close
+        client._http_client.close = mock_close
 
         await client.close()
 
@@ -98,7 +98,7 @@ class TestTABStackIntegration:
         mock_httpx_client.post.return_value = mock_response
 
         client = TABStack(api_key="test_key")
-        client._http._client = mock_httpx_client
+        client._http_client._client = mock_httpx_client
 
         result = await client.extract.markdown(url="https://example.com")
 
@@ -117,11 +117,11 @@ class TestTABStackIntegration:
         mock_httpx_client.post.return_value = mock_response
 
         client = TABStack(api_key="test_key")
-        client._http._client = mock_httpx_client
+        client._http_client._client = mock_httpx_client
 
         schema = {"type": "object", "properties": {"summary": {"type": "string"}}}
         result = await client.generate.json(
-            markdown="# Article", instructions="Summarize", schema=schema
+            url="https://example.com/article", schema=schema, instructions="Summarize"
         )
 
         assert result.data["summary"] == "Test summary"
@@ -138,12 +138,16 @@ class TestTABStackIntegration:
 
         mock_response.aiter_bytes = mock_aiter_bytes
 
+        # Create proper async context manager mock
+        mock_stream_cm = mocker.MagicMock()
+        mock_stream_cm.__aenter__ = mocker.AsyncMock(return_value=mock_response)
+        mock_stream_cm.__aexit__ = mocker.AsyncMock(return_value=None)
+
         mock_httpx_client = mocker.AsyncMock()
-        mock_httpx_client.stream = mocker.AsyncMock()
-        mock_httpx_client.stream.return_value.__aenter__.return_value = mock_response
+        mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
         client = TABStack(api_key="test_key")
-        client._http._client = mock_httpx_client
+        client._http_client._client = mock_httpx_client
 
         events = []
         async for event in client.automate.execute(task="Test", url="https://example.com"):

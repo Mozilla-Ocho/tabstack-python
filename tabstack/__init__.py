@@ -9,7 +9,9 @@ The SDK provides three main operators:
 - **Generate**: Transform and enhance web data using AI
 - **Automate**: Execute complex browser automation tasks with natural language
 
-Basic Example:
+The SDK supports both async (TABStack) and sync (TABStackSync) clients:
+
+Async Example:
     >>> import asyncio
     >>> import os
     >>> from tabstack import TABStack
@@ -21,6 +23,15 @@ Basic Example:
     ...         print(result.content)
     >>>
     >>> asyncio.run(main())
+
+Sync Example:
+    >>> import os
+    >>> from tabstack import TABStackSync
+    >>>
+    >>> with TABStackSync(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
+    ...     # Extract markdown from a URL (no async/await needed)
+    ...     result = tabs.extract.markdown(url="https://example.com")
+    ...     print(result.content)
 
 Workflow: Schema Generation → Data Extraction
     >>> async def extract_with_generated_schema():
@@ -81,7 +92,9 @@ Workflow: Browser Automation
 """
 
 from .automate import Automate
+from .automate_sync import AutomateSync
 from .client import TABStack
+from .client_sync import TABStackSync
 from .exceptions import (
     APIError,
     BadRequestError,
@@ -92,7 +105,9 @@ from .exceptions import (
     UnauthorizedError,
 )
 from .extract import Extract
+from .extract_sync import ExtractSync
 from .generate import Generate
+from .generate_sync import GenerateSync
 from .types import (
     AutomateEvent,
     EventData,
@@ -104,12 +119,17 @@ from .types import (
 
 __version__ = "1.0.0"
 __all__ = [
-    # Main client
-    "TABStack",
-    # Operators
+    # Main clients
+    "TABStack",  # Async client
+    "TABStackSync",  # Sync client
+    # Async operators
     "Extract",
     "Generate",
     "Automate",
+    # Sync operators
+    "ExtractSync",
+    "GenerateSync",
+    "AutomateSync",
     # Response types
     "MarkdownResponse",
     "SchemaResponse",

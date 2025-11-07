@@ -73,13 +73,8 @@ select = [
     "W",   # pycodestyle warnings
 ]
 
-# F401: Unused imports - enforced and auto-fixable
+# F401: Unused imports - enforced and auto-fixable everywhere (including tests)
 unfixable = []
-
-[tool.ruff.lint.per-file-ignores]
-# Test files may have unused imports for testing
-"test_*.py" = ["F401"]
-"tests/**/*.py" = ["F401"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["tabstack"]

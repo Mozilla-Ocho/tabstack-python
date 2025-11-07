@@ -1,15 +1,15 @@
-"""Generate operator for TABStack AI SDK."""
+"""Synchronous Generate operator for TABStack AI SDK."""
 
 from typing import Any, Dict
 
-from ._http_client import HTTPClient
+from ._http_client_sync import HTTPClientSync
 from ._shared import build_json_generate_request
 from .types import JsonResponse
 from .utils import validate_json_schema
 
 
-class Generate:
-    """Generate operator for AI-powered content transformation.
+class GenerateSync:
+    """Synchronous Generate operator for AI-powered content transformation.
 
     The Generate operator uses AI to transform, enhance, and create new content
     from web pages based on custom instructions. Unlike Extract (which retrieves
@@ -23,15 +23,15 @@ class Generate:
     Use Generate when you need AI to interpret and transform content, not just extract it.
     """
 
-    def __init__(self, http_client: HTTPClient) -> None:
+    def __init__(self, http_client: HTTPClientSync) -> None:
         """Initialize Generate operator.
 
         Args:
-            http_client: HTTP client for making API requests
+            http_client: Sync HTTP client for making API requests
         """
         self._http = http_client
 
-    async def json(
+    def json(
         self, url: str, schema: Dict[str, Any], instructions: str, nocache: bool = False
     ) -> JsonResponse:
         """Generate AI-transformed JSON from URL content.
@@ -62,7 +62,7 @@ class Generate:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> with TABStackSync(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {
@@ -79,7 +79,7 @@ class Generate:
             ...             }
             ...         }
             ...     }
-            ...     result = await tabs.generate.json(
+            ...     result = tabs.generate.json(
             ...         url="https://news.ycombinator.com",
             ...         schema=schema,
             ...         instructions="Categorize each story and write a one-sentence summary"
@@ -88,5 +88,5 @@ class Generate:
         """
         validate_json_schema(schema)
         request_data = build_json_generate_request(url, schema, instructions, nocache)
-        response = await self._http.post("v1/generate/json", request_data)
+        response = self._http.post("v1/generate/json", request_data)
         return JsonResponse.from_dict(response)

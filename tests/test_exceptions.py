@@ -1,7 +1,5 @@
 """Tests for exception classes."""
 
-import pytest
-
 from tabstack.exceptions import (
     APIError,
     BadRequestError,

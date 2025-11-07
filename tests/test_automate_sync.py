@@ -1,31 +1,31 @@
-"""Tests for Automate operator."""
+"""Tests for AutomateSync operator."""
 
 from typing import Any
 
 import pytest
 
-from tabstack.automate import Automate
+from tabstack.automate_sync import AutomateSync
 from tabstack.types import AutomateEvent
 
 
-class TestAutomateExecute:
+class TestAutomateSyncExecute:
     """Tests for automate execution."""
 
-    async def test_execute_streaming(self, mocker: Any, mock_automate_events: list[str]) -> None:
+    def test_execute_streaming(self, mocker: Any, mock_automate_events: list[str]) -> None:
         """Test automate execute with streaming events."""
         mock_http = mocker.Mock()
 
         # Mock the streaming response
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             for event_line in mock_automate_events:
                 yield event_line
 
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(task="Extract data", url="https://example.com"):
+        for event in automate.execute(task="Extract data", url="https://example.com"):
             events.append(event)
 
         # Should have received all events
@@ -47,11 +47,11 @@ class TestAutomateExecute:
             },
         )
 
-    async def test_execute_with_schema(self, mocker: Any, json_schema: dict[str, Any]) -> None:
+    def test_execute_with_schema(self, mocker: Any, json_schema: dict[str, Any]) -> None:
         """Test automate execute with JSON schema."""
         mock_http = mocker.Mock()
 
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             yield "event: task:completed"
             yield 'data: {"finalAnswer": "Done", "success": true}'
             yield ""  # Empty line completes the event
@@ -59,9 +59,9 @@ class TestAutomateExecute:
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(
+        for event in automate.execute(
             task="Extract data", url="https://example.com", schema=json_schema
         ):
             events.append(event)
@@ -71,24 +71,24 @@ class TestAutomateExecute:
         call_args = mock_http.post_stream.call_args
         assert call_args[0][1]["schema"] == json_schema
 
-    async def test_execute_validates_schema(self, mocker: Any) -> None:
+    def test_execute_validates_schema(self, mocker: Any) -> None:
         """Test automate validates schema before sending."""
-        mock_http = mocker.AsyncMock()
-        automate = Automate(mock_http)
+        mock_http = mocker.Mock()
+        automate = AutomateSync(mock_http)
 
         # Invalid schema should raise ValueError
         invalid_schema = {"missing": "type"}
         with pytest.raises(ValueError, match="Schema must have a 'type' field"):
-            async for _ in automate.execute(
+            for _ in automate.execute(
                 task="Test", url="https://example.com", schema=invalid_schema
             ):
                 pass
 
-    async def test_execute_parses_event_data(self, mocker: Any) -> None:
+    def test_execute_parses_event_data(self, mocker: Any) -> None:
         """Test automate correctly parses event data."""
         mock_http = mocker.Mock()
 
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             yield "event: agent:extracted"
             yield 'data: {"extractedData": {"title": "Test Title", "count": 42}}'
             yield ""  # Empty line completes the event
@@ -96,9 +96,9 @@ class TestAutomateExecute:
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(task="Test", url="https://example.com"):
+        for event in automate.execute(task="Test", url="https://example.com"):
             events.append(event)
 
         assert len(events) == 1
@@ -108,11 +108,11 @@ class TestAutomateExecute:
         assert event.data.extracted_data["title"] == "Test Title"
         assert event.data.extracted_data["count"] == 42
 
-    async def test_execute_handles_malformed_sse(self, mocker: Any) -> None:
+    def test_execute_handles_malformed_sse(self, mocker: Any) -> None:
         """Test automate handles malformed SSE gracefully."""
         mock_http = mocker.Mock()
 
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             yield "event: start"  # Event without data
             yield ""  # Complete the event (will have no data)
             yield "data: not-json"  # Data without event (invalid)
@@ -123,20 +123,20 @@ class TestAutomateExecute:
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(task="Test", url="https://example.com"):
+        for event in automate.execute(task="Test", url="https://example.com"):
             events.append(event)
 
         # Should have at least parsed the valid event
         # (implementation may vary on how it handles malformed events)
         assert len(events) >= 1
 
-    async def test_execute_with_empty_task(self, mocker: Any) -> None:
+    def test_execute_with_empty_task(self, mocker: Any) -> None:
         """Test automate with empty task string."""
         mock_http = mocker.Mock()
 
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             yield "event: task:completed"
             yield 'data: {"finalAnswer": "Done"}'
             yield ""  # Empty line completes the event
@@ -144,19 +144,19 @@ class TestAutomateExecute:
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(task="", url="https://example.com"):
+        for event in automate.execute(task="", url="https://example.com"):
             events.append(event)
 
         # Should still call API (API will validate)
         mock_http.post_stream.assert_called_once()
 
-    async def test_execute_event_types(self, mocker: Any) -> None:
+    def test_execute_event_types(self, mocker: Any) -> None:
         """Test various event types are parsed correctly."""
         mock_http = mocker.Mock()
 
-        async def mock_stream(path, data):  # type: ignore
+        def mock_stream(path, data):  # type: ignore
             # Various event types from the API
             yield "event: start"
             yield 'data: {"message": "Starting"}'
@@ -180,9 +180,9 @@ class TestAutomateExecute:
         # Use Mock instead of AsyncMock for post_stream
         mock_http.post_stream = mocker.Mock(side_effect=mock_stream)
 
-        automate = Automate(mock_http)
+        automate = AutomateSync(mock_http)
         events = []
-        async for event in automate.execute(task="Test", url="https://example.com"):
+        for event in automate.execute(task="Test", url="https://example.com"):
             events.append(event)
 
         assert len(events) == 6

@@ -3,7 +3,6 @@
 Provides fixtures for mocking HTTP responses and creating test clients.
 """
 
-import json
 from typing import Any, Dict, List
 
 import httpx
@@ -78,10 +77,18 @@ def mock_json_response() -> Dict[str, Any]:
 def mock_automate_events() -> List[str]:
     """Return mock SSE events from automate endpoint."""
     return [
-        'event: start\ndata: {"message": "Starting automation"}',
-        'event: agent:navigating\ndata: {"url": "https://example.com"}',
-        'event: agent:extracted\ndata: {"extractedData": {"title": "Test"}}',
-        'event: task:completed\ndata: {"finalAnswer": "Task completed", "success": true}',
+        "event: start",
+        'data: {"message": "Starting automation"}',
+        "",
+        "event: agent:navigating",
+        'data: {"url": "https://example.com"}',
+        "",
+        "event: agent:extracted",
+        'data: {"extractedData": {"title": "Test"}}',
+        "",
+        "event: task:completed",
+        'data: {"finalAnswer": "Task completed", "success": true}',
+        "",
     ]
 
 

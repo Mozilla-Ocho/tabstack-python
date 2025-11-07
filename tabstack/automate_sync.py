@@ -1,15 +1,15 @@
-"""Automate operator for TABStack AI SDK."""
+"""Synchronous Automate operator for TABStack AI SDK."""
 
-from typing import Any, AsyncIterator, Dict, Optional
+from typing import Any, Dict, Iterator, Optional
 
-from ._http_client import HTTPClient
+from ._http_client_sync import HTTPClientSync
 from ._shared import build_automate_request, parse_sse_event
 from .types import AutomateEvent
 from .utils import validate_json_schema
 
 
-class Automate:
-    """Automate operator for AI-powered browser automation.
+class AutomateSync:
+    """Synchronous Automate operator for AI-powered browser automation.
 
     The Automate operator enables complex, multi-step web automation tasks using
     natural language instructions. An AI agent navigates a real browser, performing
@@ -25,20 +25,20 @@ class Automate:
     monitor progress and handle events as they occur.
     """
 
-    def __init__(self, http_client: HTTPClient) -> None:
+    def __init__(self, http_client: HTTPClientSync) -> None:
         """Initialize Automate operator.
 
         Args:
-            http_client: HTTP client for making API requests
+            http_client: Sync HTTP client for making API requests
         """
         self._http = http_client
 
-    async def execute(
+    def execute(
         self,
         task: str,
         url: Optional[str] = None,
         schema: Optional[Dict[str, Any]] = None,
-    ) -> AsyncIterator[AutomateEvent]:
+    ) -> Iterator[AutomateEvent]:
         """Execute AI-powered browser automation task with streaming updates.
 
         This method streams real-time progress updates as Server-Sent Events (SSE).
@@ -60,8 +60,8 @@ class Automate:
             ServiceUnavailableError: If automate service is not available
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
-            ...     async for event in tabs.automate.execute(
+            >>> with TABStackSync(api_key="your-key") as tabs:
+            ...     for event in tabs.automate.execute(
             ...         task="Find the top 3 trending repositories",
             ...         url="https://github.com/trending"
             ...     ):
@@ -116,7 +116,7 @@ class Automate:
         current_event_type: Optional[str] = None
         current_event_data: str = ""
 
-        async for line in self._http.post_stream("v1/automate", request_data):
+        for line in self._http.post_stream("v1/automate", request_data):
             event_type, event_data, event = parse_sse_event(
                 line, current_event_type, current_event_data
             )
