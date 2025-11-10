@@ -37,6 +37,8 @@ dev = [
     "pytest-mock>=3.10.0",
     "mypy>=1.0.0",
     "ruff>=0.1.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
 ]
 
 [project.urls]

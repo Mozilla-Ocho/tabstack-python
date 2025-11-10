@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Set version from release tag
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
@@ -28,34 +33,35 @@ jobs:
           echo "tabstack/__init__.py version:"
           cat tabstack/__init__.py | grep "^__version__"
 
-      - name: Cache pip dependencies
+      - name: Cache pip packages
+        id: cache-deps
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
+          path: ~/.local
           key: pip-${{ runner.os }}-python-3.12-${{ hashFiles('pyproject.toml') }}
           restore-keys: |
             pip-${{ runner.os }}-python-3.12-
-            pip-${{ runner.os }}-
 
       - name: Install build dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |
-          python3.12 -m pip install --upgrade pip
-          python3.12 -m pip install build twine
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]" --user
 
       - name: Build package
         run: |
-          python3.12 -m build
+          python -m build
 
       - name: Check package
         run: |
-          python3.12 -m twine check dist/*
+          python -m twine check dist/*
 
       - name: Publish to TestPyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
         run: |
-          python3.12 -m twine upload --repository testpypi dist/*
+          python -m twine upload --repository testpypi dist/*
 
       - name: Verify TestPyPI installation
         run: |
@@ -64,10 +70,10 @@ jobs:
           sleep 30
 
           echo "Installing from TestPyPI..."
-          python3.12 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ tabstack==$VERSION
+          python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ tabstack==$VERSION
 
           echo "Testing import..."
-          python3.12 -c "import tabstack; print(f'Successfully imported tabstack version {tabstack.__version__}')"
+          python -c "import tabstack; print(f'Successfully imported tabstack version {tabstack.__version__}')"
 
           echo "✓ TestPyPI package verified successfully!"
 
@@ -76,4 +82,4 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          python3.12 -m twine upload dist/*
+          python -m twine upload dist/*
