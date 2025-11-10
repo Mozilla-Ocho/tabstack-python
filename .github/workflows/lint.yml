@@ -17,19 +17,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache pip dependencies
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache pip packages
+        id: cache-deps
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
+          path: ~/.local
           key: pip-${{ runner.os }}-python-3.12-${{ hashFiles('pyproject.toml') }}
           restore-keys: |
             pip-${{ runner.os }}-python-3.12-
-            pip-${{ runner.os }}-
 
       - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |
-          python3.12 -m pip install --upgrade pip
-          python3.12 -m pip install -e ".[dev]"
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]" --user
 
       - name: Check formatting with ruff
         run: |
@@ -41,5 +47,5 @@ jobs:
 
       - name: Type check with mypy
         run: |
-          python3.12 -m mypy tabstack/
+          python -m mypy tabstack/
         continue-on-error: true  # Allow mypy failures for now
