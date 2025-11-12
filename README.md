@@ -508,7 +508,7 @@ Contributions are welcome! Here's a quick checklist:
 
 ## Requirements
 
-- Python 3.10 or higher
+- Python 3.10+ (tested on 3.10, 3.11, 3.12, 3.13, 3.14)
 - httpx >= 0.27.0
 
 ## License
