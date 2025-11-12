@@ -9,7 +9,22 @@ permissions:
   contents: read
 
 jobs:
+  # Run lint checks - MUST PASS before publishing
+  lint:
+    name: Lint Check
+    uses: ./.github/workflows/lint.yml
+    permissions:
+      contents: read
+
+  # Run tests on all supported Node versions - MUST PASS before publishing
+  test:
+    name: Test Check
+    uses: ./.github/workflows/test.yml
+    permissions:
+      contents: read
+
   publish:
+    needs: [lint, test]
     runs-on: ubuntu-latest
     permissions:
       id-token: write  # Required for trusted publishing to PyPI
@@ -67,6 +82,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          attestations: false
 
       - name: Verify TestPyPI installation
         run: |
