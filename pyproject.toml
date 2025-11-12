@@ -21,6 +21,8 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Internet :: WWW/HTTP",
 ]
@@ -55,7 +57,7 @@ include = ["tabstack*"]
 tabstack = ["py.typed"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.12"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
@@ -63,7 +65,7 @@ disallow_untyped_defs = true
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py312"
 fix = true
 
 [tool.ruff.lint]
