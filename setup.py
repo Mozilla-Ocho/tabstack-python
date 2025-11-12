@@ -17,7 +17,7 @@ setup(
     description="Python SDK for TABStack AI - Extract, Generate, and Automate web content",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tabstack/tabs-python",
+    url="https://github.com/Mozilla-Ocho/tabstack-python",
     packages=find_packages(exclude=["tests", "tests.*"]),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -49,7 +49,7 @@ setup(
     keywords="web-scraping ai automation data-extraction web-automation",
     project_urls={
         "Documentation": "https://docs.tabstack.ai",
-        "Bug Tracker": "https://github.com/tabstack/tabs-python/issues",
-        "Source Code": "https://github.com/tabstack/tabs-python",
+        "Bug Tracker": "https://github.com/Mozilla-Ocho/tabstack-python/issues",
+        "Source Code": "https://github.com/Mozilla-Ocho/tabstack-python",
     },
 )

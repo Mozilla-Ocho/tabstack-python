@@ -46,8 +46,8 @@ dev = [
 [project.urls]
 Homepage = "https://tabstack.ai"
 Documentation = "https://docs.tabstack.ai"
-Repository = "https://github.com/tabstack/tabs-python"
-"Bug Tracker" = "https://github.com/tabstack/tabs-python/issues"
+Repository = "https://github.com/Mozilla-Ocho/tabstack-python"
+"Bug Tracker" = "https://github.com/Mozilla-Ocho/tabstack-python/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
