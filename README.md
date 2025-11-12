@@ -3,8 +3,8 @@
 [![PyPI version](https://badge.fury.io/py/tabstack.svg)](https://badge.fury.io/py/tabstack)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tabstack.svg)](https://pypi.org/project/tabstack/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Tests](https://github.com/tabstack/tabs-python/workflows/Tests/badge.svg)](https://github.com/tabstack/tabs-python/actions)
-[![codecov](https://codecov.io/gh/tabstack/tabs-python/branch/main/graph/badge.svg)](https://codecov.io/gh/tabstack/tabs-python)
+[![Tests](https://github.com/Mozilla-Ocho/tabstack-python/workflows/Tests/badge.svg)](https://github.com/Mozilla-Ocho/tabstack-python/actions)
+[![codecov](https://codecov.io/gh/Mozilla-Ocho/tabstack-python/branch/main/graph/badge.svg)](https://codecov.io/gh/Mozilla-Ocho/tabstack-python)
 
 Python SDK for [TABStack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
 
@@ -48,8 +48,8 @@ pipenv install tabstack
 
 ### From Source
 ```bash
-git clone https://github.com/tabstack/tabs-python.git
-cd tabs-python
+git clone https://github.com/Mozilla-Ocho/tabstack-python.git
+cd tabstack-python
 pip install -e ".[dev]"
 ```
 
@@ -440,8 +440,8 @@ asyncio.run(main())
 
 ```bash
 # Clone the repository
-git clone https://github.com/tabstack/tabs-python.git
-cd tabs-python
+git clone https://github.com/Mozilla-Ocho/tabstack-python.git
+cd tabstack-python
 
 # Install with development dependencies
 pip install -e ".[dev]"
@@ -520,8 +520,8 @@ Apache License 2.0 - see [LICENSE](LICENSE) for details.
 - **Homepage**: [https://tabstack.ai](https://tabstack.ai)
 - **Documentation**: [https://docs.tabstack.ai](https://docs.tabstack.ai)
 - **PyPI**: [https://pypi.org/project/tabstack/](https://pypi.org/project/tabstack/)
-- **Repository**: [https://github.com/tabstack/tabs-python](https://github.com/tabstack/tabs-python)
-- **Issues**: [https://github.com/tabstack/tabs-python/issues](https://github.com/tabstack/tabs-python/issues)
+- **Repository**: [https://github.com/Mozilla-Ocho/tabstack-python](https://github.com/Mozilla-Ocho/tabstack-python)
+- **Issues**: [https://github.com/Mozilla-Ocho/tabstack-python/issues](https://github.com/Mozilla-Ocho/tabstack-python/issues)
 
 ## Support
 
