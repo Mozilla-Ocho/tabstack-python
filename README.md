@@ -116,12 +116,9 @@ async def main():
             }
         }
 
-        # First extract the markdown
-        markdown_result = await tabs.extract.markdown(url="https://news.ycombinator.com")
-
-        # Then transform it with AI
+        # Transform URL content with AI
         summaries = await tabs.generate.json(
-            markdown=markdown_result.content,
+            url="https://news.ycombinator.com",
             schema=summary_schema,
             instructions="For each story, categorize it and write a one-sentence summary"
         )
@@ -243,23 +240,21 @@ print(result.data)
 
 The Generate operator uses AI to transform and enhance web content.
 
-#### `generate.json(markdown, instructions, schema)`
+#### `generate.json(url, schema, instructions, nocache=False)`
 
-Transform markdown content into structured JSON using AI.
+Fetch URL content and transform it into structured JSON using AI.
 
 **Parameters:**
-- `markdown` (str): Markdown content to transform
-- `instructions` (str): AI instructions for transformation
+- `url` (str): URL to fetch content from
 - `schema` (dict): JSON Schema for output structure
+- `instructions` (str): AI instructions for transformation
+- `nocache` (bool): Bypass cache and force fresh retrieval. Default: `False`
 
 **Returns:** `JsonResponse` with generated `data`
 
 **Example:**
 ```python
-# First extract markdown
-md = await tabs.extract.markdown(url="https://news.ycombinator.com")
-
-# Then transform with AI
+# Transform URL content with AI
 schema = {
     "type": "object",
     "properties": {
@@ -268,9 +263,9 @@ schema = {
     }
 }
 result = await tabs.generate.json(
-    markdown=md.content,
-    instructions="Summarize the content and extract main topics",
-    schema=schema
+    url="https://news.ycombinator.com",
+    schema=schema,
+    instructions="Summarize the content and extract main topics"
 )
 ```
 
