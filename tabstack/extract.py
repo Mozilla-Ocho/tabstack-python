@@ -1,6 +1,6 @@
 """Extract operator for TABStack AI SDK."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from ._http_client import HTTPClient
 from ._shared import build_json_extract_request, build_markdown_request

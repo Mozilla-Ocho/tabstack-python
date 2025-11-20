@@ -96,7 +96,7 @@ async def main():
         try:
             async for event in tabs.agent.automate(
                 task="Find the top 3 trending repositories and extract their details",
-                url="https://github.com/trending"
+                url="https://github.com/trending",
             ):
                 if event.type == "task:completed":
                     print(f"✓ Task completed: {event.data.get('finalAnswer', 'N/A')}")
