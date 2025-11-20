@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 
 from tabstack import TABStackSync
-from tabstack.automate_sync import AutomateSync
+from tabstack.agent_sync import AgentSync
 from tabstack.extract_sync import ExtractSync
 from tabstack.generate_sync import GenerateSync
 
@@ -33,7 +33,7 @@ class TestTABStackSyncInitialization:
         client = TABStackSync(api_key="test_key")
         assert isinstance(client.extract, ExtractSync)
         assert isinstance(client.generate, GenerateSync)
-        assert isinstance(client.automate, AutomateSync)
+        assert isinstance(client.agent, AgentSync)
 
     def test_operators_share_http_client(self) -> None:
         """Test all operators share the same HTTP client."""
@@ -41,7 +41,7 @@ class TestTABStackSyncInitialization:
         # All operators should use the same HTTP client instance
         assert client.extract._http is client._http_client
         assert client.generate._http is client._http_client
-        assert client.automate._http is client._http_client
+        assert client.agent._http is client._http_client
 
 
 class TestTABStackSyncContextManager:

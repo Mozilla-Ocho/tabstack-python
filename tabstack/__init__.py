@@ -33,22 +33,6 @@ Sync Example:
     ...     result = tabs.extract.markdown(url="https://example.com")
     ...     print(result.content)
 
-Workflow: Schema Generation → Data Extraction
-    >>> async def extract_with_generated_schema():
-    ...     async with TABStack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
-    ...         # First, generate a schema from the content
-    ...         schema_result = await tabs.extract.schema(
-    ...             url="https://news.ycombinator.com",
-    ...             instructions="extract top stories with title, points, and author"
-    ...         )
-    ...
-    ...         # Then use the generated schema to extract structured data
-    ...         data = await tabs.extract.json(
-    ...             url="https://news.ycombinator.com",
-    ...             schema=schema_result.schema
-    ...         )
-    ...         print(data.data)
-
 Workflow: Extract → Transform
     >>> async def extract_and_transform():
     ...     async with TABStack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
@@ -82,17 +66,16 @@ Workflow: Browser Automation
     >>> async def automate_task():
     ...     async with TABStack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
     ...         # Execute complex web automation tasks
-    ...         async for event in tabs.automate.execute(
+    ...         async for event in tabs.agent.automate(
     ...             task="Extract the top 5 trending repositories",
-    ...             url="https://github.com/trending",
-    ...             guardrails="browse and extract only, do not click stars or forks"
+    ...             url="https://github.com/trending"
     ...         ):
     ...             if event.type == "task:completed":
     ...                 print(f"Task complete: {event.data.get('finalAnswer')}")
 """
 
-from .automate import Automate
-from .automate_sync import AutomateSync
+from .agent import Agent
+from .agent_sync import AgentSync
 from .client import TABStack
 from .client_sync import TABStackSync
 from .exceptions import (
@@ -114,7 +97,6 @@ from .types import (
     JsonResponse,
     MarkdownResponse,
     Metadata,
-    SchemaResponse,
 )
 
 __version__ = "1.0.0"
@@ -125,14 +107,13 @@ __all__ = [
     # Async operators
     "Extract",
     "Generate",
-    "Automate",
+    "Agent",
     # Sync operators
     "ExtractSync",
     "GenerateSync",
-    "AutomateSync",
+    "AgentSync",
     # Response types
     "MarkdownResponse",
-    "SchemaResponse",
     "JsonResponse",
     "Metadata",
     "AutomateEvent",

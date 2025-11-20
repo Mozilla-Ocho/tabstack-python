@@ -124,7 +124,7 @@ async def main():
         )
 
         # Automate web tasks (streaming)
-        async for event in tabs.automate.execute(
+        async for event in tabs.agent.automate(
             task="Find the top 3 trending repositories and extract their details",
             url="https://github.com/trending"
         ):
@@ -191,27 +191,6 @@ print(result.content)
 print(result.metadata.title)
 ```
 
-#### `extract.schema(url, instructions, nocache=False)`
-
-Generate a JSON Schema by analyzing the structure of a webpage.
-
-**Parameters:**
-- `url` (str): URL to analyze
-- `instructions` (str): Instructions for what data to extract (max 1000 characters)
-- `nocache` (bool): Bypass cache. Default: `False`
-
-**Returns:** `SchemaResponse` with generated `schema` dict
-
-**Example:**
-```python
-result = await tabs.extract.schema(
-    url="https://example.com/products",
-    instructions="Extract product listings with name, price, and availability"
-)
-# Use the schema for extraction
-data = await tabs.extract.json(url="https://example.com/products", schema=result.schema)
-```
-
 #### `extract.json(url, schema, nocache=False)`
 
 Extract structured JSON data from a URL using a schema.
@@ -269,11 +248,11 @@ result = await tabs.generate.json(
 )
 ```
 
-### Automate Operator
+### Agent Client
 
-The Automate operator executes complex web automation tasks using natural language.
+The Agent client executes complex web automation tasks using natural language.
 
-#### `automate.execute(task, url=None, schema=None)`
+#### `agent.automate(task, url=None, schema=None)`
 
 Execute an AI-powered browser automation task (returns async iterator for Server-Sent Events).
 
@@ -305,7 +284,7 @@ schema = {
     }
 }
 
-async for event in tabs.automate.execute(
+async for event in tabs.agent.automate(
     task="Find trending repositories and extract their names and star counts",
     url="https://github.com/trending",
     schema=schema

@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 
 from tabstack import TABStack
-from tabstack.automate import Automate
+from tabstack.agent import Agent
 from tabstack.extract import Extract
 from tabstack.generate import Generate
 
@@ -33,7 +33,7 @@ class TestTABStackInitialization:
         client = TABStack(api_key="test_key")
         assert isinstance(client.extract, Extract)
         assert isinstance(client.generate, Generate)
-        assert isinstance(client.automate, Automate)
+        assert isinstance(client.agent, Agent)
 
     def test_operators_share_http_client(self) -> None:
         """Test all operators share the same HTTP client."""
@@ -41,7 +41,7 @@ class TestTABStackInitialization:
         # All operators should use the same HTTP client instance
         assert client.extract._http is client._http_client
         assert client.generate._http is client._http_client
-        assert client.automate._http is client._http_client
+        assert client.agent._http is client._http_client
 
 
 class TestTABStackContextManager:
@@ -150,7 +150,7 @@ class TestTABStackIntegration:
         client._http_client._client = mock_httpx_client
 
         events = []
-        async for event in client.automate.execute(task="Test", url="https://example.com"):
+        async for event in client.agent.automate(task="Test", url="https://example.com"):
             events.append(event)
 
         assert len(events) >= 1

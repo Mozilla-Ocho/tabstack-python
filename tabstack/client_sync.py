@@ -3,7 +3,7 @@
 from typing import Any
 
 from ._http_client_sync import HTTPClientSync
-from .automate_sync import AutomateSync
+from .agent_sync import AgentSync
 from .extract_sync import ExtractSync
 from .generate_sync import GenerateSync
 
@@ -71,7 +71,7 @@ class TABStackSync:
         # Initialize operators (each shares the same HTTP client for connection reuse)
         self.extract = ExtractSync(self._http_client)
         self.generate = GenerateSync(self._http_client)
-        self.automate = AutomateSync(self._http_client)
+        self.agent = AgentSync(self._http_client)
 
     def close(self) -> None:
         """Close the HTTP client and release all connections.

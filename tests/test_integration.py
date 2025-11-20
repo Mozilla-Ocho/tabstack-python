@@ -7,65 +7,6 @@ import pytest
 from tabstack import TABStack
 
 
-class TestSchemaGenerationToExtraction:
-    """Test workflow: schema generation → data extraction."""
-
-    async def test_generate_schema_then_extract_data(self, mocker: Any) -> None:
-        """Test generating a schema and then using it to extract data."""
-        # Mock HTTP responses
-        mock_response_1 = mocker.Mock()
-        mock_response_1.status_code = 200
-        # Schema generation response
-        schema = {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {"type": "string"},
-                            "price": {"type": "number"},
-                        },
-                    },
-                }
-            },
-        }
-        mock_response_1.json.return_value = schema
-        mock_response_1.content = b"{}"
-
-        # Extraction response
-        mock_response_2 = mocker.Mock()
-        mock_response_2.status_code = 200
-        extracted_data = {
-            "items": [
-                {"title": "Product 1", "price": 19.99},
-                {"title": "Product 2", "price": 29.99},
-            ]
-        }
-        mock_response_2.json.return_value = extracted_data
-        mock_response_2.content = b"{}"
-
-        mock_httpx_client = mocker.AsyncMock()
-        mock_httpx_client.post.side_effect = [mock_response_1, mock_response_2]
-
-        async with TABStack(api_key="test_key") as tabs:
-            tabs._http_client._client = mock_httpx_client
-
-            # Step 1: Generate schema
-            schema_result = await tabs.extract.schema(
-                url="https://example.com/products", instructions="Extract product list"
-            )
-
-            # Step 2: Use schema to extract data
-            data_result = await tabs.extract.json(
-                url="https://example.com/products", schema=schema_result.schema
-            )
-
-            assert len(data_result.data["items"]) == 2
-            assert data_result.data["items"][0]["title"] == "Product 1"
-
-
 class TestExtractTransformWorkflow:
     """Test workflow: extract → transform."""
 
@@ -156,7 +97,7 @@ class TestBrowserAutomationWorkflow:
             }
 
             events = []
-            async for event in tabs.automate.execute(
+            async for event in tabs.agent.automate(
                 task="Find and extract results",
                 url="https://example.com",
                 schema=schema,

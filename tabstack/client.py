@@ -3,7 +3,7 @@
 from typing import Any
 
 from ._http_client import HTTPClient
-from .automate import Automate
+from .agent import Agent
 from .extract import Extract
 from .generate import Generate
 
@@ -74,7 +74,7 @@ class TABStack:
         # Initialize operators (each shares the same HTTP client for connection reuse)
         self.extract = Extract(self._http_client)
         self.generate = Generate(self._http_client)
-        self.automate = Automate(self._http_client)
+        self.agent = Agent(self._http_client)
 
     async def close(self) -> None:
         """Close the HTTP client and release all connections.

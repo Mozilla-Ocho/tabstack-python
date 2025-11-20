@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 
 from tabstack.extract import Extract
-from tabstack.types import JsonResponse, MarkdownResponse, SchemaResponse
+from tabstack.types import JsonResponse, MarkdownResponse
 
 
 class TestExtractMarkdown:
@@ -66,42 +66,6 @@ class TestExtractMarkdown:
             "v1/extract/markdown",
             {"url": "https://example.com", "nocache": True},
         )
-
-
-class TestExtractSchema:
-    """Tests for schema generation."""
-
-    async def test_schema_generation(
-        self, mocker: Any, mock_schema_response: dict[str, Any]
-    ) -> None:
-        """Test schema generation from URL."""
-        mock_http = mocker.AsyncMock()
-        mock_http.post.return_value = mock_schema_response
-
-        extract = Extract(mock_http)
-        result = await extract.schema(url="https://example.com", instructions="Extract products")
-
-        assert isinstance(result, SchemaResponse)
-        assert result.schema == mock_schema_response
-        assert "properties" in result.schema
-        mock_http.post.assert_called_once_with(
-            "v1/extract/json/schema",
-            {
-                "url": "https://example.com",
-                "instructions": "Extract products",
-            },
-        )
-
-    async def test_schema_with_nocache(self, mocker: Any) -> None:
-        """Test schema generation with nocache flag."""
-        mock_http = mocker.AsyncMock()
-        mock_http.post.return_value = {"type": "object", "properties": {}}
-
-        extract = Extract(mock_http)
-        await extract.schema(url="https://example.com", instructions="Test", nocache=True)
-
-        call_args = mock_http.post.call_args
-        assert call_args[0][1]["nocache"] is True
 
 
 class TestExtractJson:
