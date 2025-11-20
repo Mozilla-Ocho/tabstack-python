@@ -6,24 +6,24 @@ from tabstack.exceptions import (
     InvalidURLError,
     ServerError,
     ServiceUnavailableError,
-    TABStackError,
+    TabstackError,
     UnauthorizedError,
 )
 
 
-class TestTABStackError:
-    """Tests for base TABStackError."""
+class TestTabstackError:
+    """Tests for base TabstackError."""
 
     def test_error_with_message_and_status(self) -> None:
         """Test error initialization with message and status code."""
-        error = TABStackError("Test error", status_code=418)
+        error = TabstackError("Test error", status_code=418)
         assert str(error) == "Test error"
         assert error.message == "Test error"
         assert error.status_code == 418
 
     def test_error_with_message_only(self) -> None:
         """Test error initialization with message only."""
-        error = TABStackError("Test error")
+        error = TabstackError("Test error")
         assert str(error) == "Test error"
         assert error.message == "Test error"
         assert error.status_code is None
@@ -40,9 +40,9 @@ class TestBadRequestError:
         assert error.status_code == 400
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test BadRequestError inherits from TABStackError."""
+        """Test BadRequestError inherits from TabstackError."""
         error = BadRequestError("Test")
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)
 
 
 class TestUnauthorizedError:
@@ -61,9 +61,9 @@ class TestUnauthorizedError:
         assert error.status_code == 401
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test UnauthorizedError inherits from TABStackError."""
+        """Test UnauthorizedError inherits from TabstackError."""
         error = UnauthorizedError()
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)
 
 
 class TestInvalidURLError:
@@ -82,9 +82,9 @@ class TestInvalidURLError:
         assert error.status_code == 422
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test InvalidURLError inherits from TABStackError."""
+        """Test InvalidURLError inherits from TabstackError."""
         error = InvalidURLError()
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)
 
 
 class TestServerError:
@@ -103,9 +103,9 @@ class TestServerError:
         assert error.status_code == 500
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test ServerError inherits from TABStackError."""
+        """Test ServerError inherits from TabstackError."""
         error = ServerError()
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)
 
 
 class TestServiceUnavailableError:
@@ -124,9 +124,9 @@ class TestServiceUnavailableError:
         assert error.status_code == 503
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test ServiceUnavailableError inherits from TABStackError."""
+        """Test ServiceUnavailableError inherits from TabstackError."""
         error = ServiceUnavailableError()
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)
 
 
 class TestAPIError:
@@ -140,6 +140,6 @@ class TestAPIError:
         assert error.status_code == 429
 
     def test_inherits_from_tabstack_error(self) -> None:
-        """Test APIError inherits from TABStackError."""
+        """Test APIError inherits from TabstackError."""
         error = APIError("Test", 418)
-        assert isinstance(error, TABStackError)
+        assert isinstance(error, TabstackError)

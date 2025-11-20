@@ -1,4 +1,4 @@
-"""Synchronous Generate operator for TABStack AI SDK."""
+"""Synchronous Generate operator for Tabstack AI SDK."""
 
 from typing import Any, Dict
 
@@ -62,7 +62,7 @@ class GenerateSync:
             ServerError: If server encounters an error
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {

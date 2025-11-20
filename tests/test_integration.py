@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from tabstack import TABStack
+from tabstack import Tabstack
 
 
 class TestExtractTransformWorkflow:
@@ -33,7 +33,7 @@ class TestExtractTransformWorkflow:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.side_effect = [mock_response_1, mock_response_2]
 
-        async with TABStack(api_key="test_key") as tabs:
+        async with Tabstack(api_key="test_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             # Step 1: Extract markdown (just to test the workflow)
@@ -88,7 +88,7 @@ class TestBrowserAutomationWorkflow:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
-        async with TABStack(api_key="test_key") as tabs:
+        async with Tabstack(api_key="test_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             schema = {
@@ -127,7 +127,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        async with TABStack(api_key="test_key") as tabs:
+        async with Tabstack(api_key="test_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(InvalidURLError, match="URL not found"):
@@ -144,7 +144,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        async with TABStack(api_key="bad_key") as tabs:
+        async with Tabstack(api_key="bad_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(UnauthorizedError, match="Invalid API key"):
@@ -161,7 +161,7 @@ class TestErrorHandlingWorkflow:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        async with TABStack(api_key="test_key") as tabs:
+        async with Tabstack(api_key="test_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             with pytest.raises(ServerError, match="Internal server error"):
@@ -181,7 +181,7 @@ class TestMultipleOperations:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        async with TABStack(api_key="test_key") as tabs:
+        async with Tabstack(api_key="test_key") as tabs:
             tabs._http_client._client = mock_httpx_client
 
             # Perform multiple operations

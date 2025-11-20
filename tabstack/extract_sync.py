@@ -1,4 +1,4 @@
-"""Synchronous Extract operator for TABStack AI SDK."""
+"""Synchronous Extract operator for Tabstack AI SDK."""
 
 from typing import Any, Dict
 
@@ -51,7 +51,7 @@ class ExtractSync:
             ServerError: If server encounters an error
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     result = tabs.extract.markdown(
             ...         url="https://example.com/blog/article",
             ...         metadata=True
@@ -89,7 +89,7 @@ class ExtractSync:
             ServerError: If server encounters an error
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {

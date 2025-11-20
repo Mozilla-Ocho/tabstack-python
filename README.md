@@ -1,4 +1,4 @@
-# TABStack AI Python SDK
+# Tabstack AI Python SDK
 
 [![PyPI version](https://badge.fury.io/py/tabstack.svg)](https://badge.fury.io/py/tabstack)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tabstack.svg)](https://pypi.org/project/tabstack/)
@@ -9,7 +9,7 @@
 > [!WARNING]
 > **Early Release**: This SDK is in early development. The API may change in future releases as we refine and improve the library based on user feedback.
 
-Python SDK for [TABStack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
+Python SDK for [Tabstack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
 
 ## Features
 
@@ -61,11 +61,11 @@ pip install -e ".[dev]"
 ```python
 import asyncio
 import os
-from tabstack import TABStack
+from tabstack import Tabstack
 
 async def main():
     # Initialize the client with connection pooling
-    async with TABStack(
+    async with Tabstack(
         api_key=os.getenv('TABSTACK_API_KEY'),
         max_connections=100,
         max_keepalive_connections=20
@@ -147,9 +147,9 @@ All methods are async and should be awaited. The client supports async context m
 ### Client Initialization
 
 ```python
-from tabstack import TABStack
+from tabstack import Tabstack
 
-async with TABStack(
+async with Tabstack(
     api_key="your-api-key",
     base_url="https://api.tabstack.ai/",  # optional
     max_connections=100,  # optional
@@ -162,7 +162,7 @@ async with TABStack(
 ```
 
 **Parameters:**
-- `api_key` (str, required): Your TABStack API key
+- `api_key` (str, required): Your Tabstack API key
 - `base_url` (str, optional): API base URL. Default: `https://api.tabstack.ai/`
 - `max_connections` (int, optional): Maximum concurrent connections. Default: `100`
 - `max_keepalive_connections` (int, optional): Maximum idle connections to keep alive. Default: `20`
@@ -300,7 +300,7 @@ async for event in tabs.agent.automate(
 
 ## Working with JSON Schemas
 
-TABStack uses standard JSON Schema for defining data structures. Here are common patterns:
+Tabstack uses standard JSON Schema for defining data structures. Here are common patterns:
 
 ### Basic Object
 ```python
@@ -382,7 +382,7 @@ The SDK provides specific exception classes for different error scenarios:
 
 ```python
 import asyncio
-from tabstack import TABStack
+from tabstack import Tabstack
 from tabstack.exceptions import (
     BadRequestError,
     UnauthorizedError,
@@ -392,7 +392,7 @@ from tabstack.exceptions import (
 )
 
 async def main():
-    async with TABStack(api_key="your-api-key") as tabs:
+    async with Tabstack(api_key="your-api-key") as tabs:
         try:
             result = await tabs.extract.markdown(url="https://example.com")
         except UnauthorizedError:
@@ -458,7 +458,7 @@ mypy tabstack/
 ```
 tests/
 ├── conftest.py              # Shared pytest fixtures
-├── test_client.py           # TABStack client tests
+├── test_client.py           # Tabstack client tests
 ├── test_extract.py          # Extract operator tests
 ├── test_generate.py         # Generate operator tests
 ├── test_automate.py         # Automate operator tests

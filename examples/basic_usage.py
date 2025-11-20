@@ -1,15 +1,15 @@
-"""Example usage of TABStack AI SDK."""
+"""Example usage of Tabstack AI SDK."""
 
 import asyncio
 import os
 
-from tabstack import TABStack
+from tabstack import Tabstack
 
 
 async def main():
     """Run all examples."""
     # Initialize the client with connection pooling
-    async with TABStack(
+    async with Tabstack(
         api_key=os.getenv("TABSTACK_API_KEY", "your-api-key-here"),
         max_connections=50,
         max_keepalive_connections=10,

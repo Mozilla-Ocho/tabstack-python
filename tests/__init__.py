@@ -1,1 +1,1 @@
-"""Tests for TABStack Python SDK."""
+"""Tests for Tabstack Python SDK."""

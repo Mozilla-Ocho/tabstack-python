@@ -1,4 +1,4 @@
-"""Extract operator for TABStack AI SDK."""
+"""Extract operator for Tabstack AI SDK."""
 
 from typing import Any, Dict
 
@@ -53,7 +53,7 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> async with Tabstack(api_key="your-key") as tabs:
             ...     result = await tabs.extract.markdown(
             ...         url="https://example.com/blog/article",
             ...         metadata=True
@@ -91,7 +91,7 @@ class Extract:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> async with Tabstack(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {

@@ -1,4 +1,4 @@
-"""Synchronous Agent client for TABStack AI SDK."""
+"""Synchronous Agent client for Tabstack AI SDK."""
 
 from typing import Any, Dict, Iterator, Optional
 
@@ -60,7 +60,7 @@ class AgentSync:
             ServiceUnavailableError: If automate service is not available
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     for event in tabs.agent.automate(
             ...         task="Find the top 3 trending repositories",
             ...         url="https://github.com/trending"

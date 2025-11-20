@@ -1,4 +1,4 @@
-"""Main client for TABStack AI SDK."""
+"""Main client for Tabstack AI SDK."""
 
 from typing import Any
 
@@ -8,20 +8,20 @@ from .extract import Extract
 from .generate import Generate
 
 
-class TABStack:
-    """TABStack AI async client for web content extraction, generation, and automation.
+class Tabstack:
+    """Tabstack AI async client for web content extraction, generation, and automation.
 
-    This is the main entry point for the TABStack AI SDK. Initialize it with your
+    This is the main entry point for the Tabstack AI SDK. Initialize it with your
     API key to access the extract, generate, and automate operators. All operations
     are async and support connection pooling for efficient resource usage.
 
     Example:
         >>> import asyncio
         >>> import os
-        >>> from tabstack import TABStack
+        >>> from tabstack import Tabstack
         >>>
         >>> async def main():
-        ...     async with TABStack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
+        ...     async with Tabstack(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
         ...         result = await tabs.extract.markdown(url="https://example.com")
         ...         print(result.content)
         >>>
@@ -37,11 +37,11 @@ class TABStack:
         keepalive_expiry: float = 30.0,  # API's connection timeout is ~30s
         timeout: float = 60.0,  # Web scraping/AI operations can take time
     ) -> None:
-        """Initialize TABStack async client with connection pooling.
+        """Initialize Tabstack async client with connection pooling.
 
         Args:
-            api_key: Your TABStack API key for authentication
-            base_url: Base URL for the TABStack API (default: https://api.tabstack.ai/)
+            api_key: Your Tabstack API key for authentication
+            base_url: Base URL for the Tabstack API (default: https://api.tabstack.ai/)
             max_connections: Maximum number of connections in the pool (default: 100)
             max_keepalive_connections: Maximum idle connections to keep alive (default: 20)
             keepalive_expiry: Time in seconds to keep idle connections alive (default: 30.0)
@@ -51,7 +51,7 @@ class TABStack:
             ValueError: If api_key is empty or None
 
         Example:
-            >>> async with TABStack(
+            >>> async with Tabstack(
             ...     api_key="your-api-key-here",
             ...     max_connections=50,
             ...     max_keepalive_connections=10
@@ -80,7 +80,7 @@ class TABStack:
         """Close the HTTP client and release all connections.
 
         Example:
-            >>> tabs = TABStack(api_key="your-key")
+            >>> tabs = Tabstack(api_key="your-key")
             >>> try:
             ...     result = await tabs.extract.markdown(url="https://example.com")
             ... finally:
@@ -88,11 +88,11 @@ class TABStack:
         """
         await self._http_client.close()
 
-    async def __aenter__(self) -> "TABStack":
+    async def __aenter__(self) -> "Tabstack":
         """Async context manager entry.
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> async with Tabstack(api_key="your-key") as tabs:
             ...     result = await tabs.extract.markdown(url="https://example.com")
         """
         return self
@@ -103,4 +103,4 @@ class TABStack:
 
     def __repr__(self) -> str:
         """String representation of the client."""
-        return f"TABStack(base_url='{self._http_client.base_url}')"
+        return f"Tabstack(base_url='{self._http_client.base_url}')"
