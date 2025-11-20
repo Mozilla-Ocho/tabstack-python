@@ -1,4 +1,4 @@
-"""Extract operator for Tabstack AI SDK."""
+"""Extract operator for Tabstack SDK."""
 
 from typing import Any, Dict
 

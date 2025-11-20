@@ -1,4 +1,4 @@
-"""Synchronous main client for Tabstack AI SDK."""
+"""Synchronous main client for Tabstack SDK."""
 
 from typing import Any
 
@@ -9,9 +9,9 @@ from .generate_sync import GenerateSync
 
 
 class TabstackSync:
-    """Tabstack AI synchronous client for web content extraction, generation, and automation.
+    """Tabstack synchronous client for web content extraction, generation, and automation.
 
-    This is the synchronous version of the Tabstack AI SDK. Use this when you don't need
+    This is the synchronous version of the Tabstack SDK. Use this when you don't need
     async/await support. For async support, use the `Tabstack` class instead.
 
     All operations are synchronous and support connection pooling for efficient resource usage.

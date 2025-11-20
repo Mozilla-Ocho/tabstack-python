@@ -1,4 +1,4 @@
-"""Generate operator for Tabstack AI SDK."""
+"""Generate operator for Tabstack SDK."""
 
 from typing import Any, Dict
 

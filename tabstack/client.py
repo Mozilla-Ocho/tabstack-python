@@ -1,4 +1,4 @@
-"""Main client for Tabstack AI SDK."""
+"""Main client for Tabstack SDK."""
 
 from typing import Any
 
@@ -9,9 +9,9 @@ from .generate import Generate
 
 
 class Tabstack:
-    """Tabstack AI async client for web content extraction, generation, and automation.
+    """Tabstack async client for web content extraction, generation, and automation.
 
-    This is the main entry point for the Tabstack AI SDK. Initialize it with your
+    This is the main entry point for the Tabstack SDK. Initialize it with your
     API key to access the extract, generate, and automate operators. All operations
     are async and support connection pooling for efficient resource usage.
 

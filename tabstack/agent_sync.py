@@ -1,4 +1,4 @@
-"""Synchronous Agent client for Tabstack AI SDK."""
+"""Synchronous Agent client for Tabstack SDK."""
 
 from typing import Any, Dict, Iterator, Optional
 

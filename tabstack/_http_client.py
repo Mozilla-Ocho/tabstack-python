@@ -1,4 +1,4 @@
-"""Internal HTTP client for Tabstack AI SDK."""
+"""Internal HTTP client for Tabstack SDK."""
 
 from typing import Any, AsyncIterator, Dict, Optional
 

@@ -1,6 +1,6 @@
-"""Tabstack AI Python SDK.
+"""Tabstack Python SDK.
 
-This SDK provides a Python interface to the Tabstack AI API for web content
+This SDK provides a Python interface to the Tabstack API for web content
 extraction, AI-powered content generation, and browser automation.
 
 The SDK provides three main operators:

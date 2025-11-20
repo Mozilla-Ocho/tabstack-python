@@ -1,4 +1,4 @@
-# Tabstack AI Python SDK
+# Tabstack Python SDK
 
 [![PyPI version](https://badge.fury.io/py/tabstack.svg)](https://badge.fury.io/py/tabstack)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tabstack.svg)](https://pypi.org/project/tabstack/)
@@ -9,7 +9,7 @@
 > [!WARNING]
 > **Early Release**: This SDK is in early development. The API may change in future releases as we refine and improve the library based on user feedback.
 
-Python SDK for [Tabstack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
+Python SDK for [Tabstack](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
 
 ## Features
 

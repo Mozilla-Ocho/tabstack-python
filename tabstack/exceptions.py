@@ -1,10 +1,10 @@
-"""Custom exceptions for Tabstack AI SDK."""
+"""Custom exceptions for Tabstack SDK."""
 
 from typing import Optional
 
 
 class TabstackError(Exception):
-    """Base exception for all Tabstack AI errors."""
+    """Base exception for all Tabstack errors."""
 
     def __init__(self, message: str, status_code: Optional[int] = None) -> None:
         """Initialize error.

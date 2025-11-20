@@ -1,4 +1,4 @@
-"""Example usage of Tabstack AI SDK."""
+"""Example usage of Tabstack SDK."""
 
 import asyncio
 import os

@@ -1,4 +1,4 @@
-"""Synchronous HTTP client for Tabstack AI SDK."""
+"""Synchronous HTTP client for Tabstack SDK."""
 
 from typing import Any, Dict, Iterator, Optional
 
