@@ -6,6 +6,9 @@
 [![Tests](https://github.com/Mozilla-Ocho/tabstack-python/workflows/Tests/badge.svg)](https://github.com/Mozilla-Ocho/tabstack-python/actions)
 [![codecov](https://codecov.io/gh/Mozilla-Ocho/tabstack-python/branch/main/graph/badge.svg)](https://codecov.io/gh/Mozilla-Ocho/tabstack-python)
 
+> [!WARNING]
+> **Early Release**: This SDK is in early development. The API may change in future releases as we refine and improve the library based on user feedback.
+
 Python SDK for [TABStack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
 
 ## Features
