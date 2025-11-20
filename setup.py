@@ -7,14 +7,14 @@ try:
     with open("README.md", encoding="utf-8") as f:
         long_description = f.read()
 except FileNotFoundError:
-    long_description = "Python SDK for TABStack AI"
+    long_description = "Python SDK for Tabstack"
 
 setup(
     name="tabstack-ai",
     version="1.0.0",
-    author="TABStack",
+    author="Tabstack",
     author_email="support@tabstack.ai",
-    description="Python SDK for TABStack AI - Extract, Generate, and Automate web content",
+    description="Python SDK for Tabstack - Extract, Generate, and Automate web content",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Mozilla-Ocho/tabstack-python",

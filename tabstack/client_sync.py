@@ -1,26 +1,26 @@
-"""Synchronous main client for TABStack AI SDK."""
+"""Synchronous main client for Tabstack SDK."""
 
 from typing import Any
 
 from ._http_client_sync import HTTPClientSync
-from .automate_sync import AutomateSync
+from .agent_sync import AgentSync
 from .extract_sync import ExtractSync
 from .generate_sync import GenerateSync
 
 
-class TABStackSync:
-    """TABStack AI synchronous client for web content extraction, generation, and automation.
+class TabstackSync:
+    """Tabstack synchronous client for web content extraction, generation, and automation.
 
-    This is the synchronous version of the TABStack AI SDK. Use this when you don't need
-    async/await support. For async support, use the `TABStack` class instead.
+    This is the synchronous version of the Tabstack SDK. Use this when you don't need
+    async/await support. For async support, use the `Tabstack` class instead.
 
     All operations are synchronous and support connection pooling for efficient resource usage.
 
     Example:
         >>> import os
-        >>> from tabstack import TABStackSync
+        >>> from tabstack import TabstackSync
         >>>
-        >>> with TABStackSync(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
+        >>> with TabstackSync(api_key=os.getenv('TABSTACK_API_KEY')) as tabs:
         ...     result = tabs.extract.markdown(url="https://example.com")
         ...     print(result.content)
     """
@@ -34,11 +34,11 @@ class TABStackSync:
         keepalive_expiry: float = 30.0,  # API's connection timeout is ~30s
         timeout: float = 60.0,  # Web scraping/AI operations can take time
     ) -> None:
-        """Initialize TABStack synchronous client with connection pooling.
+        """Initialize Tabstack synchronous client with connection pooling.
 
         Args:
-            api_key: Your TABStack API key for authentication
-            base_url: Base URL for the TABStack API (default: https://api.tabstack.ai/)
+            api_key: Your Tabstack API key for authentication
+            base_url: Base URL for the Tabstack API (default: https://api.tabstack.ai/)
             max_connections: Maximum number of connections in the pool (default: 100)
             max_keepalive_connections: Maximum idle connections to keep alive (default: 20)
             keepalive_expiry: Time in seconds to keep idle connections alive (default: 30.0)
@@ -48,7 +48,7 @@ class TABStackSync:
             ValueError: If api_key is empty or None
 
         Example:
-            >>> with TABStackSync(
+            >>> with TabstackSync(
             ...     api_key="your-api-key-here",
             ...     max_connections=50,
             ...     max_keepalive_connections=10
@@ -71,13 +71,13 @@ class TABStackSync:
         # Initialize operators (each shares the same HTTP client for connection reuse)
         self.extract = ExtractSync(self._http_client)
         self.generate = GenerateSync(self._http_client)
-        self.automate = AutomateSync(self._http_client)
+        self.agent = AgentSync(self._http_client)
 
     def close(self) -> None:
         """Close the HTTP client and release all connections.
 
         Example:
-            >>> tabs = TABStackSync(api_key="your-key")
+            >>> tabs = TabstackSync(api_key="your-key")
             >>> try:
             ...     result = tabs.extract.markdown(url="https://example.com")
             ... finally:
@@ -85,11 +85,11 @@ class TABStackSync:
         """
         self._http_client.close()
 
-    def __enter__(self) -> "TABStackSync":
+    def __enter__(self) -> "TabstackSync":
         """Sync context manager entry.
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     result = tabs.extract.markdown(url="https://example.com")
         """
         return self
@@ -100,4 +100,4 @@ class TABStackSync:
 
     def __repr__(self) -> str:
         """String representation of the client."""
-        return f"TABStackSync(base_url='{self._http_client.base_url}')"
+        return f"TabstackSync(base_url='{self._http_client.base_url}')"

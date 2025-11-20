@@ -1,4 +1,4 @@
-"""Synchronous Automate operator for TABStack AI SDK."""
+"""Synchronous Agent client for Tabstack SDK."""
 
 from typing import Any, Dict, Iterator, Optional
 
@@ -8,10 +8,10 @@ from .types import AutomateEvent
 from .utils import validate_json_schema
 
 
-class AutomateSync:
-    """Synchronous Automate operator for AI-powered browser automation.
+class AgentSync:
+    """Synchronous Agent client for AI-powered browser automation.
 
-    The Automate operator enables complex, multi-step web automation tasks using
+    The Agent client enables complex, multi-step web automation tasks using
     natural language instructions. An AI agent navigates a real browser, performing
     actions like clicking, filling forms, and extracting data.
 
@@ -26,14 +26,14 @@ class AutomateSync:
     """
 
     def __init__(self, http_client: HTTPClientSync) -> None:
-        """Initialize Automate operator.
+        """Initialize Agent client.
 
         Args:
             http_client: Sync HTTP client for making API requests
         """
         self._http = http_client
 
-    def execute(
+    def automate(
         self,
         task: str,
         url: Optional[str] = None,
@@ -60,8 +60,8 @@ class AutomateSync:
             ServiceUnavailableError: If automate service is not available
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
-            ...     for event in tabs.automate.execute(
+            >>> with TabstackSync(api_key="your-key") as tabs:
+            ...     for event in tabs.agent.automate(
             ...         task="Find the top 3 trending repositories",
             ...         url="https://github.com/trending"
             ...     ):

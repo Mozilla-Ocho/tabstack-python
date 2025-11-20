@@ -1,63 +1,63 @@
-"""Tests for main TABStack client."""
+"""Tests for main Tabstack client."""
 
 from typing import Any
 
 import pytest
 
-from tabstack import TABStack
-from tabstack.automate import Automate
+from tabstack import Tabstack
+from tabstack.agent import Agent
 from tabstack.extract import Extract
 from tabstack.generate import Generate
 
 
-class TestTABStackInitialization:
-    """Tests for TABStack client initialization."""
+class TestTabstackInitialization:
+    """Tests for Tabstack client initialization."""
 
     def test_initialization_with_api_key(self) -> None:
         """Test client initialization with API key."""
-        client = TABStack(api_key="test_key_123")
+        client = Tabstack(api_key="test_key_123")
         assert client._http_client.api_key == "test_key_123"
 
     def test_initialization_with_custom_base_url(self) -> None:
         """Test client initialization with custom base URL."""
-        client = TABStack(api_key="test_key", base_url="https://custom.api.com")
+        client = Tabstack(api_key="test_key", base_url="https://custom.api.com")
         assert client._http_client.base_url == "https://custom.api.com"
 
     def test_initialization_missing_api_key(self) -> None:
         """Test initialization without API key raises error."""
         with pytest.raises(TypeError):
-            TABStack()  # type: ignore
+            Tabstack()  # type: ignore
 
     def test_operators_are_initialized(self) -> None:
         """Test all operators are properly initialized."""
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
         assert isinstance(client.extract, Extract)
         assert isinstance(client.generate, Generate)
-        assert isinstance(client.automate, Automate)
+        assert isinstance(client.agent, Agent)
 
     def test_operators_share_http_client(self) -> None:
         """Test all operators share the same HTTP client."""
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
         # All operators should use the same HTTP client instance
         assert client.extract._http is client._http_client
         assert client.generate._http is client._http_client
-        assert client.automate._http is client._http_client
+        assert client.agent._http is client._http_client
 
 
-class TestTABStackContextManager:
+class TestTabstackContextManager:
     """Tests for async context manager support."""
 
     async def test_context_manager_usage(self) -> None:
-        """Test using TABStack as async context manager."""
-        async with TABStack(api_key="test_key") as client:
-            assert isinstance(client, TABStack)
+        """Test using Tabstack as async context manager."""
+        async with Tabstack(api_key="test_key") as client:
+            assert isinstance(client, Tabstack)
             assert isinstance(client.extract, Extract)
 
         # Client should be closed after context
 
     async def test_context_manager_closes_http_client(self, mocker: Any) -> None:
         """Test context manager closes HTTP client."""
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
 
         # Mock the close method
         mock_close = mocker.AsyncMock()
@@ -70,7 +70,7 @@ class TestTABStackContextManager:
 
     async def test_manual_close(self, mocker: Any) -> None:
         """Test manually closing the client."""
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
 
         mock_close = mocker.AsyncMock()
         client._http_client.close = mock_close
@@ -80,8 +80,8 @@ class TestTABStackContextManager:
         mock_close.assert_called_once()
 
 
-class TestTABStackIntegration:
-    """Integration tests using TABStack client."""
+class TestTabstackIntegration:
+    """Integration tests using Tabstack client."""
 
     async def test_extract_markdown_integration(self, mocker: Any) -> None:
         """Test complete flow for extracting markdown."""
@@ -97,7 +97,7 @@ class TestTABStackIntegration:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
         client._http_client._client = mock_httpx_client
 
         result = await client.extract.markdown(url="https://example.com")
@@ -116,7 +116,7 @@ class TestTABStackIntegration:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.post.return_value = mock_response
 
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
         client._http_client._client = mock_httpx_client
 
         schema = {"type": "object", "properties": {"summary": {"type": "string"}}}
@@ -146,11 +146,11 @@ class TestTABStackIntegration:
         mock_httpx_client = mocker.AsyncMock()
         mock_httpx_client.stream = mocker.MagicMock(return_value=mock_stream_cm)
 
-        client = TABStack(api_key="test_key")
+        client = Tabstack(api_key="test_key")
         client._http_client._client = mock_httpx_client
 
         events = []
-        async for event in client.automate.execute(task="Test", url="https://example.com"):
+        async for event in client.agent.automate(task="Test", url="https://example.com"):
             events.append(event)
 
         assert len(events) >= 1

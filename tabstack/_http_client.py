@@ -1,4 +1,4 @@
-"""Internal HTTP client for TABStack AI SDK."""
+"""Internal HTTP client for Tabstack SDK."""
 
 from typing import Any, AsyncIterator, Dict, Optional
 
@@ -8,15 +8,15 @@ from ._shared import get_http_headers, handle_error_response
 
 
 class HTTPClient:
-    """Internal async HTTP client for TABStack API requests.
+    """Internal async HTTP client for Tabstack API requests.
 
-    Handles HTTP communication with the TABStack API, including:
+    Handles HTTP communication with the Tabstack API, including:
     - Connection pooling and keepalive for performance
     - Request authentication with API keys
     - Error response parsing and exception mapping
     - Server-Sent Events (SSE) streaming for automate endpoint
 
-    This is an internal class. Users should use the TABStack client instead.
+    This is an internal class. Users should use the Tabstack client instead.
     """
 
     def __init__(
@@ -92,7 +92,7 @@ class HTTPClient:
             Response data as dictionary
 
         Raises:
-            TABStackError: On API errors
+            TabstackError: On API errors
         """
         client = await self._get_client()
         headers = get_http_headers(self.api_key)
@@ -127,7 +127,7 @@ class HTTPClient:
             Lines from the streaming response
 
         Raises:
-            TABStackError: On API errors
+            TabstackError: On API errors
         """
         client = await self._get_client()
         headers = get_http_headers(self.api_key)

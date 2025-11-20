@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for TABStack SDK tests.
+"""Shared pytest fixtures for Tabstack SDK tests.
 
 Provides fixtures for mocking HTTP responses and creating test clients.
 """

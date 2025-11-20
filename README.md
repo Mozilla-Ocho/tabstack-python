@@ -1,4 +1,4 @@
-# TABStack AI Python SDK
+# Tabstack Python SDK
 
 [![PyPI version](https://badge.fury.io/py/tabstack.svg)](https://badge.fury.io/py/tabstack)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tabstack.svg)](https://pypi.org/project/tabstack/)
@@ -6,7 +6,10 @@
 [![Tests](https://github.com/Mozilla-Ocho/tabstack-python/workflows/Tests/badge.svg)](https://github.com/Mozilla-Ocho/tabstack-python/actions)
 [![codecov](https://codecov.io/gh/Mozilla-Ocho/tabstack-python/branch/main/graph/badge.svg)](https://codecov.io/gh/Mozilla-Ocho/tabstack-python)
 
-Python SDK for [TABStack AI](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
+> [!WARNING]
+> **Early Release**: This SDK is in early development. The API may change in future releases as we refine and improve the library based on user feedback.
+
+Python SDK for [Tabstack](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
 
 ## Features
 
@@ -58,11 +61,11 @@ pip install -e ".[dev]"
 ```python
 import asyncio
 import os
-from tabstack import TABStack
+from tabstack import Tabstack
 
 async def main():
     # Initialize the client with connection pooling
-    async with TABStack(
+    async with Tabstack(
         api_key=os.getenv('TABSTACK_API_KEY'),
         max_connections=100,
         max_keepalive_connections=20
@@ -124,7 +127,7 @@ async def main():
         )
 
         # Automate web tasks (streaming)
-        async for event in tabs.automate.execute(
+        async for event in tabs.agent.automate(
             task="Find the top 3 trending repositories and extract their details",
             url="https://github.com/trending"
         ):
@@ -144,9 +147,9 @@ All methods are async and should be awaited. The client supports async context m
 ### Client Initialization
 
 ```python
-from tabstack import TABStack
+from tabstack import Tabstack
 
-async with TABStack(
+async with Tabstack(
     api_key="your-api-key",
     base_url="https://api.tabstack.ai/",  # optional
     max_connections=100,  # optional
@@ -159,7 +162,7 @@ async with TABStack(
 ```
 
 **Parameters:**
-- `api_key` (str, required): Your TABStack API key
+- `api_key` (str, required): Your Tabstack API key
 - `base_url` (str, optional): API base URL. Default: `https://api.tabstack.ai/`
 - `max_connections` (int, optional): Maximum concurrent connections. Default: `100`
 - `max_keepalive_connections` (int, optional): Maximum idle connections to keep alive. Default: `20`
@@ -189,27 +192,6 @@ result = await tabs.extract.markdown(
 )
 print(result.content)
 print(result.metadata.title)
-```
-
-#### `extract.schema(url, instructions, nocache=False)`
-
-Generate a JSON Schema by analyzing the structure of a webpage.
-
-**Parameters:**
-- `url` (str): URL to analyze
-- `instructions` (str): Instructions for what data to extract (max 1000 characters)
-- `nocache` (bool): Bypass cache. Default: `False`
-
-**Returns:** `SchemaResponse` with generated `schema` dict
-
-**Example:**
-```python
-result = await tabs.extract.schema(
-    url="https://example.com/products",
-    instructions="Extract product listings with name, price, and availability"
-)
-# Use the schema for extraction
-data = await tabs.extract.json(url="https://example.com/products", schema=result.schema)
 ```
 
 #### `extract.json(url, schema, nocache=False)`
@@ -269,11 +251,11 @@ result = await tabs.generate.json(
 )
 ```
 
-### Automate Operator
+### Agent Client
 
-The Automate operator executes complex web automation tasks using natural language.
+The Agent client executes complex web automation tasks using natural language.
 
-#### `automate.execute(task, url=None, schema=None)`
+#### `agent.automate(task, url=None, schema=None)`
 
 Execute an AI-powered browser automation task (returns async iterator for Server-Sent Events).
 
@@ -305,7 +287,7 @@ schema = {
     }
 }
 
-async for event in tabs.automate.execute(
+async for event in tabs.agent.automate(
     task="Find trending repositories and extract their names and star counts",
     url="https://github.com/trending",
     schema=schema
@@ -318,7 +300,7 @@ async for event in tabs.automate.execute(
 
 ## Working with JSON Schemas
 
-TABStack uses standard JSON Schema for defining data structures. Here are common patterns:
+Tabstack uses standard JSON Schema for defining data structures. Here are common patterns:
 
 ### Basic Object
 ```python
@@ -400,7 +382,7 @@ The SDK provides specific exception classes for different error scenarios:
 
 ```python
 import asyncio
-from tabstack import TABStack
+from tabstack import Tabstack
 from tabstack.exceptions import (
     BadRequestError,
     UnauthorizedError,
@@ -410,7 +392,7 @@ from tabstack.exceptions import (
 )
 
 async def main():
-    async with TABStack(api_key="your-api-key") as tabs:
+    async with Tabstack(api_key="your-api-key") as tabs:
         try:
             result = await tabs.extract.markdown(url="https://example.com")
         except UnauthorizedError:
@@ -476,7 +458,7 @@ mypy tabstack/
 ```
 tests/
 ├── conftest.py              # Shared pytest fixtures
-├── test_client.py           # TABStack client tests
+├── test_client.py           # Tabstack client tests
 ├── test_extract.py          # Extract operator tests
 ├── test_generate.py         # Generate operator tests
 ├── test_automate.py         # Automate operator tests

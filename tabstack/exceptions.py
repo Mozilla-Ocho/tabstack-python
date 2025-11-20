@@ -1,10 +1,10 @@
-"""Custom exceptions for TABStack AI SDK."""
+"""Custom exceptions for Tabstack SDK."""
 
 from typing import Optional
 
 
-class TABStackError(Exception):
-    """Base exception for all TABStack AI errors."""
+class TabstackError(Exception):
+    """Base exception for all Tabstack errors."""
 
     def __init__(self, message: str, status_code: Optional[int] = None) -> None:
         """Initialize error.
@@ -18,7 +18,7 @@ class TABStackError(Exception):
         super().__init__(self.message)
 
 
-class BadRequestError(TABStackError):
+class BadRequestError(TabstackError):
     """Exception for 400 Bad Request errors.
 
     Raised when the request is malformed or missing required fields
@@ -36,7 +36,7 @@ class BadRequestError(TABStackError):
         super().__init__(message, status_code=400)
 
 
-class UnauthorizedError(TABStackError):
+class UnauthorizedError(TabstackError):
     """Exception for 401 Unauthorized errors.
 
     Raised when the API key is invalid or missing. Verify your API key
@@ -55,7 +55,7 @@ class UnauthorizedError(TABStackError):
         super().__init__(message, status_code=401)
 
 
-class InvalidURLError(TABStackError):
+class InvalidURLError(TabstackError):
     """Exception for 422 Unprocessable Entity errors related to URLs.
 
     Raised when the provided URL is invalid, inaccessible, or returns an error
@@ -74,7 +74,7 @@ class InvalidURLError(TABStackError):
         super().__init__(message, status_code=422)
 
 
-class ServerError(TABStackError):
+class ServerError(TabstackError):
     """Exception for 500 Internal Server Error.
 
     Raised when the server encounters an error processing the request.
@@ -93,7 +93,7 @@ class ServerError(TABStackError):
         super().__init__(message, status_code=500)
 
 
-class ServiceUnavailableError(TABStackError):
+class ServiceUnavailableError(TabstackError):
     """Exception for 503 Service Unavailable errors.
 
     Raised when a service (e.g., automate) is temporarily unavailable,
@@ -112,7 +112,7 @@ class ServiceUnavailableError(TABStackError):
         super().__init__(message, status_code=503)
 
 
-class APIError(TABStackError):
+class APIError(TabstackError):
     """Generic API error for unexpected status codes."""
 
     def __init__(self, message: str, status_code: int) -> None:

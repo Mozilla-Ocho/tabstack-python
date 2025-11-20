@@ -1,4 +1,4 @@
-"""Automate operator for TABStack AI SDK."""
+"""Agent client for Tabstack SDK."""
 
 from typing import Any, AsyncIterator, Dict, Optional
 
@@ -8,10 +8,10 @@ from .types import AutomateEvent
 from .utils import validate_json_schema
 
 
-class Automate:
-    """Automate operator for AI-powered browser automation.
+class Agent:
+    """Agent client for AI-powered browser automation.
 
-    The Automate operator enables complex, multi-step web automation tasks using
+    The Agent client enables complex, multi-step web automation tasks using
     natural language instructions. An AI agent navigates a real browser, performing
     actions like clicking, filling forms, and extracting data.
 
@@ -26,14 +26,14 @@ class Automate:
     """
 
     def __init__(self, http_client: HTTPClient) -> None:
-        """Initialize Automate operator.
+        """Initialize Agent client.
 
         Args:
             http_client: HTTP client for making API requests
         """
         self._http = http_client
 
-    async def execute(
+    async def automate(
         self,
         task: str,
         url: Optional[str] = None,
@@ -60,8 +60,8 @@ class Automate:
             ServiceUnavailableError: If automate service is not available
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
-            ...     async for event in tabs.automate.execute(
+            >>> async with Tabstack(api_key="your-key") as tabs:
+            ...     async for event in tabs.agent.automate(
             ...         task="Find the top 3 trending repositories",
             ...         url="https://github.com/trending"
             ...     ):

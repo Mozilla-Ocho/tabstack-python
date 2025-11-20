@@ -1,15 +1,15 @@
-"""Example usage of TABStack AI SDK."""
+"""Example usage of Tabstack SDK."""
 
 import asyncio
 import os
 
-from tabstack import TABStack
+from tabstack import Tabstack
 
 
 async def main():
     """Run all examples."""
     # Initialize the client with connection pooling
-    async with TABStack(
+    async with Tabstack(
         api_key=os.getenv("TABSTACK_API_KEY", "your-api-key-here"),
         max_connections=50,
         max_keepalive_connections=10,
@@ -29,27 +29,8 @@ async def main():
 
         print("\n")
 
-        # Example 2: Generate schema from URL
-        print("Example 2: Generate Schema")
-        print("-" * 50)
-        try:
-            result = await tabs.extract.schema(
-                url="https://news.ycombinator.com",
-                instructions="extract top stories with title, points, and author",
-            )
-            # result.schema is a JSON Schema dict that can be used directly
-            print(f"Generated schema: {result.schema}")
-            # You can now use this schema directly with extract.json()
-            # data = await tabs.extract.json(
-            #     url="https://news.ycombinator.com", schema=result.schema
-            # )
-        except Exception as e:
-            print(f"Error: {e}")
-
-        print("\n")
-
-        # Example 3: Extract structured JSON data
-        print("Example 3: Extract Structured JSON")
+        # Example 2: Extract structured JSON data
+        print("Example 2: Extract Structured JSON")
         print("-" * 50)
         try:
             schema = {
@@ -76,8 +57,8 @@ async def main():
 
         print("\n")
 
-        # Example 4: Generate transformed content with AI
-        print("Example 4: Generate Transformed Content")
+        # Example 3: Generate transformed content with AI
+        print("Example 3: Generate Transformed Content")
         print("-" * 50)
         try:
             summary_schema = {
@@ -109,15 +90,13 @@ async def main():
 
         print("\n")
 
-        # Example 5: Automate web tasks (streaming)
-        print("Example 5: Web Automation (Streaming)")
+        # Example 4: Automate web tasks (streaming)
+        print("Example 4: Web Automation (Streaming)")
         print("-" * 50)
         try:
-            async for event in tabs.automate.execute(
+            async for event in tabs.agent.automate(
                 task="Find the top 3 trending repositories and extract their details",
                 url="https://github.com/trending",
-                guardrails="browse and extract only, don't interact with repositories",
-                max_iterations=20,
             ):
                 if event.type == "task:completed":
                     print(f"✓ Task completed: {event.data.get('finalAnswer', 'N/A')}")

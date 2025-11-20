@@ -143,7 +143,7 @@ def handle_error_response(status: int, body: bytes) -> None:
         body: Response body
 
     Raises:
-        TABStackError: Appropriate exception based on status code
+        TabstackError: Appropriate exception based on status code
     """
     from .exceptions import (
         APIError,

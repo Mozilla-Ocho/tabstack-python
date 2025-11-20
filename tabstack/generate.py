@@ -1,4 +1,4 @@
-"""Generate operator for TABStack AI SDK."""
+"""Generate operator for Tabstack SDK."""
 
 from typing import Any, Dict
 
@@ -62,7 +62,7 @@ class Generate:
             ServerError: If server encounters an error
 
         Example:
-            >>> async with TABStack(api_key="your-key") as tabs:
+            >>> async with Tabstack(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {

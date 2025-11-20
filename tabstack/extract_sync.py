@@ -1,10 +1,10 @@
-"""Synchronous Extract operator for TABStack AI SDK."""
+"""Synchronous Extract operator for Tabstack SDK."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from ._http_client_sync import HTTPClientSync
-from ._shared import build_json_extract_request, build_markdown_request, build_schema_request
-from .types import JsonResponse, MarkdownResponse, SchemaResponse
+from ._shared import build_json_extract_request, build_markdown_request
+from .types import JsonResponse, MarkdownResponse
 from .utils import validate_json_schema
 
 
@@ -14,7 +14,6 @@ class ExtractSync:
     The Extract operator converts web content into structured formats without
     AI transformation. Use Extract when you want to:
     - Convert HTML to clean Markdown
-    - Discover data structure automatically with schema generation
     - Extract structured data that exists in the page (no summarization/transformation)
 
     For AI-powered transformation of content, use the Generate operator instead.
@@ -52,7 +51,7 @@ class ExtractSync:
             ServerError: If server encounters an error
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     result = tabs.extract.markdown(
             ...         url="https://example.com/blog/article",
             ...         metadata=True
@@ -63,48 +62,6 @@ class ExtractSync:
         request_data = build_markdown_request(url, metadata, nocache)
         response = self._http.post("v1/extract/markdown", request_data)
         return MarkdownResponse.from_dict(response)
-
-    def schema(
-        self, url: str, instructions: Optional[str] = None, nocache: bool = False
-    ) -> SchemaResponse:
-        """Generate JSON Schema from URL content using AI.
-
-        Analyzes the structure of content on a page and generates a JSON Schema
-        that describes it. The generated schema can then be used with extract.json()
-        to extract data from similar pages.
-
-        Instructions help guide the AI to focus on specific data. Keep instructions
-        under 1000 characters for best results.
-
-        Args:
-            url: URL to analyze and extract schema from
-            instructions: Optional guidance for schema generation (max 1000 characters).
-                         Example: "extract top stories with title, points, and author"
-            nocache: Bypass cache and force fresh data retrieval
-
-        Returns:
-            SchemaResponse containing the generated JSON Schema dict
-
-        Raises:
-            BadRequestError: If URL is missing or instructions exceed 1000 characters
-            UnauthorizedError: If API key is invalid
-            InvalidURLError: If URL is invalid or inaccessible
-            ServerError: If server encounters an error
-
-        Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
-            ...     result = tabs.extract.schema(
-            ...         url="https://news.ycombinator.com",
-            ...         instructions="extract top stories with title, points, and author"
-            ...     )
-            ...     data = tabs.extract.json(
-            ...         url="https://news.ycombinator.com",
-            ...         schema=result.schema
-            ...     )
-        """
-        request_data = build_schema_request(url, instructions, nocache)
-        response = self._http.post("v1/extract/json/schema", request_data)
-        return SchemaResponse.from_dict(response)
 
     def json(self, url: str, schema: Dict[str, Any], nocache: bool = False) -> JsonResponse:
         """Extract structured JSON data from URL content.
@@ -132,7 +89,7 @@ class ExtractSync:
             ServerError: If server encounters an error
 
         Example:
-            >>> with TABStackSync(api_key="your-key") as tabs:
+            >>> with TabstackSync(api_key="your-key") as tabs:
             ...     schema = {
             ...         "type": "object",
             ...         "properties": {

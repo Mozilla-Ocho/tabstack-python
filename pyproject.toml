@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tabstack"
 version = "1.0.0"
-description = "Python SDK for TABStack AI - Extract, Generate, and Automate web content"
+description = "Python SDK for Tabstack - Extract, Generate, and Automate web content"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
 authors = [
-    {name = "TABStack", email = "support@tabstack.ai"}
+    {name = "Tabstack", email = "support@tabstack.ai"}
 ]
 keywords = ["web-scraping", "ai", "automation", "data-extraction", "web-automation"]
 classifiers = [
