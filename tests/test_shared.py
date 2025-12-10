@@ -13,9 +13,7 @@ class TestBuildAutomateRequest:
 
     def test_with_url(self) -> None:
         """Test building request with url."""
-        result = build_automate_request(
-            task="Find repositories", url="https://github.com/trending"
-        )
+        result = build_automate_request(task="Find repositories", url="https://github.com/trending")
         assert result == {
             "task": "Find repositories",
             "url": "https://github.com/trending",
