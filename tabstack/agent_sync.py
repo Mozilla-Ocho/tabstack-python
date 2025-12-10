@@ -38,6 +38,10 @@ class AgentSync:
         task: str,
         url: Optional[str] = None,
         schema: Optional[Dict[str, Any]] = None,
+        data: Optional[Dict[str, Any]] = None,
+        guardrails: Optional[str] = None,
+        max_iterations: Optional[int] = None,
+        max_validation_attempts: Optional[int] = None,
     ) -> Iterator[AutomateEvent]:
         """Execute AI-powered browser automation task with streaming updates.
 
@@ -48,6 +52,10 @@ class AgentSync:
             task: The task description in natural language
             url: Optional starting URL for the task
             schema: Optional JSON Schema for structured data extraction
+            data: Optional JSON data for form filling or complex tasks
+            guardrails: Optional safety constraints for execution
+            max_iterations: Optional maximum task iterations (1-100, default: 50)
+            max_validation_attempts: Optional maximum validation attempts (1-10, default: 3)
 
         Yields:
             AutomateEvent objects representing different stages of task execution
@@ -63,7 +71,9 @@ class AgentSync:
             >>> with TabstackSync(api_key="your-key") as tabs:
             ...     for event in tabs.agent.automate(
             ...         task="Find the top 3 trending repositories",
-            ...         url="https://github.com/trending"
+            ...         url="https://github.com/trending",
+            ...         guardrails="browse and extract only, don't star repos",
+            ...         max_iterations=20
             ...     ):
             ...         if event.type == "task:completed":
             ...             print(f"Result: {event.data.final_answer}")
@@ -110,7 +120,9 @@ class AgentSync:
         if schema:
             validate_json_schema(schema)
 
-        request_data = build_automate_request(task, url, schema)
+        request_data = build_automate_request(
+            task, url, schema, data, guardrails, max_iterations, max_validation_attempts
+        )
 
         # Stream the response and parse SSE events
         current_event_type: Optional[str] = None
