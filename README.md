@@ -255,7 +255,7 @@ result = await tabs.generate.json(
 
 The Agent client executes complex web automation tasks using natural language.
 
-#### `agent.automate(task, url=None, schema=None)`
+#### `agent.automate(task, url=None, schema=None, data=None, guardrails=None, max_iterations=None, max_validation_attempts=None)`
 
 Execute an AI-powered browser automation task (returns async iterator for Server-Sent Events).
 
@@ -263,6 +263,10 @@ Execute an AI-powered browser automation task (returns async iterator for Server
 - `task` (str): Natural language description of the task
 - `url` (str, optional): Starting URL for the task
 - `schema` (dict, optional): JSON Schema for structured data extraction
+- `data` (dict, optional): JSON data for form filling or complex tasks
+- `guardrails` (str, optional): Safety constraints for execution (e.g., "read-only, no form submissions")
+- `max_iterations` (int, optional): Maximum task iterations (1-100). Default: `50`
+- `max_validation_attempts` (int, optional): Maximum validation attempts (1-10). Default: `3`
 
 **Yields:** `AutomateEvent` objects with `type` and `data` fields
 
@@ -290,7 +294,9 @@ schema = {
 async for event in tabs.agent.automate(
     task="Find trending repositories and extract their names and star counts",
     url="https://github.com/trending",
-    schema=schema
+    schema=schema,
+    guardrails="browse and extract only, don't star or fork repos",
+    max_iterations=20
 ):
     if event.type == "agent:extracted":
         print(f"Extracted: {event.data.extracted_data}")
