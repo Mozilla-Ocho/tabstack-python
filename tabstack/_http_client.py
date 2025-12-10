@@ -110,7 +110,8 @@ class HTTPClient:
 
         # Parse successful response
         if response.content:
-            return response.json()
+            result: Dict[str, Any] = response.json()
+            return result
         else:
             return {}
 
