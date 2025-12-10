@@ -98,6 +98,10 @@ def build_automate_request(
     task: str,
     url: Optional[str] = None,
     schema: Optional[Dict[str, Any]] = None,
+    data: Optional[Dict[str, Any]] = None,
+    guardrails: Optional[str] = None,
+    max_iterations: Optional[int] = None,
+    max_validation_attempts: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Build request data for automation task.
 
@@ -105,6 +109,10 @@ def build_automate_request(
         task: Task description in natural language
         url: Optional starting URL
         schema: Optional JSON Schema for structured output
+        data: Optional JSON data for form filling or complex tasks
+        guardrails: Optional safety constraints for execution
+        max_iterations: Optional maximum task iterations (1-100, default: 50)
+        max_validation_attempts: Optional maximum validation attempts (1-10, default: 3)
 
     Returns:
         Request data dictionary
@@ -114,6 +122,14 @@ def build_automate_request(
         request_data["url"] = url
     if schema:
         request_data["schema"] = schema
+    if data:
+        request_data["data"] = data
+    if guardrails:
+        request_data["guardrails"] = guardrails
+    if max_iterations is not None:
+        request_data["maxIterations"] = max_iterations
+    if max_validation_attempts is not None:
+        request_data["maxValidationAttempts"] = max_validation_attempts
     return request_data
 
 
