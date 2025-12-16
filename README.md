@@ -1,513 +1,410 @@
-# Tabstack Python SDK
+# Tabstack Python API library
 
-[![PyPI version](https://badge.fury.io/py/tabstack.svg)](https://badge.fury.io/py/tabstack)
-[![Python Versions](https://img.shields.io/pypi/pyversions/tabstack.svg)](https://pypi.org/project/tabstack/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Tests](https://github.com/Mozilla-Ocho/tabstack-python/workflows/Tests/badge.svg)](https://github.com/Mozilla-Ocho/tabstack-python/actions)
-[![codecov](https://codecov.io/gh/Mozilla-Ocho/tabstack-python/branch/main/graph/badge.svg)](https://codecov.io/gh/Mozilla-Ocho/tabstack-python)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/tabstack.svg?label=pypi%20(stable))](https://pypi.org/project/tabstack/)
 
-> [!WARNING]
-> **Early Release**: This SDK is in early development. The API may change in future releases as we refine and improve the library based on user feedback.
+The Tabstack Python library provides convenient access to the Tabstack REST API from any Python 3.9+
+application. The library includes type definitions for all request params and response fields,
+and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-Python SDK for [Tabstack](https://tabstack.ai) - Extract, Generate, and Automate web content using AI.
+It is generated with [Stainless](https://www.stainless.com/).
 
-## Features
+## Documentation
 
-- **🔍 Extract**: Convert web content to markdown or structured JSON
-- **✨ Generate**: Transform and enhance web data with AI
-- **🤖 Automate**: Execute complex web automation tasks using natural language
-- **⚡ Async/Await**: Modern async Python API for efficient concurrent operations
-- **🔄 Connection Pooling**: Configurable HTTP connection pooling for optimal performance
-- **📘 Fully Typed**: Complete type hints for better IDE support and type safety
-- **🔒 JSON Schema**: Use standard JSON Schema for structured data extraction
-- **🛡️ Error Handling**: Comprehensive custom exceptions for all API errors
+The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
-### Using uv (recommended)
-```bash
-uv pip install tabstack
+```sh
+# install from this staging repo
+pip install git+ssh://git@github.com/stainless-sdks/tabstack-python.git
 ```
 
-Or add to your project:
-```bash
-uv add tabstack
-```
+> [!NOTE]
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install tabstack`
 
-### Using pip
-```bash
-pip install tabstack
-```
+## Usage
 
-### Using poetry
-```bash
-poetry add tabstack
-```
-
-### Using pipenv
-```bash
-pipenv install tabstack
-```
-
-### From Source
-```bash
-git clone https://github.com/Mozilla-Ocho/tabstack-python.git
-cd tabstack-python
-pip install -e ".[dev]"
-```
-
-## Quick Start
+The full API of this library can be found in [api.md](api.md).
 
 ```python
-import asyncio
 import os
 from tabstack import Tabstack
 
-async def main():
-    # Initialize the client with connection pooling
-    async with Tabstack(
-        api_key=os.getenv('TABSTACK_API_KEY'),
-        max_connections=100,
-        max_keepalive_connections=20
-    ) as tabs:
-        # Extract markdown from a URL
-        result = await tabs.extract.markdown(
-            url="https://news.ycombinator.com",
-            metadata=True
-        )
-        print(result.content)
-        print(result.metadata.title)
-
-        # Extract structured JSON data
-        schema = {
-            "type": "object",
-            "properties": {
-                "stories": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {"type": "string"},
-                            "points": {"type": "number"},
-                            "author": {"type": "string"}
-                        }
-                    }
-                }
-            }
-        }
-
-        data = await tabs.extract.json(
-            url="https://news.ycombinator.com",
-            schema=schema
-        )
-
-        # Generate transformed content with AI
-        summary_schema = {
-            "type": "object",
-            "properties": {
-                "summaries": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {"type": "string"},
-                            "category": {"type": "string"},
-                            "summary": {"type": "string"}
-                        }
-                    }
-                }
-            }
-        }
-
-        # Transform URL content with AI
-        summaries = await tabs.generate.json(
-            url="https://news.ycombinator.com",
-            schema=summary_schema,
-            instructions="For each story, categorize it and write a one-sentence summary"
-        )
-
-        # Automate web tasks (streaming)
-        async for event in tabs.agent.automate(
-            task="Find the top 3 trending repositories and extract their details",
-            url="https://github.com/trending"
-        ):
-            if event.type == "task:completed":
-                print(f"Result: {event.data.final_answer}")
-            elif event.type == "agent:extracted":
-                print(f"Extracted: {event.data.extracted_data}")
-
-# Run the async function
-asyncio.run(main())
-```
-
-## API Reference
-
-All methods are async and should be awaited. The client supports async context manager for automatic connection cleanup.
-
-### Client Initialization
-
-```python
-from tabstack import Tabstack
-
-async with Tabstack(
-    api_key="your-api-key",
-    base_url="https://api.tabstack.ai/",  # optional
-    max_connections=100,  # optional
-    max_keepalive_connections=20,  # optional
-    keepalive_expiry=30.0,  # optional, in seconds
-    timeout=60.0  # optional, in seconds
-) as tabs:
-    # Your code here
-    pass
-```
-
-**Parameters:**
-- `api_key` (str, required): Your Tabstack API key
-- `base_url` (str, optional): API base URL. Default: `https://api.tabstack.ai/`
-- `max_connections` (int, optional): Maximum concurrent connections. Default: `100`
-- `max_keepalive_connections` (int, optional): Maximum idle connections to keep alive. Default: `20`
-- `keepalive_expiry` (float, optional): Seconds to keep idle connections alive. Default: `30.0`
-- `timeout` (float, optional): Request timeout in seconds. Default: `60.0`
-
-### Extract Operator
-
-The Extract operator converts web content into structured formats without AI transformation.
-
-#### `extract.markdown(url, metadata=False, nocache=False)`
-
-Convert URL content to Markdown format.
-
-**Parameters:**
-- `url` (str): URL to convert
-- `metadata` (bool): If True, return metadata as separate field. If False, embed as YAML frontmatter. Default: `False`
-- `nocache` (bool): Bypass cache and force fresh retrieval. Default: `False`
-
-**Returns:** `MarkdownResponse` with `url`, `content`, and optional `metadata` fields
-
-**Example:**
-```python
-result = await tabs.extract.markdown(
-    url="https://example.com",
-    metadata=True
+client = Tabstack(
+    api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
 )
-print(result.content)
-print(result.metadata.title)
-```
 
-#### `extract.json(url, schema, nocache=False)`
-
-Extract structured JSON data from a URL using a schema.
-
-**Parameters:**
-- `url` (str): URL to extract from
-- `schema` (dict): JSON Schema defining the structure
-- `nocache` (bool): Bypass cache. Default: `False`
-
-**Returns:** `JsonResponse` with extracted `data`
-
-**Example:**
-```python
-schema = {
-    "type": "object",
-    "properties": {
-        "title": {"type": "string"},
-        "price": {"type": "number"}
-    }
-}
-result = await tabs.extract.json(url="https://example.com", schema=schema)
-print(result.data)
-```
-
-### Generate Operator
-
-The Generate operator uses AI to transform and enhance web content.
-
-#### `generate.json(url, schema, instructions, nocache=False)`
-
-Fetch URL content and transform it into structured JSON using AI.
-
-**Parameters:**
-- `url` (str): URL to fetch content from
-- `schema` (dict): JSON Schema for output structure
-- `instructions` (str): AI instructions for transformation
-- `nocache` (bool): Bypass cache and force fresh retrieval. Default: `False`
-
-**Returns:** `JsonResponse` with generated `data`
-
-**Example:**
-```python
-# Transform URL content with AI
-schema = {
-    "type": "object",
-    "properties": {
-        "summary": {"type": "string"},
-        "topics": {"type": "array", "items": {"type": "string"}}
-    }
-}
-result = await tabs.generate.json(
-    url="https://news.ycombinator.com",
-    schema=schema,
-    instructions="Summarize the content and extract main topics"
+response = client.automate.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
 ```
 
-### Agent Client
+While you can provide an `api_key` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `TABSTACK_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
-The Agent client executes complex web automation tasks using natural language.
+## Async usage
 
-#### `agent.automate(task, url=None, schema=None, data=None, guardrails=None, max_iterations=None, max_validation_attempts=None)`
-
-Execute an AI-powered browser automation task (returns async iterator for Server-Sent Events).
-
-**Parameters:**
-- `task` (str): Natural language description of the task
-- `url` (str, optional): Starting URL for the task
-- `schema` (dict, optional): JSON Schema for structured data extraction
-- `data` (dict, optional): JSON data for form filling or complex tasks
-- `guardrails` (str, optional): Safety constraints for execution (e.g., "read-only, no form submissions")
-- `max_iterations` (int, optional): Maximum task iterations (1-100). Default: `50`
-- `max_validation_attempts` (int, optional): Maximum validation attempts (1-10). Default: `3`
-
-**Yields:** `AutomateEvent` objects with `type` and `data` fields
-
-**Event Types:**
-- `start`: Automation started
-- `agent:navigating`: Agent is navigating to a URL
-- `agent:thinking`: Agent is analyzing the page
-- `agent:action`: Agent performed an action (click, scroll, etc.)
-- `agent:extracted`: Agent extracted structured data
-- `task:completed`: Task finished successfully
-
-**Example:**
-```python
-schema = {
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "name": {"type": "string"},
-            "stars": {"type": "number"}
-        }
-    }
-}
-
-async for event in tabs.agent.automate(
-    task="Find trending repositories and extract their names and star counts",
-    url="https://github.com/trending",
-    schema=schema,
-    guardrails="browse and extract only, don't star or fork repos",
-    max_iterations=20
-):
-    if event.type == "agent:extracted":
-        print(f"Extracted: {event.data.extracted_data}")
-    elif event.type == "task:completed":
-        print(f"Final answer: {event.data.final_answer}")
-```
-
-## Working with JSON Schemas
-
-Tabstack uses standard JSON Schema for defining data structures. Here are common patterns:
-
-### Basic Object
-```python
-schema = {
-    "type": "object",
-    "properties": {
-        "title": {"type": "string"},
-        "price": {"type": "number"},
-        "in_stock": {"type": "boolean"}
-    }
-}
-```
-
-### Array of Objects
-```python
-schema = {
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "id": {"type": "number"},
-            "name": {"type": "string"}
-        }
-    }
-}
-```
-
-### Nested Objects
-```python
-schema = {
-    "type": "object",
-    "properties": {
-        "product": {
-            "type": "object",
-            "properties": {
-                "name": {"type": "string"},
-                "details": {
-                    "type": "object",
-                    "properties": {
-                        "weight": {"type": "number"},
-                        "dimensions": {"type": "string"}
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
-### Array of Primitives
-```python
-schema = {
-    "type": "object",
-    "properties": {
-        "tags": {
-            "type": "array",
-            "items": {"type": "string"}
-        }
-    }
-}
-```
-
-For more information on JSON Schema, see [json-schema.org](https://json-schema.org/).
-
-## Error Handling
-
-The SDK provides specific exception classes for different error scenarios:
-
-| Exception | Status Code | Description | Retryable |
-|-----------|-------------|-------------|-----------|
-| `BadRequestError` | 400 | Invalid request parameters | No |
-| `UnauthorizedError` | 401 | Invalid or missing API key | No |
-| `InvalidURLError` | 422 | URL is invalid or inaccessible | No |
-| `ServerError` | 500 | Internal server error | Yes (with backoff) |
-| `ServiceUnavailableError` | 503 | Service temporarily unavailable | Yes (after delay) |
-| `APIError` | Other | Generic API error | Depends on status |
-
-### Example Error Handling
+Simply import `AsyncTabstack` instead of `Tabstack` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
-from tabstack import Tabstack
-from tabstack.exceptions import (
-    BadRequestError,
-    UnauthorizedError,
-    InvalidURLError,
-    ServerError,
-    ServiceUnavailableError,
+from tabstack import AsyncTabstack
+
+client = AsyncTabstack(
+    api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
 )
 
-async def main():
-    async with Tabstack(api_key="your-api-key") as tabs:
-        try:
-            result = await tabs.extract.markdown(url="https://example.com")
-        except UnauthorizedError:
-            print("Error: Invalid API key")
-        except InvalidURLError as e:
-            print(f"Error: URL is invalid or inaccessible - {e.message}")
-        except BadRequestError as e:
-            print(f"Error: Bad request - {e.message}")
-        except ServerError as e:
-            print(f"Server error (retryable): {e.message}")
-            # Implement retry logic with exponential backoff
-        except ServiceUnavailableError as e:
-            print(f"Service unavailable (retryable): {e.message}")
-            # Wait and retry
+
+async def main() -> None:
+    response = await client.automate.execute(
+        task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+    )
+
 
 asyncio.run(main())
 ```
 
-## Development & Testing
+Functionality between the synchronous and asynchronous clients is otherwise identical.
 
-### Setup Development Environment
+### With aiohttp
 
-```bash
-# Clone the repository
-git clone https://github.com/Mozilla-Ocho/tabstack-python.git
-cd tabstack-python
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
 
-# Install with development dependencies
-pip install -e ".[dev]"
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from this staging repo
+pip install 'tabstack[aiohttp] @ git+ssh://git@github.com/stainless-sdks/tabstack-python.git'
 ```
 
-### Running Tests
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
-```bash
-# Run all tests
-pytest
+```python
+import os
+import asyncio
+from tabstack import DefaultAioHttpClient
+from tabstack import AsyncTabstack
 
-# Run with coverage
-pytest --cov=tabstack --cov-report=html
 
-# Run specific test file
-pytest tests/test_extract.py
+async def main() -> None:
+    async with AsyncTabstack(
+        api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        response = await client.automate.execute(
+            task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+        )
 
-# Run with verbose output
-pytest -v
+
+asyncio.run(main())
 ```
 
-### Code Quality
+## Streaming responses
 
-```bash
-# Format code with ruff
-ruff format .
+We provide support for streaming responses using Server Side Events (SSE).
 
-# Lint code
-ruff check .
+```python
+from tabstack import Tabstack
 
-# Type checking
-mypy tabstack/
+client = Tabstack()
+
+stream = client.automate.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+)
+for response in stream:
+    print(response)
 ```
 
-### Test Structure
+The async client uses the exact same interface.
 
-```
-tests/
-├── conftest.py              # Shared pytest fixtures
-├── test_client.py           # Tabstack client tests
-├── test_extract.py          # Extract operator tests
-├── test_generate.py         # Generate operator tests
-├── test_automate.py         # Automate operator tests
-├── test_http_client.py      # HTTP client tests
-├── test_types.py            # Response type tests
-├── test_exceptions.py       # Exception tests
-├── test_utils.py            # Utility function tests
-└── test_integration.py      # End-to-end integration tests
+```python
+from tabstack import AsyncTabstack
+
+client = AsyncTabstack()
+
+stream = await client.automate.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+)
+async for response in stream:
+    print(response)
 ```
 
-All tests use mocked HTTP responses - no real API calls are made during testing.
+## Using types
 
-## Contributing
+Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
 
-Contributions are welcome! Here's a quick checklist:
+- Serializing back into JSON, `model.to_json()`
+- Converting to a dictionary, `model.to_dict()`
 
-- [ ] Fork the repository and create a feature branch
-- [ ] Write tests for new functionality
-- [ ] Ensure all tests pass (`pytest`)
-- [ ] Format code with ruff (`ruff format .`)
-- [ ] Ensure linting passes (`ruff check .`)
-- [ ] Update documentation as needed
-- [ ] Submit a pull request with clear description
+Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Handling errors
+
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `tabstack.APIConnectionError` is raised.
+
+When the API returns a non-success status code (that is, 4xx or 5xx
+response), a subclass of `tabstack.APIStatusError` is raised, containing `status_code` and `response` properties.
+
+All errors inherit from `tabstack.APIError`.
+
+```python
+import tabstack
+from tabstack import Tabstack
+
+client = Tabstack()
+
+try:
+    client.automate.execute(
+        task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+    )
+except tabstack.APIConnectionError as e:
+    print("The server could not be reached")
+    print(e.__cause__)  # an underlying Exception, likely raised within httpx.
+except tabstack.RateLimitError as e:
+    print("A 429 status code was received; we should back off a bit.")
+except tabstack.APIStatusError as e:
+    print("Another non-200-range status code was received")
+    print(e.status_code)
+    print(e.response)
+```
+
+Error codes are as follows:
+
+| Status Code | Error Type                 |
+| ----------- | -------------------------- |
+| 400         | `BadRequestError`          |
+| 401         | `AuthenticationError`      |
+| 403         | `PermissionDeniedError`    |
+| 404         | `NotFoundError`            |
+| 422         | `UnprocessableEntityError` |
+| 429         | `RateLimitError`           |
+| >=500       | `InternalServerError`      |
+| N/A         | `APIConnectionError`       |
+
+### Retries
+
+Certain errors are automatically retried 2 times by default, with a short exponential backoff.
+Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
+429 Rate Limit, and >=500 Internal errors are all retried by default.
+
+You can use the `max_retries` option to configure or disable retry settings:
+
+```python
+from tabstack import Tabstack
+
+# Configure the default for all requests:
+client = Tabstack(
+    # default is 2
+    max_retries=0,
+)
+
+# Or, configure per-request:
+client.with_options(max_retries=5).automate.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+)
+```
+
+### Timeouts
+
+By default requests time out after 1 minute. You can configure this with a `timeout` option,
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
+
+```python
+from tabstack import Tabstack
+
+# Configure the default for all requests:
+client = Tabstack(
+    # 20 seconds (default is 1 minute)
+    timeout=20.0,
+)
+
+# More granular control:
+client = Tabstack(
+    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+)
+
+# Override per-request:
+client.with_options(timeout=5.0).automate.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+)
+```
+
+On timeout, an `APITimeoutError` is thrown.
+
+Note that requests that time out are [retried twice by default](#retries).
+
+## Advanced
+
+### Logging
+
+We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
+
+You can enable logging by setting the environment variable `TABSTACK_LOG` to `info`.
+
+```shell
+$ export TABSTACK_LOG=info
+```
+
+Or to `debug` for more verbose logging.
+
+### How to tell whether `None` means `null` or missing
+
+In an API response, a field may be explicitly `null`, or missing entirely; in either case, its value is `None` in this library. You can differentiate the two cases with `.model_fields_set`:
+
+```py
+if response.my_field is None:
+  if 'my_field' not in response.model_fields_set:
+    print('Got json like {}, without a "my_field" key present at all.')
+  else:
+    print('Got json like {"my_field": null}.')
+```
+
+### Accessing raw response data (e.g. headers)
+
+The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
+
+```py
+from tabstack import Tabstack
+
+client = Tabstack()
+response = client.automate.with_raw_response.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+)
+print(response.headers.get('X-My-Header'))
+
+automate = response.parse()  # get the object that `automate.execute()` would have returned
+print(automate)
+```
+
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/tabstack-python/tree/main/src/tabstack/_response.py) object.
+
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/tabstack-python/tree/main/src/tabstack/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+
+#### `.with_streaming_response`
+
+The above interface eagerly reads the full response body when you make the request, which may not always be what you want.
+
+To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
+
+```python
+with client.automate.with_streaming_response.execute(
+    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+) as response:
+    print(response.headers.get("X-My-Header"))
+
+    for line in response.iter_lines():
+        print(line)
+```
+
+The context manager is required so that the response will reliably be closed.
+
+### Making custom/undocumented requests
+
+This library is typed for convenient access to the documented API.
+
+If you need to access undocumented endpoints, params, or response properties, the library can still be used.
+
+#### Undocumented endpoints
+
+To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
+http verbs. Options on the client will be respected (such as retries) when making this request.
+
+```py
+import httpx
+
+response = client.post(
+    "/foo",
+    cast_to=httpx.Response,
+    body={"my_param": True},
+)
+
+print(response.headers.get("x-foo"))
+```
+
+#### Undocumented request params
+
+If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request
+options.
+
+#### Undocumented response properties
+
+To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You
+can also get all the extra fields on the Pydantic model as a dict with
+[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).
+
+### Configuring the HTTP client
+
+You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
+
+- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)
+- Custom [transports](https://www.python-httpx.org/advanced/transports/)
+- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
+
+```python
+import httpx
+from tabstack import Tabstack, DefaultHttpxClient
+
+client = Tabstack(
+    # Or use the `TABSTACK_BASE_URL` env var
+    base_url="http://my.test.server.example.com:8083",
+    http_client=DefaultHttpxClient(
+        proxy="http://my.test.proxy.example.com",
+        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+    ),
+)
+```
+
+You can also customize the client on a per-request basis by using `with_options()`:
+
+```python
+client.with_options(http_client=DefaultHttpxClient(...))
+```
+
+### Managing HTTP resources
+
+By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
+
+```py
+from tabstack import Tabstack
+
+with Tabstack() as client:
+  # make requests here
+  ...
+
+# HTTP client is now closed
+```
+
+## Versioning
+
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+
+1. Changes that only affect static types, without breaking runtime behavior.
+2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
+3. Changes that we do not expect to impact the vast majority of users in practice.
+
+We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
+
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/tabstack-python/issues) with questions, bugs, or suggestions.
+
+### Determining the installed version
+
+If you've upgraded to the latest version but aren't seeing any new features you were expecting then your python environment is likely still using an older version.
+
+You can determine the version that is being used at runtime with:
+
+```py
+import tabstack
+print(tabstack.__version__)
+```
 
 ## Requirements
 
-- Python 3.10+ (tested on 3.10, 3.11, 3.12, 3.13, 3.14)
-- httpx >= 0.27.0
+Python 3.9 or higher.
 
-## License
+## Contributing
 
-Apache License 2.0 - see [LICENSE](LICENSE) for details.
-
-## Links
-
-- **Homepage**: [https://tabstack.ai](https://tabstack.ai)
-- **Documentation**: [https://docs.tabstack.ai](https://docs.tabstack.ai)
-- **PyPI**: [https://pypi.org/project/tabstack/](https://pypi.org/project/tabstack/)
-- **Repository**: [https://github.com/Mozilla-Ocho/tabstack-python](https://github.com/Mozilla-Ocho/tabstack-python)
-- **Issues**: [https://github.com/Mozilla-Ocho/tabstack-python/issues](https://github.com/Mozilla-Ocho/tabstack-python/issues)
-
-## Support
-
-- **Email**: support@tabstack.ai
-- **Discord**: [Join our community](https://discord.gg/tabstack)
-- **Documentation**: [docs.tabstack.ai](https://docs.tabstack.ai)
+See [the contributing documentation](./CONTRIBUTING.md).
