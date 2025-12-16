@@ -1,0 +1,254 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+import httpx
+
+from ..types import automate_execute_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from .._streaming import Stream, AsyncStream
+from .._base_client import make_request_options
+from ..types.automate_execute_response import AutomateExecuteResponse
+
+__all__ = ["AutomateResource", "AsyncAutomateResource"]
+
+
+class AutomateResource(SyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AutomateResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
+        """
+        return AutomateResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AutomateResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
+        """
+        return AutomateResourceWithStreamingResponse(self)
+
+    def execute(
+        self,
+        *,
+        task: str,
+        data: object | Omit = omit,
+        guardrails: str | Omit = omit,
+        max_iterations: int | Omit = omit,
+        max_validation_attempts: int | Omit = omit,
+        url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Stream[AutomateExecuteResponse]:
+        """Execute AI-powered browser automation tasks using natural language.
+
+        This
+        endpoint **always streams** responses using Server-Sent Events (SSE).
+
+        **Streaming Response:**
+
+        - All responses are streamed using Server-Sent Events (`text/event-stream`)
+        - Real-time progress updates and results as they're generated
+
+        **Use Cases:**
+
+        - Web scraping and data extraction
+        - Form filling and interaction
+        - Navigation and information gathering
+        - Multi-step web workflows
+        - Content analysis from web pages
+
+        Args:
+          task: The task description in natural language
+
+          data: JSON data to provide context for form filling or complex tasks
+
+          guardrails: Safety constraints for execution
+
+          max_iterations: Maximum task iterations
+
+          max_validation_attempts: Maximum validation attempts
+
+          url: Starting URL for the task
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return self._post(
+            "/automate",
+            body=maybe_transform(
+                {
+                    "task": task,
+                    "data": data,
+                    "guardrails": guardrails,
+                    "max_iterations": max_iterations,
+                    "max_validation_attempts": max_validation_attempts,
+                    "url": url,
+                },
+                automate_execute_params.AutomateExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+            stream=True,
+            stream_cls=Stream[AutomateExecuteResponse],
+        )
+
+
+class AsyncAutomateResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncAutomateResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncAutomateResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncAutomateResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
+        """
+        return AsyncAutomateResourceWithStreamingResponse(self)
+
+    async def execute(
+        self,
+        *,
+        task: str,
+        data: object | Omit = omit,
+        guardrails: str | Omit = omit,
+        max_iterations: int | Omit = omit,
+        max_validation_attempts: int | Omit = omit,
+        url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncStream[AutomateExecuteResponse]:
+        """Execute AI-powered browser automation tasks using natural language.
+
+        This
+        endpoint **always streams** responses using Server-Sent Events (SSE).
+
+        **Streaming Response:**
+
+        - All responses are streamed using Server-Sent Events (`text/event-stream`)
+        - Real-time progress updates and results as they're generated
+
+        **Use Cases:**
+
+        - Web scraping and data extraction
+        - Form filling and interaction
+        - Navigation and information gathering
+        - Multi-step web workflows
+        - Content analysis from web pages
+
+        Args:
+          task: The task description in natural language
+
+          data: JSON data to provide context for form filling or complex tasks
+
+          guardrails: Safety constraints for execution
+
+          max_iterations: Maximum task iterations
+
+          max_validation_attempts: Maximum validation attempts
+
+          url: Starting URL for the task
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return await self._post(
+            "/automate",
+            body=await async_maybe_transform(
+                {
+                    "task": task,
+                    "data": data,
+                    "guardrails": guardrails,
+                    "max_iterations": max_iterations,
+                    "max_validation_attempts": max_validation_attempts,
+                    "url": url,
+                },
+                automate_execute_params.AutomateExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+            stream=True,
+            stream_cls=AsyncStream[AutomateExecuteResponse],
+        )
+
+
+class AutomateResourceWithRawResponse:
+    def __init__(self, automate: AutomateResource) -> None:
+        self._automate = automate
+
+        self.execute = to_raw_response_wrapper(
+            automate.execute,
+        )
+
+
+class AsyncAutomateResourceWithRawResponse:
+    def __init__(self, automate: AsyncAutomateResource) -> None:
+        self._automate = automate
+
+        self.execute = async_to_raw_response_wrapper(
+            automate.execute,
+        )
+
+
+class AutomateResourceWithStreamingResponse:
+    def __init__(self, automate: AutomateResource) -> None:
+        self._automate = automate
+
+        self.execute = to_streamed_response_wrapper(
+            automate.execute,
+        )
+
+
+class AsyncAutomateResourceWithStreamingResponse:
+    def __init__(self, automate: AsyncAutomateResource) -> None:
+        self._automate = automate
+
+        self.execute = async_to_streamed_response_wrapper(
+            automate.execute,
+        )
