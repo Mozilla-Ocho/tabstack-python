@@ -737,7 +737,7 @@ class TestTabstack:
         respx_mock.post("/automate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.automate.with_streaming_response.execute(
+            client.agent.with_streaming_response.automate(
                 task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
             ).__enter__()
 
@@ -749,7 +749,7 @@ class TestTabstack:
         respx_mock.post("/automate").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.automate.with_streaming_response.execute(
+            client.agent.with_streaming_response.automate(
                 task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
             ).__enter__()
         assert _get_open_connections(client) == 0
@@ -780,7 +780,7 @@ class TestTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = client.automate.with_raw_response.execute(
+        response = client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
         )
 
@@ -806,7 +806,7 @@ class TestTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = client.automate.with_raw_response.execute(
+        response = client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -832,7 +832,7 @@ class TestTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = client.automate.with_raw_response.execute(
+        response = client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             extra_headers={"x-stainless-retry-count": "42"},
         )
@@ -1583,7 +1583,7 @@ class TestAsyncTabstack:
         respx_mock.post("/automate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.automate.with_streaming_response.execute(
+            await async_client.agent.with_streaming_response.automate(
                 task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
             ).__aenter__()
 
@@ -1597,7 +1597,7 @@ class TestAsyncTabstack:
         respx_mock.post("/automate").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.automate.with_streaming_response.execute(
+            await async_client.agent.with_streaming_response.automate(
                 task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
@@ -1628,7 +1628,7 @@ class TestAsyncTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = await client.automate.with_raw_response.execute(
+        response = await client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts"
         )
 
@@ -1654,7 +1654,7 @@ class TestAsyncTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = await client.automate.with_raw_response.execute(
+        response = await client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -1680,7 +1680,7 @@ class TestAsyncTabstack:
 
         respx_mock.post("/automate").mock(side_effect=retry_handler)
 
-        response = await client.automate.with_raw_response.execute(
+        response = await client.agent.with_raw_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             extra_headers={"x-stainless-retry-count": "42"},
         )

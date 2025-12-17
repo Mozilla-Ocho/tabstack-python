@@ -1,7 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict
 from typing_extensions import TypeAlias
 
-__all__ = ["AutomateExecuteResponse"]
+__all__ = ["GenerateJsonResponse"]
 
-AutomateExecuteResponse: TypeAlias = str
+GenerateJsonResponse: TypeAlias = Dict[str, object]

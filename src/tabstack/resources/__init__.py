@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .agent import (
+    AgentResource,
+    AsyncAgentResource,
+    AgentResourceWithRawResponse,
+    AsyncAgentResourceWithRawResponse,
+    AgentResourceWithStreamingResponse,
+    AsyncAgentResourceWithStreamingResponse,
+)
 from .extract import (
     ExtractResource,
     AsyncExtractResource,
@@ -7,14 +15,6 @@ from .extract import (
     AsyncExtractResourceWithRawResponse,
     ExtractResourceWithStreamingResponse,
     AsyncExtractResourceWithStreamingResponse,
-)
-from .automate import (
-    AutomateResource,
-    AsyncAutomateResource,
-    AutomateResourceWithRawResponse,
-    AsyncAutomateResourceWithRawResponse,
-    AutomateResourceWithStreamingResponse,
-    AsyncAutomateResourceWithStreamingResponse,
 )
 from .generate import (
     GenerateResource,
@@ -26,12 +26,12 @@ from .generate import (
 )
 
 __all__ = [
-    "AutomateResource",
-    "AsyncAutomateResource",
-    "AutomateResourceWithRawResponse",
-    "AsyncAutomateResourceWithRawResponse",
-    "AutomateResourceWithStreamingResponse",
-    "AsyncAutomateResourceWithStreamingResponse",
+    "AgentResource",
+    "AsyncAgentResource",
+    "AgentResourceWithRawResponse",
+    "AsyncAgentResourceWithRawResponse",
+    "AgentResourceWithStreamingResponse",
+    "AsyncAgentResourceWithStreamingResponse",
     "ExtractResource",
     "AsyncExtractResource",
     "ExtractResourceWithRawResponse",

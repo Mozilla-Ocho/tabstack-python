@@ -6,10 +6,10 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["AutomateExecuteParams"]
+__all__ = ["AgentAutomateParams"]
 
 
-class AutomateExecuteParams(TypedDict, total=False):
+class AgentAutomateParams(TypedDict, total=False):
     task: Required[str]
     """The task description in natural language"""
 
