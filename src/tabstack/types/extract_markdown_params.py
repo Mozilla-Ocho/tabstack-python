@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ExtractCreateMarkdownParams"]
+__all__ = ["ExtractMarkdownParams"]
 
 
-class ExtractCreateMarkdownParams(TypedDict, total=False):
+class ExtractMarkdownParams(TypedDict, total=False):
     url: Required[str]
     """URL to fetch and convert to markdown"""
 

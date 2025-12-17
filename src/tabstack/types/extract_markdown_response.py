@@ -4,7 +4,7 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["ExtractCreateMarkdownResponse", "Metadata"]
+__all__ = ["ExtractMarkdownResponse", "Metadata"]
 
 
 class Metadata(BaseModel):
@@ -37,7 +37,7 @@ class Metadata(BaseModel):
     """Canonical URL from Open Graph"""
 
 
-class ExtractCreateMarkdownResponse(BaseModel):
+class ExtractMarkdownResponse(BaseModel):
     content: str
     """The markdown content (includes metadata as YAML frontmatter by default)"""
 

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ExtractCreateJsonParams"]
+__all__ = ["ExtractJsonParams"]
 
 
-class ExtractCreateJsonParams(TypedDict, total=False):
+class ExtractJsonParams(TypedDict, total=False):
     json_schema: Required[object]
     """JSON schema definition that describes the structure of data to extract."""
 

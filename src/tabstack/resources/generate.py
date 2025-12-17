@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import generate_create_json_params
+from ..types import generate_json_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -16,7 +16,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.generate_create_json_response import GenerateCreateJsonResponse
+from ..types.generate_json_response import GenerateJsonResponse
 
 __all__ = ["GenerateResource", "AsyncGenerateResource"]
 
@@ -28,7 +28,7 @@ class GenerateResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
         return GenerateResourceWithRawResponse(self)
 
@@ -37,11 +37,11 @@ class GenerateResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
         return GenerateResourceWithStreamingResponse(self)
 
-    def create_json(
+    def json(
         self,
         *,
         instructions: str,
@@ -54,7 +54,7 @@ class GenerateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerateCreateJsonResponse:
+    ) -> GenerateJsonResponse:
         """
         Fetches URL content, extracts data, and transforms it using AI based on custom
         instructions. Use this to generate new content, summaries, or restructured data.
@@ -85,12 +85,12 @@ class GenerateResource(SyncAPIResource):
                     "url": url,
                     "nocache": nocache,
                 },
-                generate_create_json_params.GenerateCreateJsonParams,
+                generate_json_params.GenerateJsonParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateCreateJsonResponse,
+            cast_to=GenerateJsonResponse,
         )
 
 
@@ -101,7 +101,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
         return AsyncGenerateResourceWithRawResponse(self)
 
@@ -110,11 +110,11 @@ class AsyncGenerateResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
         return AsyncGenerateResourceWithStreamingResponse(self)
 
-    async def create_json(
+    async def json(
         self,
         *,
         instructions: str,
@@ -127,7 +127,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerateCreateJsonResponse:
+    ) -> GenerateJsonResponse:
         """
         Fetches URL content, extracts data, and transforms it using AI based on custom
         instructions. Use this to generate new content, summaries, or restructured data.
@@ -158,12 +158,12 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "url": url,
                     "nocache": nocache,
                 },
-                generate_create_json_params.GenerateCreateJsonParams,
+                generate_json_params.GenerateJsonParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateCreateJsonResponse,
+            cast_to=GenerateJsonResponse,
         )
 
 
@@ -171,8 +171,8 @@ class GenerateResourceWithRawResponse:
     def __init__(self, generate: GenerateResource) -> None:
         self._generate = generate
 
-        self.create_json = to_raw_response_wrapper(
-            generate.create_json,
+        self.json = to_raw_response_wrapper(
+            generate.json,
         )
 
 
@@ -180,8 +180,8 @@ class AsyncGenerateResourceWithRawResponse:
     def __init__(self, generate: AsyncGenerateResource) -> None:
         self._generate = generate
 
-        self.create_json = async_to_raw_response_wrapper(
-            generate.create_json,
+        self.json = async_to_raw_response_wrapper(
+            generate.json,
         )
 
 
@@ -189,8 +189,8 @@ class GenerateResourceWithStreamingResponse:
     def __init__(self, generate: GenerateResource) -> None:
         self._generate = generate
 
-        self.create_json = to_streamed_response_wrapper(
-            generate.create_json,
+        self.json = to_streamed_response_wrapper(
+            generate.json,
         )
 
 
@@ -198,6 +198,6 @@ class AsyncGenerateResourceWithStreamingResponse:
     def __init__(self, generate: AsyncGenerateResource) -> None:
         self._generate = generate
 
-        self.create_json = async_to_streamed_response_wrapper(
-            generate.create_json,
+        self.json = async_to_streamed_response_wrapper(
+            generate.json,
         )
