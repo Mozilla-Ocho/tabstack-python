@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["GenerateCreateJsonParams"]
+__all__ = ["GenerateJsonParams"]
 
 
-class GenerateCreateJsonParams(TypedDict, total=False):
+class GenerateJsonParams(TypedDict, total=False):
     instructions: Required[str]
     """Instructions describing how to transform the data"""
 

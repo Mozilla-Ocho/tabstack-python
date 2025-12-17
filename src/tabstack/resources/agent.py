@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import automate_execute_params
+from ..types import agent_automate_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -17,32 +17,32 @@ from .._response import (
 )
 from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
-from ..types.automate_execute_response import AutomateExecuteResponse
+from ..types.agent_automate_response import AgentAutomateResponse
 
-__all__ = ["AutomateResource", "AsyncAutomateResource"]
+__all__ = ["AgentResource", "AsyncAgentResource"]
 
 
-class AutomateResource(SyncAPIResource):
+class AgentResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AutomateResourceWithRawResponse:
+    def with_raw_response(self) -> AgentResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
-        return AutomateResourceWithRawResponse(self)
+        return AgentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AutomateResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AgentResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
-        return AutomateResourceWithStreamingResponse(self)
+        return AgentResourceWithStreamingResponse(self)
 
-    def execute(
+    def automate(
         self,
         *,
         task: str,
@@ -57,7 +57,7 @@ class AutomateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Stream[AutomateExecuteResponse]:
+    ) -> Stream[AgentAutomateResponse]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -109,38 +109,38 @@ class AutomateResource(SyncAPIResource):
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
                 },
-                automate_execute_params.AutomateExecuteParams,
+                agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
             stream=True,
-            stream_cls=Stream[AutomateExecuteResponse],
+            stream_cls=Stream[AgentAutomateResponse],
         )
 
 
-class AsyncAutomateResource(AsyncAPIResource):
+class AsyncAgentResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAutomateResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncAgentResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncAutomateResourceWithRawResponse(self)
+        return AsyncAgentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAutomateResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncAgentResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
-        return AsyncAutomateResourceWithStreamingResponse(self)
+        return AsyncAgentResourceWithStreamingResponse(self)
 
-    async def execute(
+    async def automate(
         self,
         *,
         task: str,
@@ -155,7 +155,7 @@ class AsyncAutomateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncStream[AutomateExecuteResponse]:
+    ) -> AsyncStream[AgentAutomateResponse]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -207,48 +207,48 @@ class AsyncAutomateResource(AsyncAPIResource):
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
                 },
-                automate_execute_params.AutomateExecuteParams,
+                agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
             stream=True,
-            stream_cls=AsyncStream[AutomateExecuteResponse],
+            stream_cls=AsyncStream[AgentAutomateResponse],
         )
 
 
-class AutomateResourceWithRawResponse:
-    def __init__(self, automate: AutomateResource) -> None:
-        self._automate = automate
+class AgentResourceWithRawResponse:
+    def __init__(self, agent: AgentResource) -> None:
+        self._agent = agent
 
-        self.execute = to_raw_response_wrapper(
-            automate.execute,
+        self.automate = to_raw_response_wrapper(
+            agent.automate,
         )
 
 
-class AsyncAutomateResourceWithRawResponse:
-    def __init__(self, automate: AsyncAutomateResource) -> None:
-        self._automate = automate
+class AsyncAgentResourceWithRawResponse:
+    def __init__(self, agent: AsyncAgentResource) -> None:
+        self._agent = agent
 
-        self.execute = async_to_raw_response_wrapper(
-            automate.execute,
+        self.automate = async_to_raw_response_wrapper(
+            agent.automate,
         )
 
 
-class AutomateResourceWithStreamingResponse:
-    def __init__(self, automate: AutomateResource) -> None:
-        self._automate = automate
+class AgentResourceWithStreamingResponse:
+    def __init__(self, agent: AgentResource) -> None:
+        self._agent = agent
 
-        self.execute = to_streamed_response_wrapper(
-            automate.execute,
+        self.automate = to_streamed_response_wrapper(
+            agent.automate,
         )
 
 
-class AsyncAutomateResourceWithStreamingResponse:
-    def __init__(self, automate: AsyncAutomateResource) -> None:
-        self._automate = automate
+class AsyncAgentResourceWithStreamingResponse:
+    def __init__(self, agent: AsyncAgentResource) -> None:
+        self._agent = agent
 
-        self.execute = async_to_streamed_response_wrapper(
-            automate.execute,
+        self.automate = async_to_streamed_response_wrapper(
+            agent.automate,
         )

@@ -31,9 +31,9 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import extract, automate, generate
+    from .resources import agent, extract, generate
+    from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.extract import ExtractResource, AsyncExtractResource
-    from .resources.automate import AutomateResource, AsyncAutomateResource
     from .resources.generate import GenerateResource, AsyncGenerateResource
 
 __all__ = [
@@ -104,10 +104,10 @@ class Tabstack(SyncAPIClient):
         )
 
     @cached_property
-    def automate(self) -> AutomateResource:
-        from .resources.automate import AutomateResource
+    def agent(self) -> AgentResource:
+        from .resources.agent import AgentResource
 
-        return AutomateResource(self)
+        return AgentResource(self)
 
     @cached_property
     def extract(self) -> ExtractResource:
@@ -290,10 +290,10 @@ class AsyncTabstack(AsyncAPIClient):
         )
 
     @cached_property
-    def automate(self) -> AsyncAutomateResource:
-        from .resources.automate import AsyncAutomateResource
+    def agent(self) -> AsyncAgentResource:
+        from .resources.agent import AsyncAgentResource
 
-        return AsyncAutomateResource(self)
+        return AsyncAgentResource(self)
 
     @cached_property
     def extract(self) -> AsyncExtractResource:
@@ -427,10 +427,10 @@ class TabstackWithRawResponse:
         self._client = client
 
     @cached_property
-    def automate(self) -> automate.AutomateResourceWithRawResponse:
-        from .resources.automate import AutomateResourceWithRawResponse
+    def agent(self) -> agent.AgentResourceWithRawResponse:
+        from .resources.agent import AgentResourceWithRawResponse
 
-        return AutomateResourceWithRawResponse(self._client.automate)
+        return AgentResourceWithRawResponse(self._client.agent)
 
     @cached_property
     def extract(self) -> extract.ExtractResourceWithRawResponse:
@@ -452,10 +452,10 @@ class AsyncTabstackWithRawResponse:
         self._client = client
 
     @cached_property
-    def automate(self) -> automate.AsyncAutomateResourceWithRawResponse:
-        from .resources.automate import AsyncAutomateResourceWithRawResponse
+    def agent(self) -> agent.AsyncAgentResourceWithRawResponse:
+        from .resources.agent import AsyncAgentResourceWithRawResponse
 
-        return AsyncAutomateResourceWithRawResponse(self._client.automate)
+        return AsyncAgentResourceWithRawResponse(self._client.agent)
 
     @cached_property
     def extract(self) -> extract.AsyncExtractResourceWithRawResponse:
@@ -477,10 +477,10 @@ class TabstackWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def automate(self) -> automate.AutomateResourceWithStreamingResponse:
-        from .resources.automate import AutomateResourceWithStreamingResponse
+    def agent(self) -> agent.AgentResourceWithStreamingResponse:
+        from .resources.agent import AgentResourceWithStreamingResponse
 
-        return AutomateResourceWithStreamingResponse(self._client.automate)
+        return AgentResourceWithStreamingResponse(self._client.agent)
 
     @cached_property
     def extract(self) -> extract.ExtractResourceWithStreamingResponse:
@@ -502,10 +502,10 @@ class AsyncTabstackWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def automate(self) -> automate.AsyncAutomateResourceWithStreamingResponse:
-        from .resources.automate import AsyncAutomateResourceWithStreamingResponse
+    def agent(self) -> agent.AsyncAgentResourceWithStreamingResponse:
+        from .resources.agent import AsyncAgentResourceWithStreamingResponse
 
-        return AsyncAutomateResourceWithStreamingResponse(self._client.automate)
+        return AsyncAgentResourceWithStreamingResponse(self._client.agent)
 
     @cached_property
     def extract(self) -> extract.AsyncExtractResourceWithStreamingResponse:

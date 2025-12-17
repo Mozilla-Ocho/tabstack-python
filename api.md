@@ -1,36 +1,36 @@
-# Automate
+# Agent
 
 Types:
 
 ```python
-from tabstack.types import AutomateExecuteResponse
+from tabstack.types import AgentAutomateResponse
 ```
 
 Methods:
 
-- <code title="post /automate">client.automate.<a href="./src/tabstack/resources/automate.py">execute</a>(\*\*<a href="src/tabstack/types/automate_execute_params.py">params</a>) -> str</code>
+- <code title="post /automate">client.agent.<a href="./src/tabstack/resources/agent.py">automate</a>(\*\*<a href="src/tabstack/types/agent_automate_params.py">params</a>) -> str</code>
 
 # Extract
 
 Types:
 
 ```python
-from tabstack.types import ExtractCreateJsonResponse, ExtractCreateMarkdownResponse
+from tabstack.types import ExtractJsonResponse, ExtractMarkdownResponse
 ```
 
 Methods:
 
-- <code title="post /extract/json">client.extract.<a href="./src/tabstack/resources/extract.py">create_json</a>(\*\*<a href="src/tabstack/types/extract_create_json_params.py">params</a>) -> <a href="./src/tabstack/types/extract_create_json_response.py">ExtractCreateJsonResponse</a></code>
-- <code title="post /extract/markdown">client.extract.<a href="./src/tabstack/resources/extract.py">create_markdown</a>(\*\*<a href="src/tabstack/types/extract_create_markdown_params.py">params</a>) -> <a href="./src/tabstack/types/extract_create_markdown_response.py">ExtractCreateMarkdownResponse</a></code>
+- <code title="post /extract/json">client.extract.<a href="./src/tabstack/resources/extract.py">json</a>(\*\*<a href="src/tabstack/types/extract_json_params.py">params</a>) -> <a href="./src/tabstack/types/extract_json_response.py">ExtractJsonResponse</a></code>
+- <code title="post /extract/markdown">client.extract.<a href="./src/tabstack/resources/extract.py">markdown</a>(\*\*<a href="src/tabstack/types/extract_markdown_params.py">params</a>) -> <a href="./src/tabstack/types/extract_markdown_response.py">ExtractMarkdownResponse</a></code>
 
 # Generate
 
 Types:
 
 ```python
-from tabstack.types import GenerateCreateJsonResponse
+from tabstack.types import GenerateJsonResponse
 ```
 
 Methods:
 
-- <code title="post /generate/json">client.generate.<a href="./src/tabstack/resources/generate.py">create_json</a>(\*\*<a href="src/tabstack/types/generate_create_json_params.py">params</a>) -> <a href="./src/tabstack/types/generate_create_json_response.py">GenerateCreateJsonResponse</a></code>
+- <code title="post /generate/json">client.generate.<a href="./src/tabstack/resources/generate.py">json</a>(\*\*<a href="src/tabstack/types/generate_json_params.py">params</a>) -> <a href="./src/tabstack/types/generate_json_response.py">GenerateJsonResponse</a></code>

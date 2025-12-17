@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import extract_create_json_params, extract_create_markdown_params
+from ..types import extract_json_params, extract_markdown_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -16,8 +16,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.extract_create_json_response import ExtractCreateJsonResponse
-from ..types.extract_create_markdown_response import ExtractCreateMarkdownResponse
+from ..types.extract_json_response import ExtractJsonResponse
+from ..types.extract_markdown_response import ExtractMarkdownResponse
 
 __all__ = ["ExtractResource", "AsyncExtractResource"]
 
@@ -29,7 +29,7 @@ class ExtractResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
         return ExtractResourceWithRawResponse(self)
 
@@ -38,11 +38,11 @@ class ExtractResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
         return ExtractResourceWithStreamingResponse(self)
 
-    def create_json(
+    def json(
         self,
         *,
         json_schema: object,
@@ -54,7 +54,7 @@ class ExtractResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateJsonResponse:
+    ) -> ExtractJsonResponse:
         """
         Fetches a URL and extracts structured data according to a provided JSON schema
 
@@ -81,15 +81,15 @@ class ExtractResource(SyncAPIResource):
                     "url": url,
                     "nocache": nocache,
                 },
-                extract_create_json_params.ExtractCreateJsonParams,
+                extract_json_params.ExtractJsonParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateJsonResponse,
+            cast_to=ExtractJsonResponse,
         )
 
-    def create_markdown(
+    def markdown(
         self,
         *,
         url: str,
@@ -101,7 +101,7 @@ class ExtractResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateMarkdownResponse:
+    ) -> ExtractMarkdownResponse:
         """
         Fetches a URL and converts its HTML content to clean Markdown format with
         optional metadata extraction
@@ -130,12 +130,12 @@ class ExtractResource(SyncAPIResource):
                     "metadata": metadata,
                     "nocache": nocache,
                 },
-                extract_create_markdown_params.ExtractCreateMarkdownParams,
+                extract_markdown_params.ExtractMarkdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateMarkdownResponse,
+            cast_to=ExtractMarkdownResponse,
         )
 
 
@@ -146,7 +146,7 @@ class AsyncExtractResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#accessing-raw-response-data-eg-headers
         """
         return AsyncExtractResourceWithRawResponse(self)
 
@@ -155,11 +155,11 @@ class AsyncExtractResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Mozilla-Ocho/tabstack-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/tabstack-python#with_streaming_response
         """
         return AsyncExtractResourceWithStreamingResponse(self)
 
-    async def create_json(
+    async def json(
         self,
         *,
         json_schema: object,
@@ -171,7 +171,7 @@ class AsyncExtractResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateJsonResponse:
+    ) -> ExtractJsonResponse:
         """
         Fetches a URL and extracts structured data according to a provided JSON schema
 
@@ -198,15 +198,15 @@ class AsyncExtractResource(AsyncAPIResource):
                     "url": url,
                     "nocache": nocache,
                 },
-                extract_create_json_params.ExtractCreateJsonParams,
+                extract_json_params.ExtractJsonParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateJsonResponse,
+            cast_to=ExtractJsonResponse,
         )
 
-    async def create_markdown(
+    async def markdown(
         self,
         *,
         url: str,
@@ -218,7 +218,7 @@ class AsyncExtractResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateMarkdownResponse:
+    ) -> ExtractMarkdownResponse:
         """
         Fetches a URL and converts its HTML content to clean Markdown format with
         optional metadata extraction
@@ -247,12 +247,12 @@ class AsyncExtractResource(AsyncAPIResource):
                     "metadata": metadata,
                     "nocache": nocache,
                 },
-                extract_create_markdown_params.ExtractCreateMarkdownParams,
+                extract_markdown_params.ExtractMarkdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateMarkdownResponse,
+            cast_to=ExtractMarkdownResponse,
         )
 
 
@@ -260,11 +260,11 @@ class ExtractResourceWithRawResponse:
     def __init__(self, extract: ExtractResource) -> None:
         self._extract = extract
 
-        self.create_json = to_raw_response_wrapper(
-            extract.create_json,
+        self.json = to_raw_response_wrapper(
+            extract.json,
         )
-        self.create_markdown = to_raw_response_wrapper(
-            extract.create_markdown,
+        self.markdown = to_raw_response_wrapper(
+            extract.markdown,
         )
 
 
@@ -272,11 +272,11 @@ class AsyncExtractResourceWithRawResponse:
     def __init__(self, extract: AsyncExtractResource) -> None:
         self._extract = extract
 
-        self.create_json = async_to_raw_response_wrapper(
-            extract.create_json,
+        self.json = async_to_raw_response_wrapper(
+            extract.json,
         )
-        self.create_markdown = async_to_raw_response_wrapper(
-            extract.create_markdown,
+        self.markdown = async_to_raw_response_wrapper(
+            extract.markdown,
         )
 
 
@@ -284,11 +284,11 @@ class ExtractResourceWithStreamingResponse:
     def __init__(self, extract: ExtractResource) -> None:
         self._extract = extract
 
-        self.create_json = to_streamed_response_wrapper(
-            extract.create_json,
+        self.json = to_streamed_response_wrapper(
+            extract.json,
         )
-        self.create_markdown = to_streamed_response_wrapper(
-            extract.create_markdown,
+        self.markdown = to_streamed_response_wrapper(
+            extract.markdown,
         )
 
 
@@ -296,9 +296,9 @@ class AsyncExtractResourceWithStreamingResponse:
     def __init__(self, extract: AsyncExtractResource) -> None:
         self._extract = extract
 
-        self.create_json = async_to_streamed_response_wrapper(
-            extract.create_json,
+        self.json = async_to_streamed_response_wrapper(
+            extract.json,
         )
-        self.create_markdown = async_to_streamed_response_wrapper(
-            extract.create_markdown,
+        self.markdown = async_to_streamed_response_wrapper(
+            extract.markdown,
         )

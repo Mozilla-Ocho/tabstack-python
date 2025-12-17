@@ -3,6 +3,6 @@
 from typing import Dict
 from typing_extensions import TypeAlias
 
-__all__ = ["GenerateCreateJsonResponse"]
+__all__ = ["ExtractJsonResponse"]
 
-GenerateCreateJsonResponse: TypeAlias = Dict[str, object]
+ExtractJsonResponse: TypeAlias = Dict[str, object]
