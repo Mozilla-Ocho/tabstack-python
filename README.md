@@ -38,6 +38,7 @@ client = Tabstack(
 response = client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
+print(response.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -63,6 +64,7 @@ async def main() -> None:
     response = await client.agent.automate(
         task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
     )
+    print(response.data)
 
 
 asyncio.run(main())
@@ -98,6 +100,7 @@ async def main() -> None:
         response = await client.agent.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
         )
+        print(response.data)
 
 
 asyncio.run(main())
@@ -116,7 +119,7 @@ stream = client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
 for response in stream:
-    print(response)
+    print(response.data)
 ```
 
 The async client uses the exact same interface.
@@ -130,7 +133,7 @@ stream = await client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
 async for response in stream:
-    print(response)
+    print(response.data)
 ```
 
 ## Using types
@@ -277,7 +280,7 @@ response = client.agent.with_raw_response.automate(
 print(response.headers.get('X-My-Header'))
 
 agent = response.parse()  # get the object that `agent.automate()` would have returned
-print(agent)
+print(agent.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Mozilla-Ocho/tabstack-python/tree/main/src/tabstack/_response.py) object.

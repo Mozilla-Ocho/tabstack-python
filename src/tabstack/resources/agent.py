@@ -114,7 +114,7 @@ class AgentResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=AgentAutomateResponse,
             stream=True,
             stream_cls=Stream[AgentAutomateResponse],
         )
@@ -212,7 +212,7 @@ class AsyncAgentResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=AgentAutomateResponse,
             stream=True,
             stream_cls=AsyncStream[AgentAutomateResponse],
         )
