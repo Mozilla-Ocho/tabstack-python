@@ -106,36 +106,6 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-## Streaming responses
-
-We provide support for streaming responses using Server Side Events (SSE).
-
-```python
-from tabstack import Tabstack
-
-client = Tabstack()
-
-stream = client.agent.automate(
-    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
-)
-for response in stream:
-    print(response.data)
-```
-
-The async client uses the exact same interface.
-
-```python
-from tabstack import AsyncTabstack
-
-client = AsyncTabstack()
-
-stream = await client.agent.automate(
-    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
-)
-async for response in stream:
-    print(response.data)
-```
-
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
