@@ -57,7 +57,7 @@ class AgentResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Stream[AgentAutomateResponse]:
+    ) -> Stream[object]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -116,7 +116,7 @@ class AgentResource(SyncAPIResource):
             ),
             cast_to=AgentAutomateResponse,
             stream=True,
-            stream_cls=Stream[AgentAutomateResponse],
+            stream_cls=Stream[object],
         )
 
 
@@ -155,7 +155,7 @@ class AsyncAgentResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncStream[AgentAutomateResponse]:
+    ) -> AsyncStream[object]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -214,7 +214,7 @@ class AsyncAgentResource(AsyncAPIResource):
             ),
             cast_to=AgentAutomateResponse,
             stream=True,
-            stream_cls=AsyncStream[AgentAutomateResponse],
+            stream_cls=AsyncStream[object],
         )
 
 
