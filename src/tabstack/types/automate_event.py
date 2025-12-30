@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["AgentAutomateResponse"]
+__all__ = ["AutomateEvent"]
 
 
-class AgentAutomateResponse(BaseModel):
+class AutomateEvent(BaseModel):
     data: Optional[object] = None
     """Event payload data"""
 

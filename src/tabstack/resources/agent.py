@@ -17,7 +17,7 @@ from .._response import (
 )
 from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
-from ..types.agent_automate_response import AgentAutomateResponse
+from ..types.automate_event import AutomateEvent
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -57,7 +57,7 @@ class AgentResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Stream[object]:
+    ) -> Stream[AutomateEvent]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -114,9 +114,9 @@ class AgentResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AgentAutomateResponse,
+            cast_to=AutomateEvent,
             stream=True,
-            stream_cls=Stream[object],
+            stream_cls=Stream[AutomateEvent],
         )
 
 
@@ -155,7 +155,7 @@ class AsyncAgentResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncStream[object]:
+    ) -> AsyncStream[AutomateEvent]:
         """Execute AI-powered browser automation tasks using natural language.
 
         This
@@ -212,9 +212,9 @@ class AsyncAgentResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AgentAutomateResponse,
+            cast_to=AutomateEvent,
             stream=True,
-            stream_cls=AsyncStream[object],
+            stream_cls=AsyncStream[AutomateEvent],
         )
 
 

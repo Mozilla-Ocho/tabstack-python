@@ -3,12 +3,12 @@
 Types:
 
 ```python
-from tabstack.types import AgentAutomateResponse
+from tabstack.types import AutomateEvent
 ```
 
 Methods:
 
-- <code title="post /automate">client.agent.<a href="./src/tabstack/resources/agent.py">automate</a>(\*\*<a href="src/tabstack/types/agent_automate_params.py">params</a>) -> <a href="./src/tabstack/types/agent_automate_response.py">AgentAutomateResponse</a></code>
+- <code title="post /automate">client.agent.<a href="./src/tabstack/resources/agent.py">automate</a>(\*\*<a href="src/tabstack/types/agent_automate_params.py">params</a>) -> <a href="./src/tabstack/types/automate_event.py">AutomateEvent</a></code>
 
 # Extract
 
