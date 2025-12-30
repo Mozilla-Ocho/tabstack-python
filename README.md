@@ -35,10 +35,10 @@ client = Tabstack(
     api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.agent.automate(
+automate_event = client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
-print(response.data)
+print(automate_event.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -61,10 +61,10 @@ client = AsyncTabstack(
 
 
 async def main() -> None:
-    response = await client.agent.automate(
+    automate_event = await client.agent.automate(
         task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
     )
-    print(response.data)
+    print(automate_event.data)
 
 
 asyncio.run(main())
@@ -97,10 +97,10 @@ async def main() -> None:
         api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.agent.automate(
+        automate_event = await client.agent.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
         )
-        print(response.data)
+        print(automate_event.data)
 
 
 asyncio.run(main())
