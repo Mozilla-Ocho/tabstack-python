@@ -4,6 +4,8 @@ on:
   release:
     types: [created]
 
+if: false  # Temporarily disabled
+
 permissions:
   id-token: write  # Required for trusted publishing to PyPI
   contents: read
