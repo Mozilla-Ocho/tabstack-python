@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 (2026-01-17)
+
+Full Changelog: [v2.0.0...v2.0.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.0.0...v2.0.1)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([9197068](https://github.com/Mozilla-Ocho/tabstack-python/commit/9197068bb9bd06db9e54a49690e25e9c0f93b230))
+
 ## 2.0.0 (2026-01-16)
 
 Full Changelog: [v0.0.1...v2.0.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v0.0.1...v2.0.0)
