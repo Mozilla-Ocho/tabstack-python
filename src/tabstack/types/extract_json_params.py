@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ExtractJsonParams"]
+__all__ = ["ExtractJsonParams", "Geotarget"]
 
 
 class ExtractJsonParams(TypedDict, total=False):
@@ -14,5 +14,18 @@ class ExtractJsonParams(TypedDict, total=False):
     url: Required[str]
     """URL to fetch and extract data from"""
 
+    geotarget: Geotarget
+    """Optional geotargeting parameters for proxy requests"""
+
     nocache: bool
     """Bypass cache and force fresh data retrieval"""
+
+
+class Geotarget(TypedDict, total=False):
+    """Optional geotargeting parameters for proxy requests"""
+
+    country: str
+    """
+    Country code using ISO 3166-1 alpha-2 standard (2 letters, e.g., "US", "GB",
+    "JP"). See: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    """

@@ -47,6 +47,7 @@ class GenerateResource(SyncAPIResource):
         instructions: str,
         json_schema: object,
         url: str,
+        geotarget: generate_json_params.Geotarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -66,6 +67,8 @@ class GenerateResource(SyncAPIResource):
 
           url: URL to fetch content from
 
+          geotarget: Optional geotargeting parameters for proxy requests
+
           nocache: Bypass cache and force fresh data retrieval
 
           extra_headers: Send extra headers
@@ -83,6 +86,7 @@ class GenerateResource(SyncAPIResource):
                     "instructions": instructions,
                     "json_schema": json_schema,
                     "url": url,
+                    "geotarget": geotarget,
                     "nocache": nocache,
                 },
                 generate_json_params.GenerateJsonParams,
@@ -120,6 +124,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         instructions: str,
         json_schema: object,
         url: str,
+        geotarget: generate_json_params.Geotarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -139,6 +144,8 @@ class AsyncGenerateResource(AsyncAPIResource):
 
           url: URL to fetch content from
 
+          geotarget: Optional geotargeting parameters for proxy requests
+
           nocache: Bypass cache and force fresh data retrieval
 
           extra_headers: Send extra headers
@@ -156,6 +163,7 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "instructions": instructions,
                     "json_schema": json_schema,
                     "url": url,
+                    "geotarget": geotarget,
                     "nocache": nocache,
                 },
                 generate_json_params.GenerateJsonParams,

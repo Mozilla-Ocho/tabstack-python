@@ -34,6 +34,7 @@ class TestGenerate:
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
             json_schema={},
             url="https://news.ycombinator.com",
+            geotarget={"country": "US"},
             nocache=False,
         )
         assert_matches_type(GenerateJsonResponse, generate, path=["response"])
@@ -91,6 +92,7 @@ class TestAsyncGenerate:
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
             json_schema={},
             url="https://news.ycombinator.com",
+            geotarget={"country": "US"},
             nocache=False,
         )
         assert_matches_type(GenerateJsonResponse, generate, path=["response"])

@@ -6,7 +6,7 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["AgentAutomateParams"]
+__all__ = ["AgentAutomateParams", "Geotarget"]
 
 
 class AgentAutomateParams(TypedDict, total=False):
@@ -15,6 +15,9 @@ class AgentAutomateParams(TypedDict, total=False):
 
     data: object
     """JSON data to provide context for form filling or complex tasks"""
+
+    geotarget: Geotarget
+    """Optional geotargeting parameters for proxy requests"""
 
     guardrails: str
     """Safety constraints for execution"""
@@ -27,3 +30,13 @@ class AgentAutomateParams(TypedDict, total=False):
 
     url: str
     """Starting URL for the task"""
+
+
+class Geotarget(TypedDict, total=False):
+    """Optional geotargeting parameters for proxy requests"""
+
+    country: str
+    """
+    Country code using ISO 3166-1 alpha-2 standard (2 letters, e.g., "US", "GB",
+    "JP"). See: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    """

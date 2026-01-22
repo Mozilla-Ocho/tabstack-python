@@ -29,6 +29,7 @@ class TestAgent:
         agent_stream = client.agent.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             data={},
+            geotarget={"country": "US"},
             guardrails="browse and extract only, don't interact with repositories",
             max_iterations=50,
             max_validation_attempts=3,
@@ -81,6 +82,7 @@ class TestAsyncAgent:
         agent_stream = await async_client.agent.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
             data={},
+            geotarget={"country": "US"},
             guardrails="browse and extract only, don't interact with repositories",
             max_iterations=50,
             max_validation_attempts=3,

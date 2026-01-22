@@ -47,6 +47,7 @@ class AgentResource(SyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
+        geotarget: agent_automate_params.Geotarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -58,15 +59,19 @@ class AgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Stream[AutomateEvent]:
-        """Execute AI-powered browser automation tasks using natural language.
-
-        This
-        endpoint **always streams** responses using Server-Sent Events (SSE).
+        """
+        Execute AI-powered browser automation tasks using natural language with optional
+        geotargeting. This endpoint **always streams** responses using Server-Sent
+        Events (SSE).
 
         **Streaming Response:**
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates and results as they're generated
+
+        **Geotargeting:**
+
+        - Optionally specify a country code for geotargeted browsing
 
         **Use Cases:**
 
@@ -80,6 +85,8 @@ class AgentResource(SyncAPIResource):
           task: The task description in natural language
 
           data: JSON data to provide context for form filling or complex tasks
+
+          geotarget: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -104,6 +111,7 @@ class AgentResource(SyncAPIResource):
                 {
                     "task": task,
                     "data": data,
+                    "geotarget": geotarget,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
@@ -145,6 +153,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
+        geotarget: agent_automate_params.Geotarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -156,15 +165,19 @@ class AsyncAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[AutomateEvent]:
-        """Execute AI-powered browser automation tasks using natural language.
-
-        This
-        endpoint **always streams** responses using Server-Sent Events (SSE).
+        """
+        Execute AI-powered browser automation tasks using natural language with optional
+        geotargeting. This endpoint **always streams** responses using Server-Sent
+        Events (SSE).
 
         **Streaming Response:**
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates and results as they're generated
+
+        **Geotargeting:**
+
+        - Optionally specify a country code for geotargeted browsing
 
         **Use Cases:**
 
@@ -178,6 +191,8 @@ class AsyncAgentResource(AsyncAPIResource):
           task: The task description in natural language
 
           data: JSON data to provide context for form filling or complex tasks
+
+          geotarget: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -202,6 +217,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 {
                     "task": task,
                     "data": data,
+                    "geotarget": geotarget,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
