@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ExtractMarkdownParams", "Geotarget"]
+__all__ = ["ExtractMarkdownParams", "GeoTarget"]
 
 
 class ExtractMarkdownParams(TypedDict, total=False):
     url: Required[str]
     """URL to fetch and convert to markdown"""
 
-    geotarget: Geotarget
+    geo_target: GeoTarget
     """Optional geotargeting parameters for proxy requests"""
 
     metadata: bool
@@ -24,7 +24,7 @@ class ExtractMarkdownParams(TypedDict, total=False):
     """Bypass cache and force fresh data retrieval"""
 
 
-class Geotarget(TypedDict, total=False):
+class GeoTarget(TypedDict, total=False):
     """Optional geotargeting parameters for proxy requests"""
 
     country: str

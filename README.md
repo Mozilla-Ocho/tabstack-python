@@ -132,9 +132,9 @@ client = Tabstack()
 
 automate_event = client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
-    geotarget={},
+    geo_target={},
 )
-print(automate_event.geotarget)
+print(automate_event.geo_target)
 ```
 
 ## Handling errors

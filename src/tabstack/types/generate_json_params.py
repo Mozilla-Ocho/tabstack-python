@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["GenerateJsonParams", "Geotarget"]
+__all__ = ["GenerateJsonParams", "GeoTarget"]
 
 
 class GenerateJsonParams(TypedDict, total=False):
@@ -17,14 +17,14 @@ class GenerateJsonParams(TypedDict, total=False):
     url: Required[str]
     """URL to fetch content from"""
 
-    geotarget: Geotarget
+    geo_target: GeoTarget
     """Optional geotargeting parameters for proxy requests"""
 
     nocache: bool
     """Bypass cache and force fresh data retrieval"""
 
 
-class Geotarget(TypedDict, total=False):
+class GeoTarget(TypedDict, total=False):
     """Optional geotargeting parameters for proxy requests"""
 
     country: str

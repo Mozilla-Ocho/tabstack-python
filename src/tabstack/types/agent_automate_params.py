@@ -6,7 +6,7 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["AgentAutomateParams", "Geotarget"]
+__all__ = ["AgentAutomateParams", "GeoTarget"]
 
 
 class AgentAutomateParams(TypedDict, total=False):
@@ -16,7 +16,7 @@ class AgentAutomateParams(TypedDict, total=False):
     data: object
     """JSON data to provide context for form filling or complex tasks"""
 
-    geotarget: Geotarget
+    geo_target: GeoTarget
     """Optional geotargeting parameters for proxy requests"""
 
     guardrails: str
@@ -32,7 +32,7 @@ class AgentAutomateParams(TypedDict, total=False):
     """Starting URL for the task"""
 
 
-class Geotarget(TypedDict, total=False):
+class GeoTarget(TypedDict, total=False):
     """Optional geotargeting parameters for proxy requests"""
 
     country: str

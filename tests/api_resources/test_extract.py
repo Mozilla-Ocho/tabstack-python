@@ -32,7 +32,7 @@ class TestExtract:
         extract = client.extract.json(
             json_schema={},
             url="https://news.ycombinator.com",
-            geotarget={"country": "US"},
+            geo_target={"country": "US"},
             nocache=False,
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -78,7 +78,7 @@ class TestExtract:
     def test_method_markdown_with_all_params(self, client: Tabstack) -> None:
         extract = client.extract.markdown(
             url="https://example.com/blog/article",
-            geotarget={"country": "US"},
+            geo_target={"country": "US"},
             metadata=True,
             nocache=False,
         )
@@ -131,7 +131,7 @@ class TestAsyncExtract:
         extract = await async_client.extract.json(
             json_schema={},
             url="https://news.ycombinator.com",
-            geotarget={"country": "US"},
+            geo_target={"country": "US"},
             nocache=False,
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -177,7 +177,7 @@ class TestAsyncExtract:
     async def test_method_markdown_with_all_params(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.markdown(
             url="https://example.com/blog/article",
-            geotarget={"country": "US"},
+            geo_target={"country": "US"},
             metadata=True,
             nocache=False,
         )

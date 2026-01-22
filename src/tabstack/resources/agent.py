@@ -47,7 +47,7 @@ class AgentResource(SyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geotarget: agent_automate_params.Geotarget | Omit = omit,
+        geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -86,7 +86,7 @@ class AgentResource(SyncAPIResource):
 
           data: JSON data to provide context for form filling or complex tasks
 
-          geotarget: Optional geotargeting parameters for proxy requests
+          geo_target: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -111,7 +111,7 @@ class AgentResource(SyncAPIResource):
                 {
                     "task": task,
                     "data": data,
-                    "geotarget": geotarget,
+                    "geo_target": geo_target,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
@@ -153,7 +153,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geotarget: agent_automate_params.Geotarget | Omit = omit,
+        geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -192,7 +192,7 @@ class AsyncAgentResource(AsyncAPIResource):
 
           data: JSON data to provide context for form filling or complex tasks
 
-          geotarget: Optional geotargeting parameters for proxy requests
+          geo_target: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -217,7 +217,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 {
                     "task": task,
                     "data": data,
-                    "geotarget": geotarget,
+                    "geo_target": geo_target,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
