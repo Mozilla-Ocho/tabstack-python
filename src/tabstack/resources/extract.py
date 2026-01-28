@@ -47,6 +47,7 @@ class ExtractResource(SyncAPIResource):
         *,
         json_schema: object,
         url: str,
+        geo_target: extract_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -62,6 +63,8 @@ class ExtractResource(SyncAPIResource):
           json_schema: JSON schema definition that describes the structure of data to extract.
 
           url: URL to fetch and extract data from
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           nocache: Bypass cache and force fresh data retrieval
 
@@ -79,6 +82,7 @@ class ExtractResource(SyncAPIResource):
                 {
                     "json_schema": json_schema,
                     "url": url,
+                    "geo_target": geo_target,
                     "nocache": nocache,
                 },
                 extract_json_params.ExtractJsonParams,
@@ -93,6 +97,7 @@ class ExtractResource(SyncAPIResource):
         self,
         *,
         url: str,
+        geo_target: extract_markdown_params.GeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -108,6 +113,8 @@ class ExtractResource(SyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           metadata: Include extracted metadata (Open Graph and HTML metadata) as a separate field in
               the response
@@ -127,6 +134,7 @@ class ExtractResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "geo_target": geo_target,
                     "metadata": metadata,
                     "nocache": nocache,
                 },
@@ -164,6 +172,7 @@ class AsyncExtractResource(AsyncAPIResource):
         *,
         json_schema: object,
         url: str,
+        geo_target: extract_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -179,6 +188,8 @@ class AsyncExtractResource(AsyncAPIResource):
           json_schema: JSON schema definition that describes the structure of data to extract.
 
           url: URL to fetch and extract data from
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           nocache: Bypass cache and force fresh data retrieval
 
@@ -196,6 +207,7 @@ class AsyncExtractResource(AsyncAPIResource):
                 {
                     "json_schema": json_schema,
                     "url": url,
+                    "geo_target": geo_target,
                     "nocache": nocache,
                 },
                 extract_json_params.ExtractJsonParams,
@@ -210,6 +222,7 @@ class AsyncExtractResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        geo_target: extract_markdown_params.GeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -225,6 +238,8 @@ class AsyncExtractResource(AsyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           metadata: Include extracted metadata (Open Graph and HTML metadata) as a separate field in
               the response
@@ -244,6 +259,7 @@ class AsyncExtractResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "geo_target": geo_target,
                     "metadata": metadata,
                     "nocache": nocache,
                 },
