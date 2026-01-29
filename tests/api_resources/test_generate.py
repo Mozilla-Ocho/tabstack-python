@@ -22,7 +22,31 @@ class TestGenerate:
     def test_method_json(self, client: Tabstack) -> None:
         generate = client.generate.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
         assert_matches_type(GenerateJsonResponse, generate, path=["response"])
@@ -32,7 +56,31 @@ class TestGenerate:
     def test_method_json_with_all_params(self, client: Tabstack) -> None:
         generate = client.generate.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
             geo_target={"country": "US"},
             nocache=False,
@@ -44,7 +92,31 @@ class TestGenerate:
     def test_raw_response_json(self, client: Tabstack) -> None:
         response = client.generate.with_raw_response.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
 
@@ -58,7 +130,31 @@ class TestGenerate:
     def test_streaming_response_json(self, client: Tabstack) -> None:
         with client.generate.with_streaming_response.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         ) as response:
             assert not response.is_closed
@@ -80,7 +176,31 @@ class TestAsyncGenerate:
     async def test_method_json(self, async_client: AsyncTabstack) -> None:
         generate = await async_client.generate.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
         assert_matches_type(GenerateJsonResponse, generate, path=["response"])
@@ -90,7 +210,31 @@ class TestAsyncGenerate:
     async def test_method_json_with_all_params(self, async_client: AsyncTabstack) -> None:
         generate = await async_client.generate.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
             geo_target={"country": "US"},
             nocache=False,
@@ -102,7 +246,31 @@ class TestAsyncGenerate:
     async def test_raw_response_json(self, async_client: AsyncTabstack) -> None:
         response = await async_client.generate.with_raw_response.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
 
@@ -116,7 +284,31 @@ class TestAsyncGenerate:
     async def test_streaming_response_json(self, async_client: AsyncTabstack) -> None:
         async with async_client.generate.with_streaming_response.json(
             instructions="For each story, categorize it (tech/business/science/other) and write a one-sentence summary explaining what it's about in simple terms.",
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "summaries": {
+                        "items": {
+                            "properties": {
+                                "category": {
+                                    "description": "Story category (tech/business/science/etc)",
+                                    "type": "string",
+                                },
+                                "summary": {
+                                    "description": "One-sentence summary of the story",
+                                    "type": "string",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         ) as response:
             assert not response.is_closed
