@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.1.0 (2026-01-30)
+
+Full Changelog: [v2.0.0...v2.1.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.0.0...v2.1.0)
+
+### Features
+
+* **api:** add research ([e139b72](https://github.com/Mozilla-Ocho/tabstack-python/commit/e139b72585ff197a48d1af52e7fd8b7ebc5f40d1))
+* **api:** api update ([23805e3](https://github.com/Mozilla-Ocho/tabstack-python/commit/23805e34be0a2dc9897a8962a7dd33bd840ef85c))
+* **api:** api update ([ac0c746](https://github.com/Mozilla-Ocho/tabstack-python/commit/ac0c74625af51293f79dbca80540781a4589adab))
+* **api:** api update ([b8a1e09](https://github.com/Mozilla-Ocho/tabstack-python/commit/b8a1e095bd6153948c18a3b15324fd0166cf136c))
+* **api:** api update ([6eb4a9f](https://github.com/Mozilla-Ocho/tabstack-python/commit/6eb4a9feb9f79e9580d5a521de46bb07f23db928))
+* **client:** add custom JSON encoder for extended type support ([4b5ce35](https://github.com/Mozilla-Ocho/tabstack-python/commit/4b5ce35a61dcc1e1c60d5d6dbfea22311c663cdb))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([c8fba67](https://github.com/Mozilla-Ocho/tabstack-python/commit/c8fba6725a642e10179f6a0006642f5dfe281c3c))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([b6d62f6](https://github.com/Mozilla-Ocho/tabstack-python/commit/b6d62f664f7cabaa8201fcb02fe50d307e82553c))
+* **internal:** update `actions/checkout` version ([9197068](https://github.com/Mozilla-Ocho/tabstack-python/commit/9197068bb9bd06db9e54a49690e25e9c0f93b230))
+
 ## 2.0.0 (2026-01-16)
 
 Full Changelog: [v0.0.1...v2.0.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v0.0.1...v2.0.0)
