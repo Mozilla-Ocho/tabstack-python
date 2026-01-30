@@ -62,6 +62,50 @@ class TestAgent:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_method_research(self, client: Tabstack) -> None:
+        agent_stream = client.agent.research(
+            query="What are the latest developments in quantum computing?",
+        )
+        agent_stream.response.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_method_research_with_all_params(self, client: Tabstack) -> None:
+        agent_stream = client.agent.research(
+            query="What are the latest developments in quantum computing?",
+            fetch_timeout=30,
+            mode="balanced",
+            nocache=False,
+        )
+        agent_stream.response.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_raw_response_research(self, client: Tabstack) -> None:
+        response = client.agent.with_raw_response.research(
+            query="What are the latest developments in quantum computing?",
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = response.parse()
+        stream.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_streaming_response_research(self, client: Tabstack) -> None:
+        with client.agent.with_streaming_response.research(
+            query="What are the latest developments in quantum computing?",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = response.parse()
+            stream.close()
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncAgent:
     parametrize = pytest.mark.parametrize(
@@ -106,6 +150,50 @@ class TestAsyncAgent:
     async def test_streaming_response_automate(self, async_client: AsyncTabstack) -> None:
         async with async_client.agent.with_streaming_response.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = await response.parse()
+            await stream.close()
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_method_research(self, async_client: AsyncTabstack) -> None:
+        agent_stream = await async_client.agent.research(
+            query="What are the latest developments in quantum computing?",
+        )
+        await agent_stream.response.aclose()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_method_research_with_all_params(self, async_client: AsyncTabstack) -> None:
+        agent_stream = await async_client.agent.research(
+            query="What are the latest developments in quantum computing?",
+            fetch_timeout=30,
+            mode="balanced",
+            nocache=False,
+        )
+        await agent_stream.response.aclose()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_raw_response_research(self, async_client: AsyncTabstack) -> None:
+        response = await async_client.agent.with_raw_response.research(
+            query="What are the latest developments in quantum computing?",
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = await response.parse()
+        await stream.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_streaming_response_research(self, async_client: AsyncTabstack) -> None:
+        async with async_client.agent.with_streaming_response.research(
+            query="What are the latest developments in quantum computing?",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
