@@ -21,7 +21,31 @@ class TestExtract:
     @parametrize
     def test_method_json(self, client: Tabstack) -> None:
         extract = client.extract.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -30,8 +54,33 @@ class TestExtract:
     @parametrize
     def test_method_json_with_all_params(self, client: Tabstack) -> None:
         extract = client.extract.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
+            geo_target={"country": "US"},
             nocache=False,
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -40,7 +89,31 @@ class TestExtract:
     @parametrize
     def test_raw_response_json(self, client: Tabstack) -> None:
         response = client.extract.with_raw_response.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
 
@@ -53,7 +126,31 @@ class TestExtract:
     @parametrize
     def test_streaming_response_json(self, client: Tabstack) -> None:
         with client.extract.with_streaming_response.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         ) as response:
             assert not response.is_closed
@@ -77,6 +174,7 @@ class TestExtract:
     def test_method_markdown_with_all_params(self, client: Tabstack) -> None:
         extract = client.extract.markdown(
             url="https://example.com/blog/article",
+            geo_target={"country": "US"},
             metadata=True,
             nocache=False,
         )
@@ -118,7 +216,31 @@ class TestAsyncExtract:
     @parametrize
     async def test_method_json(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -127,8 +249,33 @@ class TestAsyncExtract:
     @parametrize
     async def test_method_json_with_all_params(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
+            geo_target={"country": "US"},
             nocache=False,
         )
         assert_matches_type(ExtractJsonResponse, extract, path=["response"])
@@ -137,7 +284,31 @@ class TestAsyncExtract:
     @parametrize
     async def test_raw_response_json(self, async_client: AsyncTabstack) -> None:
         response = await async_client.extract.with_raw_response.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         )
 
@@ -150,7 +321,31 @@ class TestAsyncExtract:
     @parametrize
     async def test_streaming_response_json(self, async_client: AsyncTabstack) -> None:
         async with async_client.extract.with_streaming_response.json(
-            json_schema={},
+            json_schema={
+                "properties": {
+                    "stories": {
+                        "items": {
+                            "properties": {
+                                "author": {
+                                    "description": "Author username",
+                                    "type": "string",
+                                },
+                                "points": {
+                                    "description": "Story points",
+                                    "type": "number",
+                                },
+                                "title": {
+                                    "description": "Story title",
+                                    "type": "string",
+                                },
+                            },
+                            "type": "object",
+                        },
+                        "type": "array",
+                    }
+                },
+                "type": "object",
+            },
             url="https://news.ycombinator.com",
         ) as response:
             assert not response.is_closed
@@ -174,6 +369,7 @@ class TestAsyncExtract:
     async def test_method_markdown_with_all_params(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.markdown(
             url="https://example.com/blog/article",
+            geo_target={"country": "US"},
             metadata=True,
             nocache=False,
         )

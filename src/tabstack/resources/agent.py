@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
-from ..types import agent_automate_params
+from ..types import agent_automate_params, agent_research_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,6 +20,7 @@ from .._response import (
 from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
 from ..types.automate_event import AutomateEvent
+from ..types.research_event import ResearchEvent
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -47,6 +50,7 @@ class AgentResource(SyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
+        geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -58,15 +62,19 @@ class AgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Stream[AutomateEvent]:
-        """Execute AI-powered browser automation tasks using natural language.
-
-        This
-        endpoint **always streams** responses using Server-Sent Events (SSE).
+        """
+        Execute AI-powered browser automation tasks using natural language with optional
+        geotargeting. This endpoint **always streams** responses using Server-Sent
+        Events (SSE).
 
         **Streaming Response:**
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates and results as they're generated
+
+        **Geotargeting:**
+
+        - Optionally specify a country code for geotargeted browsing
 
         **Use Cases:**
 
@@ -80,6 +88,8 @@ class AgentResource(SyncAPIResource):
           task: The task description in natural language
 
           data: JSON data to provide context for form filling or complex tasks
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -104,6 +114,7 @@ class AgentResource(SyncAPIResource):
                 {
                     "task": task,
                     "data": data,
+                    "geo_target": geo_target,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
@@ -117,6 +128,79 @@ class AgentResource(SyncAPIResource):
             cast_to=AutomateEvent,
             stream=True,
             stream_cls=Stream[AutomateEvent],
+        )
+
+    def research(
+        self,
+        *,
+        query: str,
+        fetch_timeout: int | Omit = omit,
+        mode: Literal["fast", "balanced"] | Omit = omit,
+        nocache: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Stream[ResearchEvent]:
+        """
+        Execute AI-powered research queries that search the web, analyze sources, and
+        synthesize comprehensive answers. This endpoint **always streams** responses
+        using Server-Sent Events (SSE).
+
+        **Streaming Response:**
+
+        - All responses are streamed using Server-Sent Events (`text/event-stream`)
+        - Real-time progress updates as research progresses through phases
+
+        **Research Modes:**
+
+        - `fast` - Quick answers with minimal web searches
+        - `balanced` - Standard research with multiple iterations (default)
+
+        **Use Cases:**
+
+        - Answering complex questions with cited sources
+        - Synthesizing information from multiple web sources
+        - Research reports on specific topics
+        - Fact-checking and verification tasks
+
+        Args:
+          query: The research query or question to answer
+
+          fetch_timeout: Timeout in seconds for fetching web pages
+
+          mode: Research mode: fast (quick answers), balanced (standard research, default)
+
+          nocache: Skip cache and force fresh research
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return self._post(
+            "/research",
+            body=maybe_transform(
+                {
+                    "query": query,
+                    "fetch_timeout": fetch_timeout,
+                    "mode": mode,
+                    "nocache": nocache,
+                },
+                agent_research_params.AgentResearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ResearchEvent,
+            stream=True,
+            stream_cls=Stream[ResearchEvent],
         )
 
 
@@ -145,6 +229,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
+        geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
@@ -156,15 +241,19 @@ class AsyncAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[AutomateEvent]:
-        """Execute AI-powered browser automation tasks using natural language.
-
-        This
-        endpoint **always streams** responses using Server-Sent Events (SSE).
+        """
+        Execute AI-powered browser automation tasks using natural language with optional
+        geotargeting. This endpoint **always streams** responses using Server-Sent
+        Events (SSE).
 
         **Streaming Response:**
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates and results as they're generated
+
+        **Geotargeting:**
+
+        - Optionally specify a country code for geotargeted browsing
 
         **Use Cases:**
 
@@ -178,6 +267,8 @@ class AsyncAgentResource(AsyncAPIResource):
           task: The task description in natural language
 
           data: JSON data to provide context for form filling or complex tasks
+
+          geo_target: Optional geotargeting parameters for proxy requests
 
           guardrails: Safety constraints for execution
 
@@ -202,6 +293,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 {
                     "task": task,
                     "data": data,
+                    "geo_target": geo_target,
                     "guardrails": guardrails,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
@@ -217,6 +309,79 @@ class AsyncAgentResource(AsyncAPIResource):
             stream_cls=AsyncStream[AutomateEvent],
         )
 
+    async def research(
+        self,
+        *,
+        query: str,
+        fetch_timeout: int | Omit = omit,
+        mode: Literal["fast", "balanced"] | Omit = omit,
+        nocache: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncStream[ResearchEvent]:
+        """
+        Execute AI-powered research queries that search the web, analyze sources, and
+        synthesize comprehensive answers. This endpoint **always streams** responses
+        using Server-Sent Events (SSE).
+
+        **Streaming Response:**
+
+        - All responses are streamed using Server-Sent Events (`text/event-stream`)
+        - Real-time progress updates as research progresses through phases
+
+        **Research Modes:**
+
+        - `fast` - Quick answers with minimal web searches
+        - `balanced` - Standard research with multiple iterations (default)
+
+        **Use Cases:**
+
+        - Answering complex questions with cited sources
+        - Synthesizing information from multiple web sources
+        - Research reports on specific topics
+        - Fact-checking and verification tasks
+
+        Args:
+          query: The research query or question to answer
+
+          fetch_timeout: Timeout in seconds for fetching web pages
+
+          mode: Research mode: fast (quick answers), balanced (standard research, default)
+
+          nocache: Skip cache and force fresh research
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return await self._post(
+            "/research",
+            body=await async_maybe_transform(
+                {
+                    "query": query,
+                    "fetch_timeout": fetch_timeout,
+                    "mode": mode,
+                    "nocache": nocache,
+                },
+                agent_research_params.AgentResearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ResearchEvent,
+            stream=True,
+            stream_cls=AsyncStream[ResearchEvent],
+        )
+
 
 class AgentResourceWithRawResponse:
     def __init__(self, agent: AgentResource) -> None:
@@ -224,6 +389,9 @@ class AgentResourceWithRawResponse:
 
         self.automate = to_raw_response_wrapper(
             agent.automate,
+        )
+        self.research = to_raw_response_wrapper(
+            agent.research,
         )
 
 
@@ -234,6 +402,9 @@ class AsyncAgentResourceWithRawResponse:
         self.automate = async_to_raw_response_wrapper(
             agent.automate,
         )
+        self.research = async_to_raw_response_wrapper(
+            agent.research,
+        )
 
 
 class AgentResourceWithStreamingResponse:
@@ -243,6 +414,9 @@ class AgentResourceWithStreamingResponse:
         self.automate = to_streamed_response_wrapper(
             agent.automate,
         )
+        self.research = to_streamed_response_wrapper(
+            agent.research,
+        )
 
 
 class AsyncAgentResourceWithStreamingResponse:
@@ -251,4 +425,7 @@ class AsyncAgentResourceWithStreamingResponse:
 
         self.automate = async_to_streamed_response_wrapper(
             agent.automate,
+        )
+        self.research = async_to_streamed_response_wrapper(
+            agent.research,
         )
