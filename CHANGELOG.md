@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.2.0 (2026-02-11)
+
+Full Changelog: [v2.1.0...v2.2.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.1.0...v2.2.0)
+
+### Features
+
+* **api:** rename mcp package ([ad5bd9b](https://github.com/Mozilla-Ocho/tabstack-python/commit/ad5bd9b63e6ec9a242212cbe6cb7fa36903230b4))
+
+
+### Chores
+
+* **internal:** bump dependencies ([1e58c7b](https://github.com/Mozilla-Ocho/tabstack-python/commit/1e58c7b577422a441286822932d5cb0c30c069fa))
+* **internal:** fix lint error on Python 3.14 ([db03056](https://github.com/Mozilla-Ocho/tabstack-python/commit/db030565294dfd9337d44f95260b835098d36b12))
+
 ## 2.1.0 (2026-01-30)
 
 Full Changelog: [v2.0.0...v2.1.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.0.0...v2.1.0)
