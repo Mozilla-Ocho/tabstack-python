@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.1 (2026-02-12)
+
+Full Changelog: [v2.2.0...v2.2.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.2.0...v2.2.1)
+
+### Chores
+
+* format all `api.md` files ([79c09d3](https://github.com/Mozilla-Ocho/tabstack-python/commit/79c09d3d4a871fa902dc4ce0b4153fab01bb1361))
+
 ## 2.2.0 (2026-02-11)
 
 Full Changelog: [v2.1.0...v2.2.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.1.0...v2.2.0)
