@@ -80,6 +80,7 @@ class TestExtract:
                 "type": "object",
             },
             url="https://news.ycombinator.com",
+            effort="standard",
             geo_target={"country": "US"},
             nocache=False,
         )
@@ -174,6 +175,7 @@ class TestExtract:
     def test_method_markdown_with_all_params(self, client: Tabstack) -> None:
         extract = client.extract.markdown(
             url="https://example.com/blog/article",
+            effort="standard",
             geo_target={"country": "US"},
             metadata=True,
             nocache=False,
@@ -275,6 +277,7 @@ class TestAsyncExtract:
                 "type": "object",
             },
             url="https://news.ycombinator.com",
+            effort="standard",
             geo_target={"country": "US"},
             nocache=False,
         )
@@ -369,6 +372,7 @@ class TestAsyncExtract:
     async def test_method_markdown_with_all_params(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.markdown(
             url="https://example.com/blog/article",
+            effort="standard",
             geo_target={"country": "US"},
             metadata=True,
             nocache=False,

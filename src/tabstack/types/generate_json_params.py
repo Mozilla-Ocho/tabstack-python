@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["GenerateJsonParams", "GeoTarget"]
 
@@ -16,6 +16,14 @@ class GenerateJsonParams(TypedDict, total=False):
 
     url: Required[str]
     """URL to fetch content from"""
+
+    effort: Literal["min", "standard", "max"]
+    """Fetch effort level controlling speed vs.
+
+    capability tradeoff. "min": fastest, no fallback (~1-5s). "standard": balanced
+    with enhanced reliability (default, ~3-15s). "max": full browser rendering for
+    JS-heavy sites (~15-60s).
+    """
 
     geo_target: GeoTarget
     """Optional geotargeting parameters for proxy requests"""

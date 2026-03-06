@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import generate_json_params
@@ -47,6 +49,7 @@ class GenerateResource(SyncAPIResource):
         instructions: str,
         json_schema: object,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: generate_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -67,6 +70,10 @@ class GenerateResource(SyncAPIResource):
 
           url: URL to fetch content from
 
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
+              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+
           geo_target: Optional geotargeting parameters for proxy requests
 
           nocache: Bypass cache and force fresh data retrieval
@@ -86,6 +93,7 @@ class GenerateResource(SyncAPIResource):
                     "instructions": instructions,
                     "json_schema": json_schema,
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "nocache": nocache,
                 },
@@ -124,6 +132,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         instructions: str,
         json_schema: object,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: generate_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -144,6 +153,10 @@ class AsyncGenerateResource(AsyncAPIResource):
 
           url: URL to fetch content from
 
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
+              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+
           geo_target: Optional geotargeting parameters for proxy requests
 
           nocache: Bypass cache and force fresh data retrieval
@@ -163,6 +176,7 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "instructions": instructions,
                     "json_schema": json_schema,
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "nocache": nocache,
                 },
