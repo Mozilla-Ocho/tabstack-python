@@ -82,6 +82,7 @@ class TestGenerate:
                 "type": "object",
             },
             url="https://news.ycombinator.com",
+            effort="standard",
             geo_target={"country": "US"},
             nocache=False,
         )
@@ -236,6 +237,7 @@ class TestAsyncGenerate:
                 "type": "object",
             },
             url="https://news.ycombinator.com",
+            effort="standard",
             geo_target={"country": "US"},
             nocache=False,
         )
