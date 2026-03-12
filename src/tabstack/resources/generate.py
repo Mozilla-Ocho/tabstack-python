@@ -71,8 +71,8 @@ class GenerateResource(SyncAPIResource):
           url: URL to fetch content from
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -154,8 +154,8 @@ class AsyncGenerateResource(AsyncAPIResource):
           url: URL to fetch content from
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
