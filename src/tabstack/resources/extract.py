@@ -68,8 +68,8 @@ class ExtractResource(SyncAPIResource):
           url: URL to fetch and extract data from
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -124,8 +124,8 @@ class ExtractResource(SyncAPIResource):
           url: URL to fetch and convert to markdown
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -205,8 +205,8 @@ class AsyncExtractResource(AsyncAPIResource):
           url: URL to fetch and extract data from
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -261,8 +261,8 @@ class AsyncExtractResource(AsyncAPIResource):
           url: URL to fetch and convert to markdown
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
-              fallback (~1-5s). "standard": balanced with enhanced reliability (default,
-              ~3-15s). "max": full browser rendering for JS-heavy sites (~15-60s).
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 

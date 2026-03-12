@@ -17,9 +17,9 @@ class ExtractJsonParams(TypedDict, total=False):
     effort: Literal["min", "standard", "max"]
     """Fetch effort level controlling speed vs.
 
-    capability tradeoff. "min": fastest, no fallback (~1-5s). "standard": balanced
-    with enhanced reliability (default, ~3-15s). "max": full browser rendering for
-    JS-heavy sites (~15-60s).
+    capability tradeoff. "min": fastest, no fallback (1-5s). "standard": balanced
+    with enhanced reliability (default, 3-15s). "max": full browser rendering for
+    JS-heavy sites (15-60s).
     """
 
     geo_target: GeoTarget
