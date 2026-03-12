@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import extract_json_params, extract_markdown_params
@@ -47,6 +49,7 @@ class ExtractResource(SyncAPIResource):
         *,
         json_schema: object,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: extract_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -63,6 +66,10 @@ class ExtractResource(SyncAPIResource):
           json_schema: JSON schema definition that describes the structure of data to extract.
 
           url: URL to fetch and extract data from
+
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -82,6 +89,7 @@ class ExtractResource(SyncAPIResource):
                 {
                     "json_schema": json_schema,
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "nocache": nocache,
                 },
@@ -97,6 +105,7 @@ class ExtractResource(SyncAPIResource):
         self,
         *,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: extract_markdown_params.GeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
@@ -113,6 +122,10 @@ class ExtractResource(SyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -134,6 +147,7 @@ class ExtractResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,
                     "nocache": nocache,
@@ -172,6 +186,7 @@ class AsyncExtractResource(AsyncAPIResource):
         *,
         json_schema: object,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: extract_json_params.GeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -188,6 +203,10 @@ class AsyncExtractResource(AsyncAPIResource):
           json_schema: JSON schema definition that describes the structure of data to extract.
 
           url: URL to fetch and extract data from
+
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -207,6 +226,7 @@ class AsyncExtractResource(AsyncAPIResource):
                 {
                     "json_schema": json_schema,
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "nocache": nocache,
                 },
@@ -222,6 +242,7 @@ class AsyncExtractResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: extract_markdown_params.GeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
@@ -238,6 +259,10 @@ class AsyncExtractResource(AsyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
+              fallback (1-5s). "standard": balanced with enhanced reliability (default,
+              3-15s). "max": full browser rendering for JS-heavy sites (15-60s).
 
           geo_target: Optional geotargeting parameters for proxy requests
 
@@ -259,6 +284,7 @@ class AsyncExtractResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,
                     "nocache": nocache,

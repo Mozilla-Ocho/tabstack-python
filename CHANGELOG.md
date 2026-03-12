@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.3.0 (2026-03-12)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* **api:** api update ([8bb9280](https://github.com/Mozilla-Ocho/tabstack-python/commit/8bb92809a4d7967b25f4a288557d81c9eb6883d9))
+* **api:** api update ([2453efd](https://github.com/Mozilla-Ocho/tabstack-python/commit/2453efdf272307fd008f20f18be23be1430795b4))
+
+
+### Chores
+
+* **ci:** bump uv version ([b17a93a](https://github.com/Mozilla-Ocho/tabstack-python/commit/b17a93a8f667f43518db5a278acf440bfce3ddee))
+* **ci:** skip uploading artifacts on stainless-internal branches ([4af1491](https://github.com/Mozilla-Ocho/tabstack-python/commit/4af149100add3389ca29fc7448a49d3b53a7e709))
+* format all `api.md` files ([79c09d3](https://github.com/Mozilla-Ocho/tabstack-python/commit/79c09d3d4a871fa902dc4ce0b4153fab01bb1361))
+* **internal:** add request options to SSE classes ([36eb33c](https://github.com/Mozilla-Ocho/tabstack-python/commit/36eb33c1ace478eaa0b0489642abc7bc8ba08ad2))
+* **internal:** make `test_proxy_environment_variables` more resilient ([e8a44e9](https://github.com/Mozilla-Ocho/tabstack-python/commit/e8a44e9425b78f099a7a3aee65fb25b70c5bce69))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([e9e5e13](https://github.com/Mozilla-Ocho/tabstack-python/commit/e9e5e130d7a2f5b7dd718632673fc8e8d7eb36be))
+* **internal:** remove mock server code ([f61d3b4](https://github.com/Mozilla-Ocho/tabstack-python/commit/f61d3b4f5ea74b0da9ec9d2e71b96549361d0ea6))
+* **test:** update skip reason message ([911d25f](https://github.com/Mozilla-Ocho/tabstack-python/commit/911d25fcc361fc9cdb00de3684038ca6f5aed55f))
+* update mock server docs ([ca0bd54](https://github.com/Mozilla-Ocho/tabstack-python/commit/ca0bd54fc57b5b04db69034124dae1c489926f0d))
+
 ## 2.2.0 (2026-02-11)
 
 Full Changelog: [v2.1.0...v2.2.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.1.0...v2.2.0)

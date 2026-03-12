@@ -15,7 +15,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAgent:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_automate(self, client: Tabstack) -> None:
         agent_stream = client.agent.automate(
@@ -23,7 +23,7 @@ class TestAgent:
         )
         agent_stream.response.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_automate_with_all_params(self, client: Tabstack) -> None:
         agent_stream = client.agent.automate(
@@ -37,7 +37,7 @@ class TestAgent:
         )
         agent_stream.response.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_automate(self, client: Tabstack) -> None:
         response = client.agent.with_raw_response.automate(
@@ -48,7 +48,7 @@ class TestAgent:
         stream = response.parse()
         stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_automate(self, client: Tabstack) -> None:
         with client.agent.with_streaming_response.automate(
@@ -62,7 +62,7 @@ class TestAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_research(self, client: Tabstack) -> None:
         agent_stream = client.agent.research(
@@ -70,7 +70,7 @@ class TestAgent:
         )
         agent_stream.response.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_research_with_all_params(self, client: Tabstack) -> None:
         agent_stream = client.agent.research(
@@ -81,7 +81,7 @@ class TestAgent:
         )
         agent_stream.response.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_research(self, client: Tabstack) -> None:
         response = client.agent.with_raw_response.research(
@@ -92,7 +92,7 @@ class TestAgent:
         stream = response.parse()
         stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_research(self, client: Tabstack) -> None:
         with client.agent.with_streaming_response.research(
@@ -112,7 +112,7 @@ class TestAsyncAgent:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_automate(self, async_client: AsyncTabstack) -> None:
         agent_stream = await async_client.agent.automate(
@@ -120,7 +120,7 @@ class TestAsyncAgent:
         )
         await agent_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_automate_with_all_params(self, async_client: AsyncTabstack) -> None:
         agent_stream = await async_client.agent.automate(
@@ -134,7 +134,7 @@ class TestAsyncAgent:
         )
         await agent_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_automate(self, async_client: AsyncTabstack) -> None:
         response = await async_client.agent.with_raw_response.automate(
@@ -145,7 +145,7 @@ class TestAsyncAgent:
         stream = await response.parse()
         await stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_automate(self, async_client: AsyncTabstack) -> None:
         async with async_client.agent.with_streaming_response.automate(
@@ -159,7 +159,7 @@ class TestAsyncAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_research(self, async_client: AsyncTabstack) -> None:
         agent_stream = await async_client.agent.research(
@@ -167,7 +167,7 @@ class TestAsyncAgent:
         )
         await agent_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_research_with_all_params(self, async_client: AsyncTabstack) -> None:
         agent_stream = await async_client.agent.research(
@@ -178,7 +178,7 @@ class TestAsyncAgent:
         )
         await agent_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_research(self, async_client: AsyncTabstack) -> None:
         response = await async_client.agent.with_raw_response.research(
@@ -189,7 +189,7 @@ class TestAsyncAgent:
         stream = await response.parse()
         await stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_research(self, async_client: AsyncTabstack) -> None:
         async with async_client.agent.with_streaming_response.research(
