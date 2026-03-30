@@ -9,7 +9,7 @@ __all__ = ["GenerateJsonParams", "GeoTarget"]
 
 class GenerateJsonParams(TypedDict, total=False):
     instructions: Required[str]
-    """Instructions describing how to transform the data"""
+    """Instructions describing how to transform the data. Maximum 20,000 characters."""
 
     json_schema: Required[object]
     """JSON schema defining the structure of the transformed output"""
