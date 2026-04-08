@@ -129,7 +129,11 @@ class AgentResource(SyncAPIResource):
                 agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=AutomateEvent,
             stream=True,
@@ -259,7 +263,11 @@ class AgentResource(SyncAPIResource):
                 agent_research_params.AgentResearchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=ResearchEvent,
             stream=True,
@@ -369,7 +377,11 @@ class AsyncAgentResource(AsyncAPIResource):
                 agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=AutomateEvent,
             stream=True,
@@ -499,7 +511,11 @@ class AsyncAgentResource(AsyncAPIResource):
                 agent_research_params.AgentResearchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=ResearchEvent,
             stream=True,
