@@ -8,6 +8,10 @@ from typing import Any, cast
 import pytest
 
 from tabstack import Tabstack, AsyncTabstack
+from tests.utils import assert_matches_type
+from tabstack.types import (
+    AgentAutomateInputResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -62,6 +66,63 @@ class TestAgent:
             stream.close()
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_automate_input(self, client: Tabstack) -> None:
+        agent = client.agent.automate_input(
+            request_id="requestID",
+        )
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_automate_input_with_all_params(self, client: Tabstack) -> None:
+        agent = client.agent.automate_input(
+            request_id="requestID",
+            cancelled=True,
+            fields=[
+                {
+                    "ref": "E42",
+                    "value": "user@example.com",
+                }
+            ],
+        )
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_automate_input(self, client: Tabstack) -> None:
+        response = client.agent.with_raw_response.automate_input(
+            request_id="requestID",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_automate_input(self, client: Tabstack) -> None:
+        with client.agent.with_streaming_response.automate_input(
+            request_id="requestID",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_automate_input(self, client: Tabstack) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `request_id` but received ''"):
+            client.agent.with_raw_response.automate_input(
+                request_id="",
+            )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -160,6 +221,63 @@ class TestAsyncAgent:
             await stream.close()
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_automate_input(self, async_client: AsyncTabstack) -> None:
+        agent = await async_client.agent.automate_input(
+            request_id="requestID",
+        )
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_automate_input_with_all_params(self, async_client: AsyncTabstack) -> None:
+        agent = await async_client.agent.automate_input(
+            request_id="requestID",
+            cancelled=True,
+            fields=[
+                {
+                    "ref": "E42",
+                    "value": "user@example.com",
+                }
+            ],
+        )
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_automate_input(self, async_client: AsyncTabstack) -> None:
+        response = await async_client.agent.with_raw_response.automate_input(
+            request_id="requestID",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_automate_input(self, async_client: AsyncTabstack) -> None:
+        async with async_client.agent.with_streaming_response.automate_input(
+            request_id="requestID",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentAutomateInputResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_automate_input(self, async_client: AsyncTabstack) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `request_id` but received ''"):
+            await async_client.agent.with_raw_response.automate_input(
+                request_id="",
+            )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
