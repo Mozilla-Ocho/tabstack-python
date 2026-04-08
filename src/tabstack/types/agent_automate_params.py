@@ -22,6 +22,9 @@ class AgentAutomateParams(TypedDict, total=False):
     guardrails: str
     """Safety constraints for execution"""
 
+    interactive: bool
+    """Enable interactive mode to allow human-in-the-loop input during task execution"""
+
     max_iterations: Annotated[int, PropertyInfo(alias="maxIterations")]
     """Maximum task iterations"""
 

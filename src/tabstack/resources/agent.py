@@ -52,6 +52,7 @@ class AgentResource(SyncAPIResource):
         data: object | Omit = omit,
         geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
+        interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
         url: str | Omit = omit,
@@ -93,6 +94,8 @@ class AgentResource(SyncAPIResource):
 
           guardrails: Safety constraints for execution
 
+          interactive: Enable interactive mode to allow human-in-the-loop input during task execution
+
           max_iterations: Maximum task iterations
 
           max_validation_attempts: Maximum validation attempts
@@ -116,6 +119,7 @@ class AgentResource(SyncAPIResource):
                     "data": data,
                     "geo_target": geo_target,
                     "guardrails": guardrails,
+                    "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
@@ -231,6 +235,7 @@ class AsyncAgentResource(AsyncAPIResource):
         data: object | Omit = omit,
         geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
+        interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
         url: str | Omit = omit,
@@ -272,6 +277,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
           guardrails: Safety constraints for execution
 
+          interactive: Enable interactive mode to allow human-in-the-loop input during task execution
+
           max_iterations: Maximum task iterations
 
           max_validation_attempts: Maximum validation attempts
@@ -295,6 +302,7 @@ class AsyncAgentResource(AsyncAPIResource):
                     "data": data,
                     "geo_target": geo_target,
                     "guardrails": guardrails,
+                    "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
