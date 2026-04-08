@@ -12,3 +12,5 @@ from .extract_json_response import ExtractJsonResponse as ExtractJsonResponse
 from .generate_json_response import GenerateJsonResponse as GenerateJsonResponse
 from .extract_markdown_params import ExtractMarkdownParams as ExtractMarkdownParams
 from .extract_markdown_response import ExtractMarkdownResponse as ExtractMarkdownResponse
+from .agent_automate_input_params import AgentAutomateInputParams as AgentAutomateInputParams
+from .agent_automate_input_response import AgentAutomateInputResponse as AgentAutomateInputResponse
