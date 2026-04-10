@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import agent_automate_params, agent_research_params
+from ..types import agent_automate_params, agent_research_params, agent_automate_input_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -21,6 +22,7 @@ from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
 from ..types.automate_event import AutomateEvent
 from ..types.research_event import ResearchEvent
+from ..types.agent_automate_input_response import AgentAutomateInputResponse
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -52,6 +54,7 @@ class AgentResource(SyncAPIResource):
         data: object | Omit = omit,
         geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
+        interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
         url: str | Omit = omit,
@@ -93,6 +96,8 @@ class AgentResource(SyncAPIResource):
 
           guardrails: Safety constraints for execution
 
+          interactive: Enable interactive mode to allow human-in-the-loop input during task execution
+
           max_iterations: Maximum task iterations
 
           max_validation_attempts: Maximum validation attempts
@@ -116,6 +121,7 @@ class AgentResource(SyncAPIResource):
                     "data": data,
                     "geo_target": geo_target,
                     "guardrails": guardrails,
+                    "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
@@ -123,11 +129,72 @@ class AgentResource(SyncAPIResource):
                 agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=AutomateEvent,
             stream=True,
             stream_cls=Stream[AutomateEvent],
+        )
+
+    def automate_input(
+        self,
+        request_id: str,
+        *,
+        cancelled: bool | Omit = omit,
+        fields: Iterable[agent_automate_input_params.Field] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentAutomateInputResponse:
+        """
+        Submit a response to an interactive form data request from an in-progress
+        automation task. When the AI agent encounters a form requiring user data, it
+        emits an `interactive:form_data:request` or `interactive:form_data:error` SSE
+        event containing a `requestId`. Use this endpoint to provide the requested data
+        or cancel the request.
+
+        **Lifecycle:**
+
+        - Input requests expire after 2 minutes by default
+        - Expired or already-answered requests return `410 Gone`
+        - Successful submissions return `202 Accepted` (fire-and-forget from caller's
+          perspective)
+
+        Args:
+          cancelled: Set to true to cancel/decline the request
+
+          fields: Field values as array of {ref, value} pairs (required when not cancelled)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not request_id:
+            raise ValueError(f"Expected a non-empty value for `request_id` but received {request_id!r}")
+        return self._post(
+            path_template("/automate/{request_id}/input", request_id=request_id),
+            body=maybe_transform(
+                {
+                    "cancelled": cancelled,
+                    "fields": fields,
+                },
+                agent_automate_input_params.AgentAutomateInputParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentAutomateInputResponse,
         )
 
     def research(
@@ -196,7 +263,11 @@ class AgentResource(SyncAPIResource):
                 agent_research_params.AgentResearchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=ResearchEvent,
             stream=True,
@@ -231,6 +302,7 @@ class AsyncAgentResource(AsyncAPIResource):
         data: object | Omit = omit,
         geo_target: agent_automate_params.GeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
+        interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
         url: str | Omit = omit,
@@ -272,6 +344,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
           guardrails: Safety constraints for execution
 
+          interactive: Enable interactive mode to allow human-in-the-loop input during task execution
+
           max_iterations: Maximum task iterations
 
           max_validation_attempts: Maximum validation attempts
@@ -295,6 +369,7 @@ class AsyncAgentResource(AsyncAPIResource):
                     "data": data,
                     "geo_target": geo_target,
                     "guardrails": guardrails,
+                    "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
                     "url": url,
@@ -302,11 +377,72 @@ class AsyncAgentResource(AsyncAPIResource):
                 agent_automate_params.AgentAutomateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=AutomateEvent,
             stream=True,
             stream_cls=AsyncStream[AutomateEvent],
+        )
+
+    async def automate_input(
+        self,
+        request_id: str,
+        *,
+        cancelled: bool | Omit = omit,
+        fields: Iterable[agent_automate_input_params.Field] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentAutomateInputResponse:
+        """
+        Submit a response to an interactive form data request from an in-progress
+        automation task. When the AI agent encounters a form requiring user data, it
+        emits an `interactive:form_data:request` or `interactive:form_data:error` SSE
+        event containing a `requestId`. Use this endpoint to provide the requested data
+        or cancel the request.
+
+        **Lifecycle:**
+
+        - Input requests expire after 2 minutes by default
+        - Expired or already-answered requests return `410 Gone`
+        - Successful submissions return `202 Accepted` (fire-and-forget from caller's
+          perspective)
+
+        Args:
+          cancelled: Set to true to cancel/decline the request
+
+          fields: Field values as array of {ref, value} pairs (required when not cancelled)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not request_id:
+            raise ValueError(f"Expected a non-empty value for `request_id` but received {request_id!r}")
+        return await self._post(
+            path_template("/automate/{request_id}/input", request_id=request_id),
+            body=await async_maybe_transform(
+                {
+                    "cancelled": cancelled,
+                    "fields": fields,
+                },
+                agent_automate_input_params.AgentAutomateInputParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentAutomateInputResponse,
         )
 
     async def research(
@@ -375,7 +511,11 @@ class AsyncAgentResource(AsyncAPIResource):
                 agent_research_params.AgentResearchParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                synthesize_event_and_data=True,
             ),
             cast_to=ResearchEvent,
             stream=True,
@@ -390,6 +530,9 @@ class AgentResourceWithRawResponse:
         self.automate = to_raw_response_wrapper(
             agent.automate,
         )
+        self.automate_input = to_raw_response_wrapper(
+            agent.automate_input,
+        )
         self.research = to_raw_response_wrapper(
             agent.research,
         )
@@ -401,6 +544,9 @@ class AsyncAgentResourceWithRawResponse:
 
         self.automate = async_to_raw_response_wrapper(
             agent.automate,
+        )
+        self.automate_input = async_to_raw_response_wrapper(
+            agent.automate_input,
         )
         self.research = async_to_raw_response_wrapper(
             agent.research,
@@ -414,6 +560,9 @@ class AgentResourceWithStreamingResponse:
         self.automate = to_streamed_response_wrapper(
             agent.automate,
         )
+        self.automate_input = to_streamed_response_wrapper(
+            agent.automate_input,
+        )
         self.research = to_streamed_response_wrapper(
             agent.research,
         )
@@ -425,6 +574,9 @@ class AsyncAgentResourceWithStreamingResponse:
 
         self.automate = async_to_streamed_response_wrapper(
             agent.automate,
+        )
+        self.automate_input = async_to_streamed_response_wrapper(
+            agent.automate_input,
         )
         self.research = async_to_streamed_response_wrapper(
             agent.research,

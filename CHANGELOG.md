@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.4.0 (2026-04-10)
+
+Full Changelog: [v2.3.0...v2.4.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.3.0...v2.4.0)
+
+### Features
+
+* **api:** add input endpoint ([f3b1f16](https://github.com/Mozilla-Ocho/tabstack-python/commit/f3b1f16204c0d724193815c5e34100831f0a2653))
+* **api:** api update ([cda5c19](https://github.com/Mozilla-Ocho/tabstack-python/commit/cda5c19baedee455072a8071cb2741714a9ded19))
+* **api:** api update ([ed80ce0](https://github.com/Mozilla-Ocho/tabstack-python/commit/ed80ce06975480e8466b18b75397ee3c761f6398))
+* **api:** better handling of SSE events ([6b6ba7b](https://github.com/Mozilla-Ocho/tabstack-python/commit/6b6ba7b5b6a6aba119a6caf6aec3af5ff5c6350b))
+* **internal:** implement indices array format for query and form serialization ([97a9bb7](https://github.com/Mozilla-Ocho/tabstack-python/commit/97a9bb7241ad0c7a98483d81f74bbb5ee40e1b93))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([2cda6ae](https://github.com/Mozilla-Ocho/tabstack-python/commit/2cda6aeb86a50115ba347549452c57700e810679))
+* **deps:** bump minimum typing-extensions version ([1946504](https://github.com/Mozilla-Ocho/tabstack-python/commit/194650472a951f76bd180e1dd08507fcf2670577))
+* ensure file data are only sent as 1 parameter ([10f77bc](https://github.com/Mozilla-Ocho/tabstack-python/commit/10f77bcad1e0ea05151f291bf55b17a04512465a))
+* **pydantic:** do not pass `by_alias` unless set ([a32962e](https://github.com/Mozilla-Ocho/tabstack-python/commit/a32962e54563d7073726b4463d70017fc2a40331))
+* sanitize endpoint path params ([f4632c7](https://github.com/Mozilla-Ocho/tabstack-python/commit/f4632c74a42a3ea56998e6f9d9afacace4bd4a5c))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([9710840](https://github.com/Mozilla-Ocho/tabstack-python/commit/97108400820fbe715dcb922c997b87b612bf588e))
+* configure new SDK language ([f5f587a](https://github.com/Mozilla-Ocho/tabstack-python/commit/f5f587ab07a757e4ada42e6bc3c802f29591c536))
+* **internal:** tweak CI branches ([8458777](https://github.com/Mozilla-Ocho/tabstack-python/commit/8458777f42fdbdc611d213513b1e7f026886ba42))
+* **internal:** update gitignore ([e39102c](https://github.com/Mozilla-Ocho/tabstack-python/commit/e39102cd8c44fbbaec52a5bed74a11deab25b97f))
+
 ## 2.3.0 (2026-03-12)
 
 Full Changelog: [v2.2.0...v2.3.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.2.0...v2.3.0)

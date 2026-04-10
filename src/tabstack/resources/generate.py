@@ -64,7 +64,7 @@ class GenerateResource(SyncAPIResource):
         instructions. Use this to generate new content, summaries, or restructured data.
 
         Args:
-          instructions: Instructions describing how to transform the data
+          instructions: Instructions describing how to transform the data. Maximum 20,000 characters.
 
           json_schema: JSON schema defining the structure of the transformed output
 
@@ -147,7 +147,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         instructions. Use this to generate new content, summaries, or restructured data.
 
         Args:
-          instructions: Instructions describing how to transform the data
+          instructions: Instructions describing how to transform the data. Maximum 20,000 characters.
 
           json_schema: JSON schema defining the structure of the transformed output
 
