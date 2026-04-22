@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Any, Iterable, cast
 from typing_extensions import Literal
 
 import httpx
@@ -135,7 +135,7 @@ class AgentResource(SyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=AutomateEvent,
+            cast_to=cast(Any, AutomateEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=Stream[AutomateEvent],
         )
@@ -269,7 +269,7 @@ class AgentResource(SyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=ResearchEvent,
+            cast_to=cast(Any, ResearchEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=Stream[ResearchEvent],
         )
@@ -383,7 +383,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=AutomateEvent,
+            cast_to=cast(Any, AutomateEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=AsyncStream[AutomateEvent],
         )
@@ -517,7 +517,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=ResearchEvent,
+            cast_to=cast(Any, ResearchEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=AsyncStream[ResearchEvent],
         )
