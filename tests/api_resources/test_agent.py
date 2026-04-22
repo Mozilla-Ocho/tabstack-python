@@ -138,7 +138,7 @@ class TestAgent:
         agent_stream = client.agent.research(
             query="What are the latest developments in quantum computing?",
             fetch_timeout=30,
-            mode="balanced",
+            mode="fast",
             nocache=False,
         )
         agent_stream.response.close()
@@ -293,7 +293,7 @@ class TestAsyncAgent:
         agent_stream = await async_client.agent.research(
             query="What are the latest developments in quantum computing?",
             fetch_timeout=30,
-            mode="balanced",
+            mode="fast",
             nocache=False,
         )
         await agent_stream.response.aclose()

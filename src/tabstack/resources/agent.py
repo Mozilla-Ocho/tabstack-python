@@ -223,8 +223,8 @@ class AgentResource(SyncAPIResource):
 
         **Research Modes:**
 
-        - `fast` - Quick answers with minimal web searches
-        - `balanced` - Standard research with multiple iterations (default)
+        - `fast` - Quick answers with minimal web searches (default)
+        - `balanced` - Standard research with multiple iterations
 
         **Use Cases:**
 
@@ -238,7 +238,7 @@ class AgentResource(SyncAPIResource):
 
           fetch_timeout: Timeout in seconds for fetching web pages
 
-          mode: Research mode: fast (quick answers), balanced (standard research, default)
+          mode: Research mode: fast (quick answers, default), balanced (standard research)
 
           nocache: Skip cache and force fresh research
 
@@ -471,8 +471,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
         **Research Modes:**
 
-        - `fast` - Quick answers with minimal web searches
-        - `balanced` - Standard research with multiple iterations (default)
+        - `fast` - Quick answers with minimal web searches (default)
+        - `balanced` - Standard research with multiple iterations
 
         **Use Cases:**
 
@@ -486,7 +486,7 @@ class AsyncAgentResource(AsyncAPIResource):
 
           fetch_timeout: Timeout in seconds for fetching web pages
 
-          mode: Research mode: fast (quick answers), balanced (standard research, default)
+          mode: Research mode: fast (quick answers, default), balanced (standard research)
 
           nocache: Skip cache and force fresh research
 
