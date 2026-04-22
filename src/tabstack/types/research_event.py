@@ -257,7 +257,7 @@ class V1ResearchEventCompleteDataMetadataMetricsPhases(BaseModel):
 
 
 class V1ResearchEventCompleteDataMetadataMetricsSuccessRates(BaseModel):
-    """Success rates (0-1) for various operations"""
+    """Success rate metrics"""
 
     analyzes: float
 
@@ -299,7 +299,7 @@ class V1ResearchEventCompleteDataMetadataMetrics(BaseModel):
     """Search count by provider name (e.g., "bright-data", "parallel")"""
 
     success_rates: V1ResearchEventCompleteDataMetadataMetricsSuccessRates = FieldInfo(alias="successRates")
-    """Success rates (0-1) for various operations"""
+    """Success rate metrics"""
 
     tokens: Dict[str, V1ResearchEventCompleteDataMetadataMetricsTokens]
     """Token usage by model ID (e.g., "gemini-2.5-flash")"""
@@ -457,7 +457,7 @@ class V1ResearchEventError(BaseModel):
 
 
 class V1ResearchEventEvaluatingEndDataQuestionAssessment(BaseModel):
-    """Question assessment for evaluating:end payload"""
+    """Assessment of a single research question"""
 
     findings: str
     """What we learned (if answered/partial) or what's missing (if unanswered)"""
