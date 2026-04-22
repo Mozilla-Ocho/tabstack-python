@@ -29,76 +29,76 @@ __all__ = [
     "V1AutomateEventAIGenerationData",
     "V1AutomateEventAIGenerationDataUsage",
     "V1AutomateEventAIGenerationDataMessage",
-    "V1AutomateEventAIGenerationDataMessageUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1Image",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1Buffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageByteLength",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBufferBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2Data",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1Buffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataByteLength",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBufferBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1Data",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1Buffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataByteLength",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBufferBuffer",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4Output",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember4",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5Value",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember4",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember5",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember6",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember7",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember8",
-    "V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember5",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3Content",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Output",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember4",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5Value",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember0",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember1",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember2",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember3",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember4",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember5",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember6",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember7",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember8",
-    "V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageSystem",
+    "V1AutomateEventAIGenerationDataMessageUser",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Text",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Image",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImage",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1Buffer",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByteLength",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1File",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileData",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1Buffer",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteLength",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer",
+    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer",
+    "V1AutomateEventAIGenerationDataMessageAssistant",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Text",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1File",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileData",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1Buffer",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataByteLength",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Reasoning",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolCall",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResult",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutput",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputText",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputJson",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputExecutionDenied",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorText",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorJson",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContent",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValue",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueText",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueMedia",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileData",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileURL",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileID",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageData",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageURL",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageFileID",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueCustom",
+    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolApprovalRequest",
+    "V1AutomateEventAIGenerationDataMessageTool",
+    "V1AutomateEventAIGenerationDataMessageToolContent",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResult",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutput",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputText",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputJson",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputExecutionDenied",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorText",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorJson",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContent",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValue",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueText",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueMedia",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileData",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileURL",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileID",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageData",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageURL",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageFileID",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueCustom",
+    "V1AutomateEventAIGenerationDataMessageToolContentToolApprovalResponse",
     "V1AutomateEventAIGenerationError",
     "V1AutomateEventAIGenerationErrorData",
     "V1AutomateEventBrowserActionCompleted",
@@ -293,7 +293,7 @@ class V1AutomateEventAIGenerationDataUsage(BaseModel):
     total_tokens: Optional[float] = FieldInfo(alias="totalTokens", default=None)
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageSystem(BaseModel):
     """A system message. It can contain system information.
 
     Note: using the "system" part of the prompt is strongly preferred to increase the resilience against prompt injection attacks, and because not all providers support several system messages.
@@ -312,9 +312,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember0(BaseModel):
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -326,7 +325,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember0(BaseModel):
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Text(BaseModel):
     """Text content part of a prompt. It contains a string of text."""
 
     text: str
@@ -343,9 +342,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -357,48 +355,12 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1Buffer(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1Buffer(BaseModel):
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1Buffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageByteLength(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBufferBuffer(
-    BaseModel
-):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBufferBuffer
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1Buffer
 
     byte_length: float = FieldInfo(alias="byteLength")
 
@@ -421,18 +383,50 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
         __pydantic_extra__: Dict[str, float]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1Image: TypeAlias = Union[
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByteLength(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer
+
+    byte_length: float = FieldInfo(alias="byteLength")
+
+    byte_offset: float = FieldInfo(alias="byteOffset")
+
+    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
+
+    length: float
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> float: ...
+    else:
+        __pydantic_extra__: Dict[str, float]
+
+
+V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImage: TypeAlias = Union[
     str,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageByteLength,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1ImageV1GlobalBuffer,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByteLength,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Image(BaseModel):
     """Image content part of a prompt. It contains an image."""
 
-    image: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1Image
+    image: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImage
     """Image data. Can either be:
 
     - data: a base64-encoded string, a Uint8Array, an ArrayBuffer, or a Buffer
@@ -453,9 +447,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -467,48 +460,12 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1Buffer(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1Buffer(BaseModel):
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1Buffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataByteLength(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBufferBuffer(
-    BaseModel
-):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBufferBuffer
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1Buffer
 
     byte_length: float = FieldInfo(alias="byteLength")
 
@@ -531,18 +488,50 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
         __pydantic_extra__: Dict[str, float]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2Data: TypeAlias = Union[
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteLength(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer
+
+    byte_length: float = FieldInfo(alias="byteLength")
+
+    byte_offset: float = FieldInfo(alias="byteOffset")
+
+    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
+
+    length: float
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> float: ...
+    else:
+        __pydantic_extra__: Dict[str, float]
+
+
+V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileData: TypeAlias = Union[
     str,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataByteLength,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2DataV1GlobalBuffer,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteLength,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2(BaseModel):
+class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1File(BaseModel):
     """File content part of a prompt. It contains a file."""
 
-    data: V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2Data
+    data: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileData
     """File data. Can either be:
 
     - data: a base64-encoded string, a Uint8Array, an ArrayBuffer, or a Buffer
@@ -566,9 +555,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -580,17 +568,17 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1Union
     """
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1UnionMember2,
+V1AutomateEventAIGenerationDataMessageUserContentUnionMember1: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Text,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1Image,
+    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1File,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageUser(BaseModel):
     """A user message. It can contain text or a combination of text and images."""
 
-    content: Union[str, List[V1AutomateEventAIGenerationDataMessageUnionMember1ContentUnionMember1]]
+    content: Union[str, List[V1AutomateEventAIGenerationDataMessageUserContentUnionMember1]]
     """Content of a user message.
 
     It can be a string or an array of text and image parts.
@@ -607,9 +595,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1(BaseModel):
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -621,7 +608,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember1(BaseModel):
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Text(BaseModel):
     """Text content part of a prompt. It contains a string of text."""
 
     text: str
@@ -638,9 +625,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -652,48 +638,12 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1Buffer(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1Buffer(BaseModel):
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1Buffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataByteLength(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBufferBuffer(
-    BaseModel
-):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBufferBuffer
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1Buffer
 
     byte_length: float = FieldInfo(alias="byteLength")
 
@@ -716,18 +666,50 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
         __pydantic_extra__: Dict[str, float]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1Data: TypeAlias = Union[
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataByteLength(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer(BaseModel):
+    byte_length: float = FieldInfo(alias="byteLength")
+
+
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer(BaseModel):
+    buffer: V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer
+
+    byte_length: float = FieldInfo(alias="byteLength")
+
+    byte_offset: float = FieldInfo(alias="byteOffset")
+
+    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
+
+    length: float
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> float: ...
+    else:
+        __pydantic_extra__: Dict[str, float]
+
+
+V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileData: TypeAlias = Union[
     str,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataByteLength,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1DataV1GlobalBuffer,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataByteLength,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1File(BaseModel):
     """File content part of a prompt. It contains a file."""
 
-    data: V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1Data
+    data: V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileData
     """File data. Can either be:
 
     - data: a base64-encoded string, a Uint8Array, an ArrayBuffer, or a Buffer
@@ -751,9 +733,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -765,7 +746,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember2(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Reasoning(BaseModel):
     """Reasoning content part of a prompt. It contains a reasoning."""
 
     text: str
@@ -782,9 +763,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -796,7 +776,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember3(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolCall(BaseModel):
     """Tool call content part of a prompt.
 
     It contains a tool call (usually generated by the AI model).
@@ -831,9 +811,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -845,7 +824,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputText(BaseModel):
     type: Literal["text"]
     """Text tool output that should be directly sent to the API."""
 
@@ -860,9 +839,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -870,7 +848,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputJson(BaseModel):
     type: Literal["json"]
 
     value: Union[
@@ -883,9 +861,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                 str,
                 float,
                 bool,
-                Dict[str, Union[str, float, bool, List[object], object, object]],
+                Dict[str, Union[str, float, bool, List[object], object]],
                 List[Union[str, float, bool, List[object], object, None]],
-                object,
             ],
         ],
         List[Union[str, float, bool, List[object], object, None]],
@@ -906,9 +883,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -916,7 +892,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember2(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputExecutionDenied(BaseModel):
     type: Literal["execution-denied"]
     """Type when the user has denied the execution of the tool call."""
 
@@ -929,9 +905,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -942,7 +917,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Optional reason for the execution denial."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember3(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorText(BaseModel):
     type: Literal["error-text"]
 
     value: str
@@ -956,9 +931,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -966,7 +940,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember4(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorJson(BaseModel):
     type: Literal["error-json"]
 
     value: Union[
@@ -979,9 +953,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                 str,
                 float,
                 bool,
-                Dict[str, Union[str, float, bool, List[object], object, object]],
+                Dict[str, Union[str, float, bool, List[object], object]],
                 List[Union[str, float, bool, List[object], object, None]],
-                object,
             ],
         ],
         List[Union[str, float, bool, List[object], object, None]],
@@ -1002,9 +975,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1012,9 +984,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember0(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueText(BaseModel):
     text: str
     """Text content."""
 
@@ -1029,9 +999,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1039,9 +1008,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember1(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueMedia(BaseModel):
     data: str
 
     media_type: str = FieldInfo(alias="mediaType")
@@ -1050,9 +1017,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Deprecated. Use image-data or file-data instead."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember2(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileData(BaseModel):
     data: str
     """Base-64 encoded media data."""
 
@@ -1073,9 +1038,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1083,9 +1047,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember3(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileURL(BaseModel):
     type: Literal["file-url"]
 
     url: str
@@ -1100,9 +1062,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1110,9 +1071,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember4(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileID(BaseModel):
     file_id: Union[str, Dict[str, str]] = FieldInfo(alias="fileId")
     """ID of the file.
 
@@ -1132,9 +1091,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1142,7 +1100,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember5(
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageData(
     BaseModel
 ):
     data: str
@@ -1163,9 +1121,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1173,9 +1130,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember6(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageURL(BaseModel):
     type: Literal["image-url"]
     """Images that are referenced using a URL."""
 
@@ -1191,9 +1146,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1201,7 +1155,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember7(
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageFileID(
     BaseModel
 ):
     file_id: Union[str, Dict[str, str]] = FieldInfo(alias="fileId")
@@ -1224,9 +1178,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1234,9 +1187,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember8(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueCustom(BaseModel):
     type: Literal["custom"]
     """Custom content part.
 
@@ -1252,9 +1203,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1262,44 +1212,42 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """Provider-specific options."""
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5Value: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember3,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember4,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember5,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember6,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember7,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5ValueUnionMember8,
+V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValue: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueText,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueMedia,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileData,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileURL,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueFileID,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageData,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageURL,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueImageFileID,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValueCustom,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContent(BaseModel):
     type: Literal["content"]
 
-    value: List[
-        V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5Value
-    ]
+    value: List[V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContentValue]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4Output: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember3,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember4,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4OutputUnionMember5,
+V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutput: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputText,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputJson,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputExecutionDenied,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorText,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputErrorJson,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutputContent,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResult(BaseModel):
     """Tool result content part of a prompt.
 
     It contains the result of the tool call with the matching ID.
     """
 
-    output: V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4Output
+    output: V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResultOutput
     """Result of the tool call. This is a JSON-serializable object."""
 
     tool_call_id: str = FieldInfo(alias="toolCallId")
@@ -1319,9 +1267,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1333,7 +1280,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember5(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolApprovalRequest(BaseModel):
     """Tool approval request prompt part."""
 
     approval_id: str = FieldInfo(alias="approvalId")
@@ -1345,23 +1292,23 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1Union
     type: Literal["tool-approval-request"]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember3,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember4,
-    V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1UnionMember5,
+V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Text,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1File,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Reasoning,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolCall,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResult,
+    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolApprovalRequest,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember2(BaseModel):
+class V1AutomateEventAIGenerationDataMessageAssistant(BaseModel):
     """An assistant message.
 
     It can contain text, tool calls, or a combination of text and tool calls.
     """
 
-    content: Union[str, List[V1AutomateEventAIGenerationDataMessageUnionMember2ContentUnionMember1]]
+    content: Union[str, List[V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1]]
     """Content of an assistant message.
 
     It can be a string or an array of text, image, reasoning, redacted reasoning,
@@ -1379,9 +1326,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2(BaseModel):
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1393,7 +1339,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember2(BaseModel):
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputText(BaseModel):
     type: Literal["text"]
     """Text tool output that should be directly sent to the API."""
 
@@ -1408,9 +1354,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1418,7 +1363,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputJson(BaseModel):
     type: Literal["json"]
 
     value: Union[
@@ -1431,9 +1376,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                 str,
                 float,
                 bool,
-                Dict[str, Union[str, float, bool, List[object], object, object]],
+                Dict[str, Union[str, float, bool, List[object], object]],
                 List[Union[str, float, bool, List[object], object, None]],
-                object,
             ],
         ],
         List[Union[str, float, bool, List[object], object, None]],
@@ -1454,9 +1398,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1464,7 +1407,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember2(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputExecutionDenied(BaseModel):
     type: Literal["execution-denied"]
     """Type when the user has denied the execution of the tool call."""
 
@@ -1477,9 +1420,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1490,7 +1432,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Optional reason for the execution denial."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember3(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorText(BaseModel):
     type: Literal["error-text"]
 
     value: str
@@ -1504,9 +1446,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1514,7 +1455,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember4(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorJson(BaseModel):
     type: Literal["error-json"]
 
     value: Union[
@@ -1527,9 +1468,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                 str,
                 float,
                 bool,
-                Dict[str, Union[str, float, bool, List[object], object, object]],
+                Dict[str, Union[str, float, bool, List[object], object]],
                 List[Union[str, float, bool, List[object], object, None]],
-                object,
             ],
         ],
         List[Union[str, float, bool, List[object], object, None]],
@@ -1550,9 +1490,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1560,9 +1499,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember0(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueText(BaseModel):
     text: str
     """Text content."""
 
@@ -1577,9 +1514,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1587,9 +1523,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember1(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueMedia(BaseModel):
     data: str
 
     media_type: str = FieldInfo(alias="mediaType")
@@ -1598,9 +1532,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Deprecated. Use image-data or file-data instead."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember2(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileData(BaseModel):
     data: str
     """Base-64 encoded media data."""
 
@@ -1621,9 +1553,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1631,9 +1562,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember3(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileURL(BaseModel):
     type: Literal["file-url"]
 
     url: str
@@ -1648,9 +1577,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1658,9 +1586,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember4(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileID(BaseModel):
     file_id: Union[str, Dict[str, str]] = FieldInfo(alias="fileId")
     """ID of the file.
 
@@ -1680,9 +1606,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1690,9 +1615,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember5(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageData(BaseModel):
     data: str
     """Base-64 encoded image data."""
 
@@ -1711,9 +1634,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1721,9 +1643,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember6(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageURL(BaseModel):
     type: Literal["image-url"]
     """Images that are referenced using a URL."""
 
@@ -1739,9 +1659,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1749,9 +1668,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember7(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageFileID(BaseModel):
     file_id: Union[str, Dict[str, str]] = FieldInfo(alias="fileId")
     """Image that is referenced using a provider file id.
 
@@ -1772,9 +1689,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1782,9 +1698,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember8(
-    BaseModel
-):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueCustom(BaseModel):
     type: Literal["custom"]
     """Custom content part.
 
@@ -1800,9 +1714,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1810,42 +1723,42 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Outpu
     """Provider-specific options."""
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5Value: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember3,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember4,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember5,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember6,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember7,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5ValueUnionMember8,
+V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValue: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueText,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueMedia,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileData,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileURL,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueFileID,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageData,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageURL,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueImageFileID,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValueCustom,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContent(BaseModel):
     type: Literal["content"]
 
-    value: List[V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5Value]
+    value: List[V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContentValue]
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Output: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember3,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember4,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0OutputUnionMember5,
+V1AutomateEventAIGenerationDataMessageToolContentToolResultOutput: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputText,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputJson,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputExecutionDenied,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorText,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputErrorJson,
+    V1AutomateEventAIGenerationDataMessageToolContentToolResultOutputContent,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolResult(BaseModel):
     """Tool result content part of a prompt.
 
     It contains the result of the tool call with the matching ID.
     """
 
-    output: V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0Output
+    output: V1AutomateEventAIGenerationDataMessageToolContentToolResultOutput
     """Result of the tool call. This is a JSON-serializable object."""
 
     tool_call_id: str = FieldInfo(alias="toolCallId")
@@ -1865,9 +1778,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0(Base
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1879,7 +1791,7 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0(Base
     """
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember1(BaseModel):
+class V1AutomateEventAIGenerationDataMessageToolContentToolApprovalResponse(BaseModel):
     """Tool approval response prompt part."""
 
     approval_id: str = FieldInfo(alias="approvalId")
@@ -1900,16 +1812,16 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember1(Base
     """Optional reason for the approval or denial."""
 
 
-V1AutomateEventAIGenerationDataMessageUnionMember3Content: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember3ContentUnionMember1,
+V1AutomateEventAIGenerationDataMessageToolContent: TypeAlias = Union[
+    V1AutomateEventAIGenerationDataMessageToolContentToolResult,
+    V1AutomateEventAIGenerationDataMessageToolContentToolApprovalResponse,
 ]
 
 
-class V1AutomateEventAIGenerationDataMessageUnionMember3(BaseModel):
+class V1AutomateEventAIGenerationDataMessageTool(BaseModel):
     """A tool message. It contains the result of one or more tool calls."""
 
-    content: List[V1AutomateEventAIGenerationDataMessageUnionMember3Content]
+    content: List[V1AutomateEventAIGenerationDataMessageToolContent]
     """Content of a tool message. It is an array of tool result parts."""
 
     role: Literal["tool"]
@@ -1923,9 +1835,8 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3(BaseModel):
                     str,
                     float,
                     bool,
-                    Dict[str, Union[str, float, bool, List[object], object, object]],
+                    Dict[str, Union[str, float, bool, List[object], object]],
                     List[Union[str, float, bool, List[object], object, None]],
-                    object,
                 ],
             ],
         ]
@@ -1938,10 +1849,10 @@ class V1AutomateEventAIGenerationDataMessageUnionMember3(BaseModel):
 
 
 V1AutomateEventAIGenerationDataMessage: TypeAlias = Union[
-    V1AutomateEventAIGenerationDataMessageUnionMember0,
-    V1AutomateEventAIGenerationDataMessageUnionMember1,
-    V1AutomateEventAIGenerationDataMessageUnionMember2,
-    V1AutomateEventAIGenerationDataMessageUnionMember3,
+    V1AutomateEventAIGenerationDataMessageSystem,
+    V1AutomateEventAIGenerationDataMessageUser,
+    V1AutomateEventAIGenerationDataMessageAssistant,
+    V1AutomateEventAIGenerationDataMessageTool,
 ]
 
 
