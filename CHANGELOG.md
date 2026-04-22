@@ -1,5 +1,35 @@
 # Changelog
 
+## 2.5.0 (2026-04-22)
+
+Full Changelog: [v2.4.0...v2.5.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.4.0...v2.5.0)
+
+### Features
+
+* **api:** api update ([c43bc04](https://github.com/Mozilla-Ocho/tabstack-python/commit/c43bc047af5b2380a7bbe12a4d2a5825f68b7e48))
+* **api:** api update ([2162472](https://github.com/Mozilla-Ocho/tabstack-python/commit/216247282393d0a8d1a4c200a0601766402d3447))
+
+
+### Bug Fixes
+
+* **codegen:** OAS 3.0 compliance + local Spectral lint + Stainless PR check ([cd8e38c](https://github.com/Mozilla-Ocho/tabstack-python/commit/cd8e38c6bda53419e6fc2bdb33cf251b6498727b))
+* **codegen:** reduce Stainless variant-naming and ambiguity warnings ([06f98a5](https://github.com/Mozilla-Ocho/tabstack-python/commit/06f98a5fb555f03d5a467523e5abc6b7e2cad45d))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([0aff4b6](https://github.com/Mozilla-Ocho/tabstack-python/commit/0aff4b62652bf495f02b9b679f11886dc67937b0))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([318ffd3](https://github.com/Mozilla-Ocho/tabstack-python/commit/318ffd399a88d629031487c9652b27850fbeaa16))
+
+
+### Documentation
+
+* **research:** correct default mode from balanced to fast ([d58bd1b](https://github.com/Mozilla-Ocho/tabstack-python/commit/d58bd1b115a88a89bfdb6cc86a9fc3c53f644764))
+
 ## 2.4.0 (2026-04-10)
 
 Full Changelog: [v2.3.0...v2.4.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.3.0...v2.4.0)
