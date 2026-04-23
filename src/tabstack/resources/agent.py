@@ -234,7 +234,7 @@ class AgentResource(SyncAPIResource):
         - Fact-checking and verification tasks
 
         Args:
-          query: The research query or question to answer
+          query: The research query or question to answer. Maximum 10,000 characters.
 
           fetch_timeout: Timeout in seconds for fetching web pages
 
@@ -482,7 +482,7 @@ class AsyncAgentResource(AsyncAPIResource):
         - Fact-checking and verification tasks
 
         Args:
-          query: The research query or question to answer
+          query: The research query or question to answer. Maximum 10,000 characters.
 
           fetch_timeout: Timeout in seconds for fetching web pages
 

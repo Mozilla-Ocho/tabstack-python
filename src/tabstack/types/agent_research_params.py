@@ -9,7 +9,7 @@ __all__ = ["AgentResearchParams"]
 
 class AgentResearchParams(TypedDict, total=False):
     query: Required[str]
-    """The research query or question to answer"""
+    """The research query or question to answer. Maximum 10,000 characters."""
 
     fetch_timeout: int
     """Timeout in seconds for fetching web pages"""
