@@ -15,7 +15,7 @@ class AgentResearchParams(TypedDict, total=False):
     """Timeout in seconds for fetching web pages"""
 
     mode: Literal["fast", "balanced"]
-    """Research mode: fast (quick answers), balanced (standard research, default)"""
+    """Research mode: fast (quick answers, default), balanced (standard research)"""
 
     nocache: bool
     """Skip cache and force fresh research"""

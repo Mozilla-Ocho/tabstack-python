@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Any, Iterable, cast
 from typing_extensions import Literal
 
 import httpx
@@ -135,7 +135,7 @@ class AgentResource(SyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=AutomateEvent,
+            cast_to=cast(Any, AutomateEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=Stream[AutomateEvent],
         )
@@ -223,8 +223,8 @@ class AgentResource(SyncAPIResource):
 
         **Research Modes:**
 
-        - `fast` - Quick answers with minimal web searches
-        - `balanced` - Standard research with multiple iterations (default)
+        - `fast` - Quick answers with minimal web searches (default)
+        - `balanced` - Standard research with multiple iterations
 
         **Use Cases:**
 
@@ -238,7 +238,7 @@ class AgentResource(SyncAPIResource):
 
           fetch_timeout: Timeout in seconds for fetching web pages
 
-          mode: Research mode: fast (quick answers), balanced (standard research, default)
+          mode: Research mode: fast (quick answers, default), balanced (standard research)
 
           nocache: Skip cache and force fresh research
 
@@ -269,7 +269,7 @@ class AgentResource(SyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=ResearchEvent,
+            cast_to=cast(Any, ResearchEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=Stream[ResearchEvent],
         )
@@ -383,7 +383,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=AutomateEvent,
+            cast_to=cast(Any, AutomateEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=AsyncStream[AutomateEvent],
         )
@@ -471,8 +471,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
         **Research Modes:**
 
-        - `fast` - Quick answers with minimal web searches
-        - `balanced` - Standard research with multiple iterations (default)
+        - `fast` - Quick answers with minimal web searches (default)
+        - `balanced` - Standard research with multiple iterations
 
         **Use Cases:**
 
@@ -486,7 +486,7 @@ class AsyncAgentResource(AsyncAPIResource):
 
           fetch_timeout: Timeout in seconds for fetching web pages
 
-          mode: Research mode: fast (quick answers), balanced (standard research, default)
+          mode: Research mode: fast (quick answers, default), balanced (standard research)
 
           nocache: Skip cache and force fresh research
 
@@ -517,7 +517,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 synthesize_event_and_data=True,
             ),
-            cast_to=ResearchEvent,
+            cast_to=cast(Any, ResearchEvent),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=AsyncStream[ResearchEvent],
         )
