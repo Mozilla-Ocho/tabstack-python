@@ -117,6 +117,14 @@ __all__ = [
     "V1AutomateEventCdpEndpointConnectedData",
     "V1AutomateEventCdpEndpointCycle",
     "V1AutomateEventCdpEndpointCycleData",
+    "V1AutomateEventComplete",
+    "V1AutomateEventCompleteData",
+    "V1AutomateEventCompleteDataStats",
+    "V1AutomateEventCompleteDataError",
+    "V1AutomateEventDone",
+    "V1AutomateEventError",
+    "V1AutomateEventErrorData",
+    "V1AutomateEventErrorDataError",
     "V1AutomateEventInteractiveFormDataError",
     "V1AutomateEventInteractiveFormDataErrorData",
     "V1AutomateEventInteractiveFormDataErrorDataField",
@@ -2108,6 +2116,111 @@ class V1AutomateEventCdpEndpointCycle(BaseModel):
     event: Literal["cdp:endpoint_cycle"]
 
 
+class V1AutomateEventCompleteDataStats(BaseModel):
+    """Execution statistics"""
+
+    actions: float
+
+    duration_ms: float = FieldInfo(alias="durationMs")
+
+    end_time: float = FieldInfo(alias="endTime")
+
+    iterations: float
+
+    start_time: float = FieldInfo(alias="startTime")
+
+
+class V1AutomateEventCompleteDataError(BaseModel):
+    """Structured error information for failed tasks"""
+
+    code: Literal["TASK_ABORTED", "MAX_ITERATIONS", "MAX_ERRORS", "TASK_FAILED"]
+    """Error codes for task failures"""
+
+    message: str
+    """Human-readable error message"""
+
+
+class V1AutomateEventCompleteData(BaseModel):
+    """Payload for the `complete` stream event.
+
+    Structurally identical to TaskExecutionResult from webAgent.ts — the `complete` event's data is the agent's final TaskExecutionResult, stringified onto the SSE stream.
+    """
+
+    final_answer: Optional[str] = FieldInfo(alias="finalAnswer", default=None)
+    """Final answer or result from the agent"""
+
+    stats: V1AutomateEventCompleteDataStats
+    """Execution statistics"""
+
+    success: bool
+    """Whether the task completed successfully"""
+
+    error: Optional[V1AutomateEventCompleteDataError] = None
+    """Structured error information for failed tasks"""
+
+
+class V1AutomateEventComplete(BaseModel):
+    """Envelope for the "complete" event from /v1/automate."""
+
+    data: V1AutomateEventCompleteData
+    """Payload for the `complete` stream event.
+
+    Structurally identical to TaskExecutionResult from webAgent.ts — the `complete`
+    event's data is the agent's final TaskExecutionResult, stringified onto the SSE
+    stream.
+    """
+
+    event: Literal["complete"]
+
+
+class V1AutomateEventDone(BaseModel):
+    """Envelope for the "done" event from /v1/automate."""
+
+    data: Dict[str, object]
+    """Payload for the `done` stream terminator event.
+
+    Empty today; reserved for future metadata.
+    """
+
+    event: Literal["done"]
+
+
+class V1AutomateEventErrorDataError(BaseModel):
+    code: str
+
+    message: str
+
+    timestamp: str
+    """ISO-8601 timestamp"""
+
+
+class V1AutomateEventErrorData(BaseModel):
+    """Payload for the top-level `error` stream event.
+
+    Emitted when an uncaught error escapes the task runner. Mirrors `ErrorResponse` from the server package's `taskRunner.ts` — kept structurally aligned so schema and runtime stay consistent. Distinct from agent-level error events like `ai:generation:error` and `task:validation_error`, which are emitted through the normal event emitter during the agent loop.
+    """
+
+    error: V1AutomateEventErrorDataError
+
+    success: Literal[False]
+
+
+class V1AutomateEventError(BaseModel):
+    """Envelope for the "error" event from /v1/automate."""
+
+    data: V1AutomateEventErrorData
+    """Payload for the top-level `error` stream event.
+
+    Emitted when an uncaught error escapes the task runner. Mirrors `ErrorResponse`
+    from the server package's `taskRunner.ts` — kept structurally aligned so schema
+    and runtime stay consistent. Distinct from agent-level error events like
+    `ai:generation:error` and `task:validation_error`, which are emitted through the
+    normal event emitter during the agent loop.
+    """
+
+    event: Literal["error"]
+
+
 class V1AutomateEventInteractiveFormDataErrorDataField(BaseModel):
     """A single form field the agent needs data for."""
 
@@ -2504,6 +2617,9 @@ AutomateEvent: TypeAlias = Annotated[
         V1AutomateEventBrowserScreenshotCapturedImage,
         V1AutomateEventCdpEndpointConnected,
         V1AutomateEventCdpEndpointCycle,
+        V1AutomateEventComplete,
+        V1AutomateEventDone,
+        V1AutomateEventError,
         V1AutomateEventInteractiveFormDataError,
         V1AutomateEventInteractiveFormDataRequest,
         V1AutomateEventSystemDebugCompression,

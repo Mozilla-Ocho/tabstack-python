@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.6.0 (2026-04-24)
+
+Full Changelog: [v2.5.0...v2.6.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.5.0...v2.6.0)
+
+### Features
+
+* **api:** api update ([6b2a7ab](https://github.com/Mozilla-Ocho/tabstack-python/commit/6b2a7ab3c60534f7347f7e5da4a9dc8c4fa6047e))
+* **codegen:** consume Pilo's AutomateStreamEvent as the /automate SSE root ([3615e2d](https://github.com/Mozilla-Ocho/tabstack-python/commit/3615e2dbc4f934ae5b9763b110affc39d04bdce8))
+
 ## 2.5.0 (2026-04-22)
 
 Full Changelog: [v2.4.0...v2.5.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.4.0...v2.5.0)
