@@ -8,7 +8,7 @@ import httpx
 
 from ..types import generate_json_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import is_given, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -17,6 +17,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._constants import DEFAULT_TIMEOUT
 from .._base_client import make_request_options
 from ..types.generate_json_response import GenerateJsonResponse
 
@@ -86,6 +87,8 @@ class GenerateResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return self._post(
             "/generate/json",
             body=maybe_transform(
@@ -169,6 +172,8 @@ class AsyncGenerateResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return await self._post(
             "/generate/json",
             body=await async_maybe_transform(

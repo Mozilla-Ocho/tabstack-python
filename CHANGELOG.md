@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.7.0 (2026-05-03)
+
+Full Changelog: [v2.6.0...v2.7.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.0...v2.7.0)
+
+### Features
+
+* **api:** add endpoint specfic timeouts ([15bcc6b](https://github.com/Mozilla-Ocho/tabstack-python/commit/15bcc6b29cf0e64fa5bf544f099471dac26d9cea))
+* **automate:** emit task:trace_context SSE event with trace ID ([20d3ff3](https://github.com/Mozilla-Ocho/tabstack-python/commit/20d3ff3b4c5e8d7d287ef9807ecbc33c522bed37))
+* support setting headers via env ([4699481](https://github.com/Mozilla-Ocho/tabstack-python/commit/4699481aee8341952e2cae287bc0ff0fc629a292))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([a10a1ed](https://github.com/Mozilla-Ocho/tabstack-python/commit/a10a1ed1298179229f69dc3c12b899f6242ed1b4))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([c909f52](https://github.com/Mozilla-Ocho/tabstack-python/commit/c909f52bf36e746213c2cb8b316e6eb1909a2e80))
+
 ## 2.6.0 (2026-04-24)
 
 Full Changelog: [v2.5.0...v2.6.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.5.0...v2.6.0)

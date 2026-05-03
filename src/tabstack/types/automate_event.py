@@ -147,6 +147,8 @@ __all__ = [
     "V1AutomateEventTaskSetupData",
     "V1AutomateEventTaskStarted",
     "V1AutomateEventTaskStartedData",
+    "V1AutomateEventTaskTraceContext",
+    "V1AutomateEventTaskTraceContextData",
     "V1AutomateEventTaskValidated",
     "V1AutomateEventTaskValidatedData",
     "V1AutomateEventTaskValidationError",
@@ -2550,6 +2552,30 @@ class V1AutomateEventTaskStarted(BaseModel):
     event: Literal["task:started"]
 
 
+class V1AutomateEventTaskTraceContextData(BaseModel):
+    """Payload for the task:trace_context event.
+
+    Carries the OpenTelemetry trace ID for this /v1/automate request so consumers can deep-link to distributed-tracing UIs (e.g. Cloud Trace, Cloud Logging) for the run.
+    """
+
+    trace_id: str = FieldInfo(alias="traceId")
+    """W3C trace ID — 32-character lowercase hexadecimal string."""
+
+
+class V1AutomateEventTaskTraceContext(BaseModel):
+    """Envelope for the "task:trace_context" event from /v1/automate."""
+
+    data: V1AutomateEventTaskTraceContextData
+    """Payload for the task:trace_context event.
+
+    Carries the OpenTelemetry trace ID for this /v1/automate request so consumers
+    can deep-link to distributed-tracing UIs (e.g. Cloud Trace, Cloud Logging) for
+    the run.
+    """
+
+    event: Literal["task:trace_context"]
+
+
 class V1AutomateEventTaskValidatedData(BaseModel):
     """Event data for task validation"""
 
@@ -2630,6 +2656,7 @@ AutomateEvent: TypeAlias = Annotated[
         V1AutomateEventTaskMetricsIncremental,
         V1AutomateEventTaskSetup,
         V1AutomateEventTaskStarted,
+        V1AutomateEventTaskTraceContext,
         V1AutomateEventTaskValidated,
         V1AutomateEventTaskValidationError,
     ],
