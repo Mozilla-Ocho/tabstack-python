@@ -8,6 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._utils import PropertyInfo
 from .._models import BaseModel
+from .v1_global_buffer import V1GlobalBuffer
 
 __all__ = [
     "AutomateEvent",
@@ -38,15 +39,11 @@ __all__ = [
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1Buffer",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByteLength",
-    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1File",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileData",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1Buffer",
     "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteLength",
-    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer",
     "V1AutomateEventAIGenerationDataMessageAssistant",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Text",
@@ -55,8 +52,6 @@ __all__ = [
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1Buffer",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataByteLength",
-    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer",
-    "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1Reasoning",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolCall",
     "V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1ToolResult",
@@ -397,39 +392,11 @@ class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByt
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBufferBuffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
 V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImage: TypeAlias = Union[
     str,
     V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageUnionMember1,
     V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageByteLength,
-    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1ImageImageV1GlobalBuffer,
+    V1GlobalBuffer,
 ]
 
 
@@ -502,39 +469,11 @@ class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteL
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBufferBuffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
 V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileData: TypeAlias = Union[
     str,
     V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataUnionMember1,
     V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataByteLength,
-    V1AutomateEventAIGenerationDataMessageUserContentUnionMember1FileDataV1GlobalBuffer,
+    V1GlobalBuffer,
 ]
 
 
@@ -680,39 +619,11 @@ class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileData
     byte_length: float = FieldInfo(alias="byteLength")
 
 
-class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer(BaseModel):
-    byte_length: float = FieldInfo(alias="byteLength")
-
-
-class V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer(BaseModel):
-    buffer: V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBufferBuffer
-
-    byte_length: float = FieldInfo(alias="byteLength")
-
-    byte_offset: float = FieldInfo(alias="byteOffset")
-
-    bytes_per_element: float = FieldInfo(alias="BYTES_PER_ELEMENT")
-
-    length: float
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, float] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> float: ...
-    else:
-        __pydantic_extra__: Dict[str, float]
-
-
 V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileData: TypeAlias = Union[
     str,
     V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataUnionMember1,
     V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataByteLength,
-    V1AutomateEventAIGenerationDataMessageAssistantContentUnionMember1FileDataV1GlobalBuffer,
+    V1GlobalBuffer,
 ]
 
 

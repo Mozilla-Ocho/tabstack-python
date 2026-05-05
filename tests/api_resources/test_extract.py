@@ -9,7 +9,10 @@ import pytest
 
 from tabstack import Tabstack, AsyncTabstack
 from tests.utils import assert_matches_type
-from tabstack.types import ExtractJsonResponse, ExtractMarkdownResponse
+from tabstack.types import (
+    ExtractJsonResponse,
+    ExtractMarkdownResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

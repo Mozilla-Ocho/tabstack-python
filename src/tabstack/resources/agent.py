@@ -24,6 +24,7 @@ from .._base_client import make_request_options
 from ..types.automate_event import AutomateEvent
 from ..types.research_event import ResearchEvent
 from ..types.agent_automate_input_response import AgentAutomateInputResponse
+from ..types.shared_params.geotarget_geo_target import GeotargetGeoTarget
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -53,7 +54,7 @@ class AgentResource(SyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geo_target: agent_automate_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
@@ -305,7 +306,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geo_target: agent_automate_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,

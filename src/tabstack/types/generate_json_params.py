@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["GenerateJsonParams", "GeoTarget"]
+from .shared_params.geotarget_geo_target import GeotargetGeoTarget
+
+__all__ = ["GenerateJsonParams"]
 
 
 class GenerateJsonParams(TypedDict, total=False):
@@ -25,18 +27,8 @@ class GenerateJsonParams(TypedDict, total=False):
     JS-heavy sites (15-60s).
     """
 
-    geo_target: GeoTarget
+    geo_target: GeotargetGeoTarget
     """Optional geotargeting parameters for proxy requests"""
 
     nocache: bool
     """Bypass cache and force fresh data retrieval"""
-
-
-class GeoTarget(TypedDict, total=False):
-    """Optional geotargeting parameters for proxy requests"""
-
-    country: str
-    """
-    Country code using ISO 3166-1 alpha-2 standard (2 letters, e.g., "US", "GB",
-    "JP"). See: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    """

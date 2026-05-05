@@ -5,8 +5,9 @@ from __future__ import annotations
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .shared_params.geotarget_geo_target import GeotargetGeoTarget
 
-__all__ = ["AgentAutomateParams", "GeoTarget"]
+__all__ = ["AgentAutomateParams"]
 
 
 class AgentAutomateParams(TypedDict, total=False):
@@ -16,7 +17,7 @@ class AgentAutomateParams(TypedDict, total=False):
     data: object
     """JSON data to provide context for form filling or complex tasks"""
 
-    geo_target: GeoTarget
+    geo_target: GeotargetGeoTarget
     """Optional geotargeting parameters for proxy requests"""
 
     guardrails: str
@@ -33,13 +34,3 @@ class AgentAutomateParams(TypedDict, total=False):
 
     url: str
     """Starting URL for the task"""
-
-
-class GeoTarget(TypedDict, total=False):
-    """Optional geotargeting parameters for proxy requests"""
-
-    country: str
-    """
-    Country code using ISO 3166-1 alpha-2 standard (2 letters, e.g., "US", "GB",
-    "JP"). See: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    """

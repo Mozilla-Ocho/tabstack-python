@@ -7,6 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._utils import PropertyInfo
 from .._models import BaseModel
+from .v1_research_question_assessment import V1ResearchQuestionAssessment
 
 __all__ = [
     "ResearchEvent",
@@ -20,7 +21,6 @@ __all__ = [
     "V1ResearchEventCompleteDataMetadata",
     "V1ResearchEventCompleteDataMetadataCitedPage",
     "V1ResearchEventCompleteDataMetadataGapEvaluation",
-    "V1ResearchEventCompleteDataMetadataGapEvaluationQuestionAssessment",
     "V1ResearchEventCompleteDataMetadataJudgment",
     "V1ResearchEventCompleteDataMetadataMetrics",
     "V1ResearchEventCompleteDataMetadataMetricsPhases",
@@ -33,7 +33,6 @@ __all__ = [
     "V1ResearchEventErrorDataError",
     "V1ResearchEventEvaluatingEnd",
     "V1ResearchEventEvaluatingEndData",
-    "V1ResearchEventEvaluatingEndDataQuestionAssessment",
     "V1ResearchEventEvaluatingStart",
     "V1ResearchEventEvaluatingStartData",
     "V1ResearchEventFollowingEnd",
@@ -170,22 +169,6 @@ class V1ResearchEventCompleteDataMetadataCitedPage(BaseModel):
     """URL source tracking - where a URL came from"""
 
 
-class V1ResearchEventCompleteDataMetadataGapEvaluationQuestionAssessment(BaseModel):
-    """Assessment of a single research question"""
-
-    findings: str
-    """What we learned (if answered/partial) or what's missing (if unanswered)"""
-
-    question: str
-    """The research question being assessed"""
-
-    status: Literal["answered", "partial", "unanswered"]
-    """
-    Status: answered (clear info), partial (some info, gaps remain), unanswered (no
-    relevant info)
-    """
-
-
 class V1ResearchEventCompleteDataMetadataGapEvaluation(BaseModel):
     """Gap evaluation results from research strategist"""
 
@@ -195,9 +178,7 @@ class V1ResearchEventCompleteDataMetadataGapEvaluation(BaseModel):
     needed?
     """
 
-    question_assessments: List[V1ResearchEventCompleteDataMetadataGapEvaluationQuestionAssessment] = FieldInfo(
-        alias="questionAssessments"
-    )
+    question_assessments: List[V1ResearchQuestionAssessment] = FieldInfo(alias="questionAssessments")
     """Assessment of each research question's status and findings"""
 
     research_coverage: Literal["Light", "Moderate", "Solid", "Comprehensive"] = FieldInfo(alias="researchCoverage")
@@ -456,22 +437,6 @@ class V1ResearchEventError(BaseModel):
     event: Literal["error"]
 
 
-class V1ResearchEventEvaluatingEndDataQuestionAssessment(BaseModel):
-    """Assessment of a single research question"""
-
-    findings: str
-    """What we learned (if answered/partial) or what's missing (if unanswered)"""
-
-    question: str
-    """The research question being assessed"""
-
-    status: Literal["answered", "partial", "unanswered"]
-    """
-    Status: answered (clear info), partial (some info, gaps remain), unanswered (no
-    relevant info)
-    """
-
-
 class V1ResearchEventEvaluatingEndData(BaseModel):
     coverage: Literal["Light", "Moderate", "Solid", "Comprehensive"]
 
@@ -483,9 +448,7 @@ class V1ResearchEventEvaluatingEndData(BaseModel):
 
     next_queries: List[str] = FieldInfo(alias="nextQueries")
 
-    question_assessments: List[V1ResearchEventEvaluatingEndDataQuestionAssessment] = FieldInfo(
-        alias="questionAssessments"
-    )
+    question_assessments: List[V1ResearchQuestionAssessment] = FieldInfo(alias="questionAssessments")
 
     should_continue: bool = FieldInfo(alias="shouldContinue")
 
