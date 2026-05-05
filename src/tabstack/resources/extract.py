@@ -8,7 +8,7 @@ import httpx
 
 from ..types import extract_json_params, extract_markdown_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import is_given, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -17,9 +17,11 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._constants import DEFAULT_TIMEOUT
 from .._base_client import make_request_options
 from ..types.extract_json_response import ExtractJsonResponse
 from ..types.extract_markdown_response import ExtractMarkdownResponse
+from ..types.shared_params.geotarget_geo_target import GeotargetGeoTarget
 
 __all__ = ["ExtractResource", "AsyncExtractResource"]
 
@@ -50,7 +52,7 @@ class ExtractResource(SyncAPIResource):
         json_schema: object,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: extract_json_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -83,6 +85,8 @@ class ExtractResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return self._post(
             "/extract/json",
             body=maybe_transform(
@@ -106,7 +110,7 @@ class ExtractResource(SyncAPIResource):
         *,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: extract_markdown_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -142,6 +146,8 @@ class ExtractResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 180
         return self._post(
             "/extract/markdown",
             body=maybe_transform(
@@ -187,7 +193,7 @@ class AsyncExtractResource(AsyncAPIResource):
         json_schema: object,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: extract_json_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -220,6 +226,8 @@ class AsyncExtractResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return await self._post(
             "/extract/json",
             body=await async_maybe_transform(
@@ -243,7 +251,7 @@ class AsyncExtractResource(AsyncAPIResource):
         *,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: extract_markdown_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -279,6 +287,8 @@ class AsyncExtractResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 180
         return await self._post(
             "/extract/markdown",
             body=await async_maybe_transform(

@@ -9,7 +9,7 @@ import httpx
 
 from ..types import agent_automate_params, agent_research_params, agent_automate_input_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._utils import is_given, path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -18,11 +18,13 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._constants import DEFAULT_TIMEOUT
 from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
 from ..types.automate_event import AutomateEvent
 from ..types.research_event import ResearchEvent
 from ..types.agent_automate_input_response import AgentAutomateInputResponse
+from ..types.shared_params.geotarget_geo_target import GeotargetGeoTarget
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -52,7 +54,7 @@ class AgentResource(SyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geo_target: agent_automate_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
@@ -112,6 +114,8 @@ class AgentResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 600
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/automate",
@@ -250,6 +254,8 @@ class AgentResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 600
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/research",
@@ -300,7 +306,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         task: str,
         data: object | Omit = omit,
-        geo_target: agent_automate_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         guardrails: str | Omit = omit,
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
@@ -360,6 +366,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 600
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/automate",
@@ -498,6 +506,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 600
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/research",
