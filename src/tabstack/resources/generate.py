@@ -20,6 +20,7 @@ from .._response import (
 from .._constants import DEFAULT_TIMEOUT
 from .._base_client import make_request_options
 from ..types.generate_json_response import GenerateJsonResponse
+from ..types.shared_params.geotarget_geo_target import GeotargetGeoTarget
 
 __all__ = ["GenerateResource", "AsyncGenerateResource"]
 
@@ -51,7 +52,7 @@ class GenerateResource(SyncAPIResource):
         json_schema: object,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: generate_json_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,7 +137,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         json_schema: object,
         url: str,
         effort: Literal["min", "standard", "max"] | Omit = omit,
-        geo_target: generate_json_params.GeoTarget | Omit = omit,
+        geo_target: GeotargetGeoTarget | Omit = omit,
         nocache: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

@@ -1,9 +1,21 @@
+# Shared Types
+
+```python
+from tabstack.types import GeotargetGeoTarget
+```
+
 # Agent
 
 Types:
 
 ```python
-from tabstack.types import AutomateEvent, ResearchEvent, AgentAutomateInputResponse
+from tabstack.types import (
+    AutomateEvent,
+    ResearchEvent,
+    V1GlobalBuffer,
+    V1ResearchQuestionAssessment,
+    AgentAutomateInputResponse,
+)
 ```
 
 Methods:
