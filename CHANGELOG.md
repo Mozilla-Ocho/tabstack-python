@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.7.0 (2026-05-18)
+
+Full Changelog: [v2.6.1...v2.7.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.1...v2.7.0)
+
+### Features
+
+* **api:** api update ([0dc3df4](https://github.com/Mozilla-Ocho/tabstack-python/commit/0dc3df4c3cf8cdc8834819b5e9629d67073ec6fd))
+* **internal/types:** support eagerly validating pydantic iterators ([55833b9](https://github.com/Mozilla-Ocho/tabstack-python/commit/55833b9e36f0c02c999084a70238ab60eca3653f))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([0cf99e5](https://github.com/Mozilla-Ocho/tabstack-python/commit/0cf99e5fe29eb7b3cdc9fa34f5a1ff1bbebf53bb))
+
 ## 2.6.1 (2026-05-05)
 
 Full Changelog: [v2.6.0...v2.6.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.0...v2.6.1)
