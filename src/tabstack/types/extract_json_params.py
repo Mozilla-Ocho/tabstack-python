@@ -11,7 +11,11 @@ __all__ = ["ExtractJsonParams"]
 
 class ExtractJsonParams(TypedDict, total=False):
     json_schema: Required[object]
-    """JSON schema definition that describes the structure of data to extract."""
+    """JSON schema definition that describes the structure of data to extract.
+
+    If the schema includes a "page_title" or "favicon" property, those fields are
+    automatically filled from page metadata when the AI leaves them empty.
+    """
 
     url: Required[str]
     """URL to fetch and extract data from"""
