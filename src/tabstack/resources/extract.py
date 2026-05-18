@@ -65,7 +65,9 @@ class ExtractResource(SyncAPIResource):
         Fetches a URL and extracts structured data according to a provided JSON schema
 
         Args:
-          json_schema: JSON schema definition that describes the structure of data to extract.
+          json_schema: JSON schema definition that describes the structure of data to extract. If the
+              schema includes a "page_title" or "favicon" property, those fields are
+              automatically filled from page metadata when the AI leaves them empty.
 
           url: URL to fetch and extract data from
 
@@ -206,7 +208,9 @@ class AsyncExtractResource(AsyncAPIResource):
         Fetches a URL and extracts structured data according to a provided JSON schema
 
         Args:
-          json_schema: JSON schema definition that describes the structure of data to extract.
+          json_schema: JSON schema definition that describes the structure of data to extract. If the
+              schema includes a "page_title" or "favicon" property, those fields are
+              automatically filled from page metadata when the AI leaves them empty.
 
           url: URL to fetch and extract data from
 
