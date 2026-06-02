@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.geotarget_geo_target import GeotargetGeoTarget
 
@@ -31,6 +32,22 @@ class AgentAutomateParams(TypedDict, total=False):
 
     max_validation_attempts: Annotated[int, PropertyInfo(alias="maxValidationAttempts")]
     """Maximum validation attempts"""
+
+    trusted_hostnames: SequenceNotStr[str]
+    """
+    TrustedHostnames lists hostnames where the action firewall is bypassed for fills
+    and submissions. WARNING: on listed hosts, prompt injection from page content
+    can drive the agent to fill and submit any field, including personal and
+    credential data. Use only for sites you fully trust to receive your data.
+    """
+
+    unsafe_mode: bool
+    """
+    UnsafeMode disables the action firewall entirely. WARNING: prompt injection from
+    page content can then cause the agent to submit your data, including
+    credentials, personal information, and conversation context, to
+    attacker-controlled forms. Only enable for trusted, controlled environments.
+    """
 
     url: str
     """Starting URL for the task"""

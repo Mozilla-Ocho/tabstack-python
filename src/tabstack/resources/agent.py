@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import agent_automate_params, agent_research_params, agent_automate_input_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import is_given, path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -59,6 +59,8 @@ class AgentResource(SyncAPIResource):
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
+        trusted_hostnames: SequenceNotStr[str] | Omit = omit,
+        unsafe_mode: bool | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -104,6 +106,16 @@ class AgentResource(SyncAPIResource):
 
           max_validation_attempts: Maximum validation attempts
 
+          trusted_hostnames: TrustedHostnames lists hostnames where the action firewall is bypassed for fills
+              and submissions. WARNING: on listed hosts, prompt injection from page content
+              can drive the agent to fill and submit any field, including personal and
+              credential data. Use only for sites you fully trust to receive your data.
+
+          unsafe_mode: UnsafeMode disables the action firewall entirely. WARNING: prompt injection from
+              page content can then cause the agent to submit your data, including
+              credentials, personal information, and conversation context, to
+              attacker-controlled forms. Only enable for trusted, controlled environments.
+
           url: Starting URL for the task
 
           extra_headers: Send extra headers
@@ -128,6 +140,8 @@ class AgentResource(SyncAPIResource):
                     "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
+                    "trusted_hostnames": trusted_hostnames,
+                    "unsafe_mode": unsafe_mode,
                     "url": url,
                 },
                 agent_automate_params.AgentAutomateParams,
@@ -311,6 +325,8 @@ class AsyncAgentResource(AsyncAPIResource):
         interactive: bool | Omit = omit,
         max_iterations: int | Omit = omit,
         max_validation_attempts: int | Omit = omit,
+        trusted_hostnames: SequenceNotStr[str] | Omit = omit,
+        unsafe_mode: bool | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -356,6 +372,16 @@ class AsyncAgentResource(AsyncAPIResource):
 
           max_validation_attempts: Maximum validation attempts
 
+          trusted_hostnames: TrustedHostnames lists hostnames where the action firewall is bypassed for fills
+              and submissions. WARNING: on listed hosts, prompt injection from page content
+              can drive the agent to fill and submit any field, including personal and
+              credential data. Use only for sites you fully trust to receive your data.
+
+          unsafe_mode: UnsafeMode disables the action firewall entirely. WARNING: prompt injection from
+              page content can then cause the agent to submit your data, including
+              credentials, personal information, and conversation context, to
+              attacker-controlled forms. Only enable for trusted, controlled environments.
+
           url: Starting URL for the task
 
           extra_headers: Send extra headers
@@ -380,6 +406,8 @@ class AsyncAgentResource(AsyncAPIResource):
                     "interactive": interactive,
                     "max_iterations": max_iterations,
                     "max_validation_attempts": max_validation_attempts,
+                    "trusted_hostnames": trusted_hostnames,
+                    "unsafe_mode": unsafe_mode,
                     "url": url,
                 },
                 agent_automate_params.AgentAutomateParams,
