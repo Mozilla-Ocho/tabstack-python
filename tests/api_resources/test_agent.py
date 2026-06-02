@@ -38,6 +38,8 @@ class TestAgent:
             interactive=False,
             max_iterations=50,
             max_validation_attempts=3,
+            trusted_hostnames=["string"],
+            unsafe_mode=False,
             url="https://github.com/trending",
         )
         agent_stream.response.close()
@@ -193,6 +195,8 @@ class TestAsyncAgent:
             interactive=False,
             max_iterations=50,
             max_validation_attempts=3,
+            trusted_hostnames=["string"],
+            unsafe_mode=False,
             url="https://github.com/trending",
         )
         await agent_stream.response.aclose()
