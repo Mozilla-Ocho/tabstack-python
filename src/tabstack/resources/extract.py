@@ -111,6 +111,7 @@ class ExtractResource(SyncAPIResource):
         self,
         *,
         url: str,
+        content: Literal["main", "full"] | Omit = omit,
         effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
@@ -128,6 +129,9 @@ class ExtractResource(SyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          content: Content scope. "main" (default) returns the main article content; "full" returns
+              the whole page, including navigation, footer, and links.
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
               fallback (1-5s). "standard": balanced with enhanced reliability (default,
@@ -155,6 +159,7 @@ class ExtractResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "content": content,
                     "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,
@@ -254,6 +259,7 @@ class AsyncExtractResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        content: Literal["main", "full"] | Omit = omit,
         effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
@@ -271,6 +277,9 @@ class AsyncExtractResource(AsyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          content: Content scope. "main" (default) returns the main article content; "full" returns
+              the whole page, including navigation, footer, and links.
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
               fallback (1-5s). "standard": balanced with enhanced reliability (default,
@@ -298,6 +307,7 @@ class AsyncExtractResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "content": content,
                     "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,
