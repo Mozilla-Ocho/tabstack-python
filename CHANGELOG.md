@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.7.0 (2026-07-17)
+
+Full Changelog: [v2.6.1...v2.7.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.1...v2.7.0)
+
+### Features
+
+* **api:** api update ([0dc3df4](https://github.com/Mozilla-Ocho/tabstack-python/commit/0dc3df4c3cf8cdc8834819b5e9629d67073ec6fd))
+* **automate:** expose trusted_hostnames and unsafe_mode (TAB-980) ([3cf3f64](https://github.com/Mozilla-Ocho/tabstack-python/commit/3cf3f644db32987184a153c4d29b3ad550a0e3ba))
+* **internal/types:** support eagerly validating pydantic iterators ([55833b9](https://github.com/Mozilla-Ocho/tabstack-python/commit/55833b9e36f0c02c999084a70238ab60eca3653f))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([56175ff](https://github.com/Mozilla-Ocho/tabstack-python/commit/56175ff2b3a6ef86257cc80750702fc7172bf587))
+* TAB-991 Add content (main/full) param to /extract/markdown ([e988aeb](https://github.com/Mozilla-Ocho/tabstack-python/commit/e988aebb18412dfadc4d751afc5a8baa91e34ffc))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([0cf99e5](https://github.com/Mozilla-Ocho/tabstack-python/commit/0cf99e5fe29eb7b3cdc9fa34f5a1ff1bbebf53bb))
+* **internal:** resolve build failures ([ff09b2f](https://github.com/Mozilla-Ocho/tabstack-python/commit/ff09b2fb56e559ef95adc8e59afc33021d345ee1))
+
+
+### Documentation
+
+* **generate:** remove apostrophe from instructions example ([29558a2](https://github.com/Mozilla-Ocho/tabstack-python/commit/29558a28a311595bd21a882327555286e6793ded))
+
 ## 2.6.1 (2026-05-05)
 
 Full Changelog: [v2.6.0...v2.6.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.0...v2.6.1)
