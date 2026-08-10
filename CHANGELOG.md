@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.8.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.7.1...v2.8.0) (2026-08-10)
+
+
+### Features
+
+* **ci:** cut releases automatically, without a pull request (TAB-1192) ([#37](https://github.com/Mozilla-Ocho/tabstack-python/issues/37)) ([fe22cc3](https://github.com/Mozilla-Ocho/tabstack-python/commit/fe22cc337689c48b1539d83a29492dbde99db049))
+
+
+### Bug Fixes
+
+* **ci:** assign the release issue to whoever pushed (TAB-1192) ([#33](https://github.com/Mozilla-Ocho/tabstack-python/issues/33)) ([390ce92](https://github.com/Mozilla-Ocho/tabstack-python/commit/390ce92e28664dd2c86cc41381f050e9a882c46a))
+* **ci:** make the release pipeline usable end to end (TAB-1192) ([#30](https://github.com/Mozilla-Ocho/tabstack-python/issues/30)) ([d4c5377](https://github.com/Mozilla-Ocho/tabstack-python/commit/d4c53777957225b60fe54ec55b6f6efd0d9c35f9))
+* **ci:** merge the release branch onto main instead of pushing it (TAB-1192) ([#39](https://github.com/Mozilla-Ocho/tabstack-python/issues/39)) ([1012b5b](https://github.com/Mozilla-Ocho/tabstack-python/commit/1012b5b7c67a8f6e731a72bb1437f831e418cbbb))
+* **ci:** stop the sync skipping on a matching manifest version (TAB-1192) ([#50](https://github.com/Mozilla-Ocho/tabstack-python/issues/50)) ([99ae6c2](https://github.com/Mozilla-Ocho/tabstack-python/commit/99ae6c2a9e9cf56d7fe55df045d3f9a61e9f25cd))
+* **ci:** use --add-assignee when editing the release issue (TAB-1192) ([#35](https://github.com/Mozilla-Ocho/tabstack-python/issues/35)) ([0af4f7f](https://github.com/Mozilla-Ocho/tabstack-python/commit/0af4f7f43ee5013e68bc6e0c773febbc46ac8808))
+
+
+### Reverts
+
+* **ci:** restore the issue-driven release flow (TAB-1192) ([#41](https://github.com/Mozilla-Ocho/tabstack-python/issues/41)) ([9740093](https://github.com/Mozilla-Ocho/tabstack-python/commit/97400932ebc81afbe44b71b3c2aa182893d23b20))
+
+
+### Documentation
+
+* **ci:** point the release issue at the release script (TAB-1192) ([#45](https://github.com/Mozilla-Ocho/tabstack-python/issues/45)) ([046bd7f](https://github.com/Mozilla-Ocho/tabstack-python/commit/046bd7f4a2dc96ca2d4ae747b71a51b56a943c1c))
+
 ## [2.7.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.7.0...v2.7.1) (2026-08-10)
 
 
