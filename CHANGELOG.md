@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.7.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.7.0...v2.7.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* **ci:** build release-please with pnpm instead of npm -g (TAB-1192) ([#25](https://github.com/Mozilla-Ocho/tabstack-python/issues/25)) ([ad4545f](https://github.com/Mozilla-Ocho/tabstack-python/commit/ad4545f2fcea50be0bea6fa3e79d9979c1546d3d))
+* **ci:** build release-please with pnpm instead of npm -g (TAB-1192) ([#26](https://github.com/Mozilla-Ocho/tabstack-python/issues/26)) ([0f3d37c](https://github.com/Mozilla-Ocho/tabstack-python/commit/0f3d37c3506eefe1ced0330471038547c1cb11ed))
+* **ci:** build release-please with pnpm instead of npm -g (TAB-1192) ([#26](https://github.com/Mozilla-Ocho/tabstack-python/issues/26)) ([1eb6800](https://github.com/Mozilla-Ocho/tabstack-python/commit/1eb6800bd310737ebd8967eaa67f0d4c050dca1d))
+* **ci:** install pnpm directly for the release-please build (TAB-1192) ([#27](https://github.com/Mozilla-Ocho/tabstack-python/issues/27)) ([4cc8540](https://github.com/Mozilla-Ocho/tabstack-python/commit/4cc854074864c90597ae58f917bb143accfd057a))
+* **ci:** install pnpm directly for the release-please build (TAB-1192) ([#28](https://github.com/Mozilla-Ocho/tabstack-python/issues/28)) ([cbf6c4e](https://github.com/Mozilla-Ocho/tabstack-python/commit/cbf6c4e15aa0529afed1fe9eff0171d24565dc6c))
+
 ## 2.7.0 (2026-07-17)
 
 Full Changelog: [v2.6.1...v2.7.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.6.1...v2.7.0)
