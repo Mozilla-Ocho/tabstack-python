@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.1](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.0...v2.8.1) (2026-08-10)
+
+
+### Chores
+
+* sync release 2.8.0 to next ([0ca7cce](https://github.com/Mozilla-Ocho/tabstack-python/commit/0ca7cce4a7fb66b38585198a0cd58e1e59aac58b))
+
 ## [2.8.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.7.1...v2.8.0) (2026-08-10)
 
 
