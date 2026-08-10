@@ -13,6 +13,13 @@ class ExtractMarkdownParams(TypedDict, total=False):
     url: Required[str]
     """URL to fetch and convert to markdown"""
 
+    content: Literal["main", "full"]
+    """Content scope.
+
+    "main" (default) returns the main article content; "full" returns the whole
+    page, including navigation, footer, and links.
+    """
+
     effort: Literal["min", "standard", "max"]
     """Fetch effort level controlling speed vs.
 

@@ -24,6 +24,12 @@ class Metadata(BaseModel):
     description: Optional[str] = None
     """Page description from Open Graph or HTML"""
 
+    favicon: Optional[str] = None
+    """
+    Favicon URL (resolved to absolute) parsed from <link rel="icon"> / "shortcut
+    icon" / "apple-touch-icon"
+    """
+
     image: Optional[str] = None
     """Featured image URL from Open Graph"""
 

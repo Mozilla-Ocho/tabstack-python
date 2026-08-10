@@ -65,7 +65,9 @@ class ExtractResource(SyncAPIResource):
         Fetches a URL and extracts structured data according to a provided JSON schema
 
         Args:
-          json_schema: JSON schema definition that describes the structure of data to extract.
+          json_schema: JSON schema definition that describes the structure of data to extract. If the
+              schema includes a "page_title" or "favicon" property, those fields are
+              automatically filled from page metadata when the AI leaves them empty.
 
           url: URL to fetch and extract data from
 
@@ -109,6 +111,7 @@ class ExtractResource(SyncAPIResource):
         self,
         *,
         url: str,
+        content: Literal["main", "full"] | Omit = omit,
         effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
@@ -126,6 +129,9 @@ class ExtractResource(SyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          content: Content scope. "main" (default) returns the main article content; "full" returns
+              the whole page, including navigation, footer, and links.
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
               fallback (1-5s). "standard": balanced with enhanced reliability (default,
@@ -153,6 +159,7 @@ class ExtractResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "content": content,
                     "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,
@@ -206,7 +213,9 @@ class AsyncExtractResource(AsyncAPIResource):
         Fetches a URL and extracts structured data according to a provided JSON schema
 
         Args:
-          json_schema: JSON schema definition that describes the structure of data to extract.
+          json_schema: JSON schema definition that describes the structure of data to extract. If the
+              schema includes a "page_title" or "favicon" property, those fields are
+              automatically filled from page metadata when the AI leaves them empty.
 
           url: URL to fetch and extract data from
 
@@ -250,6 +259,7 @@ class AsyncExtractResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        content: Literal["main", "full"] | Omit = omit,
         effort: Literal["min", "standard", "max"] | Omit = omit,
         geo_target: GeotargetGeoTarget | Omit = omit,
         metadata: bool | Omit = omit,
@@ -267,6 +277,9 @@ class AsyncExtractResource(AsyncAPIResource):
 
         Args:
           url: URL to fetch and convert to markdown
+
+          content: Content scope. "main" (default) returns the main article content; "full" returns
+              the whole page, including navigation, footer, and links.
 
           effort: Fetch effort level controlling speed vs. capability tradeoff. "min": fastest, no
               fallback (1-5s). "standard": balanced with enhanced reliability (default,
@@ -294,6 +307,7 @@ class AsyncExtractResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "content": content,
                     "effort": effort,
                     "geo_target": geo_target,
                     "metadata": metadata,

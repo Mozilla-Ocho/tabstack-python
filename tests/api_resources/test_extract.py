@@ -178,6 +178,7 @@ class TestExtract:
     def test_method_markdown_with_all_params(self, client: Tabstack) -> None:
         extract = client.extract.markdown(
             url="https://example.com/blog/article",
+            content="main",
             effort="standard",
             geo_target={"country": "US"},
             metadata=True,
@@ -375,6 +376,7 @@ class TestAsyncExtract:
     async def test_method_markdown_with_all_params(self, async_client: AsyncTabstack) -> None:
         extract = await async_client.extract.markdown(
             url="https://example.com/blog/article",
+            content="main",
             effort="standard",
             geo_target={"country": "US"},
             metadata=True,
