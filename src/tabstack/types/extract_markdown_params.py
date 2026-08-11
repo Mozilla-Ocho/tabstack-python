@@ -32,10 +32,7 @@ class ExtractMarkdownParams(TypedDict, total=False):
     """Optional geotargeting parameters for proxy requests"""
 
     metadata: bool
-    """
-    Include extracted metadata (Open Graph and HTML metadata) as a separate field in
-    the response
-    """
+    """Include Open Graph and HTML metadata as a separate field in the response"""
 
     nocache: bool
     """Bypass cache and force fresh data retrieval"""

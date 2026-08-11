@@ -139,8 +139,7 @@ class ExtractResource(SyncAPIResource):
 
           geo_target: Optional geotargeting parameters for proxy requests
 
-          metadata: Include extracted metadata (Open Graph and HTML metadata) as a separate field in
-              the response
+          metadata: Include Open Graph and HTML metadata as a separate field in the response
 
           nocache: Bypass cache and force fresh data retrieval
 
@@ -287,8 +286,7 @@ class AsyncExtractResource(AsyncAPIResource):
 
           geo_target: Optional geotargeting parameters for proxy requests
 
-          metadata: Include extracted metadata (Open Graph and HTML metadata) as a separate field in
-              the response
+          metadata: Include Open Graph and HTML metadata as a separate field in the response
 
           nocache: Bypass cache and force fresh data retrieval
 
