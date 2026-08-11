@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.4](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.3...v2.8.4) (2026-08-11)
+
+
+### Bug Fixes
+
+* **ci:** close the release issue once the release is cut ([#61](https://github.com/Mozilla-Ocho/tabstack-python/issues/61)) ([a8fcac5](https://github.com/Mozilla-Ocho/tabstack-python/commit/a8fcac55aa1b4b8af10ab10cb0acd0fe04ed41e7))
+
 ## [2.8.3](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.2...v2.8.3) (2026-08-11)
 
 
