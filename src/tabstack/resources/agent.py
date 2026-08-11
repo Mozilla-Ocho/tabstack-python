@@ -258,7 +258,7 @@ class AgentResource(SyncAPIResource):
 
           mode: Research mode: fast (quick answers, default), balanced (standard research)
 
-          nocache: Skip cache and force fresh research
+          nocache: Bypass cache and force fresh research
 
           extra_headers: Send extra headers
 
@@ -524,7 +524,7 @@ class AsyncAgentResource(AsyncAPIResource):
 
           mode: Research mode: fast (quick answers, default), balanced (standard research)
 
-          nocache: Skip cache and force fresh research
+          nocache: Bypass cache and force fresh research
 
           extra_headers: Send extra headers
 
