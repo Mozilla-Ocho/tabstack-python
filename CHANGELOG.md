@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.5](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.4...v2.8.5) (2026-08-11)
+
+
+### Bug Fixes
+
+* **api:** regenerate from spec b22d2a7e ([#64](https://github.com/Mozilla-Ocho/tabstack-python/issues/64)) ([2b131fc](https://github.com/Mozilla-Ocho/tabstack-python/commit/2b131fc1affb0b17cca3783ecf6b55a104a45932))
+
 ## [2.8.4](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.3...v2.8.4) (2026-08-11)
 
 
