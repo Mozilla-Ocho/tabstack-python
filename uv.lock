@@ -1334,7 +1334,7 @@ wheels = [
 
 [[package]]
 name = "tabstack"
-version = "2.7.1"
+version = "2.8.1"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
