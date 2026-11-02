@@ -28,6 +28,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
+import sys
 from tabstack import Tabstack
 
 client = Tabstack(
@@ -42,7 +43,7 @@ for event in stream:
     if event.event == "complete":
         print(event.data.report)
     elif event.event == "error":
-        print(event.data.message)
+        print(event.data.message, file=sys.stderr)
 ```
 
 While you can provide an `api_key` keyword argument,
