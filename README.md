@@ -3,6 +3,8 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/tabstack.svg?label=pypi%20(stable))](https://pypi.org/project/tabstack/)
 
+Give your model the web without giving up your privacy. Never trained on. Private by default. Built by Mozilla.
+
 The Tabstack Python library provides convenient access to the Tabstack REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
@@ -32,9 +34,15 @@ client = Tabstack(
     api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
 )
 
-automate_event = client.agent.automate(
-    task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+stream = client.agent.research(
+    query="What are the latest developments in quantum computing?",
 )
+
+for event in stream:
+    if event.event == "complete":
+        print(event.data.report)
+    elif event.event == "error":
+        print(event.data.message)
 ```
 
 While you can provide an `api_key` keyword argument,
