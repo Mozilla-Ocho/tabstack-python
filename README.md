@@ -66,15 +66,21 @@ client = AsyncTabstack(
 
 
 async def main() -> None:
-    automate_event = await client.agent.automate(
+    stream = await client.agent.automate(
         task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+        url="https://github.com/trending",
     )
+    async for event in stream:
+        if event.event == "complete":
+            print(event.data.final_answer)
 
 
 asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+`client.agent.automate()` and `client.agent.research()` always stream. They return a `Stream` (or `AsyncStream`) of `AutomateEvent` or `ResearchEvent`, and the final result arrives in the `complete` event. Both unions include an `error` event, and `AutomateEvent` also ends with a `done` event.
 
 ### With aiohttp
 
@@ -101,9 +107,13 @@ async def main() -> None:
         api_key=os.environ.get("TABSTACK_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        automate_event = await client.agent.automate(
+        stream = await client.agent.automate(
             task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+            url="https://github.com/trending",
         )
+        async for event in stream:
+            if event.event == "complete":
+                print(event.data.final_answer)
 
 
 asyncio.run(main())
@@ -127,11 +137,14 @@ from tabstack import Tabstack
 
 client = Tabstack()
 
-automate_event = client.agent.automate(
+stream = client.agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
-    geo_target={},
+    url="https://github.com/trending",
+    geo_target={"country": "US"},
 )
-print(automate_event.geo_target)
+for event in stream:
+    if event.event == "complete":
+        print(event.data.final_answer)
 ```
 
 ## Handling errors
@@ -150,9 +163,18 @@ from tabstack import Tabstack
 client = Tabstack()
 
 try:
-    client.agent.automate(
+    stream = client.agent.automate(
         task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
+        url="https://github.com/trending",
     )
+    for event in stream:
+        if event.event == "complete":
+            if event.data.success:
+                print(event.data.final_answer)
+            elif event.data.error is not None:
+                print(event.data.error.message)
+        elif event.event == "error":
+            print(event.data.error.message)
 except tabstack.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -163,6 +185,8 @@ except tabstack.APIStatusError as e:
     print(e.status_code)
     print(e.response)
 ```
+
+Errors that happen after the stream opens arrive as events in the stream (an `error` event, or a `complete` event with `success: false`), not as a raised `APIError`.
 
 Error codes are as follows:
 
@@ -195,17 +219,21 @@ client = Tabstack(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).agent.automate(
+stream = client.with_options(max_retries=5).agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
+for event in stream:
+    if event.event == "complete":
+        print(event.data.final_answer)
 ```
 
 ### Timeouts
 
-By default requests time out after 1 minute. You can configure this with a `timeout` option,
+By default requests time out after 1 minute. `client.agent.automate()` and `client.agent.research()` default to 10 minutes unless you change the client-level `timeout`. You can configure this with a `timeout` option,
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
+import httpx
 from tabstack import Tabstack
 
 # Configure the default for all requests:
@@ -220,9 +248,12 @@ client = Tabstack(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).agent.automate(
+stream = client.with_options(timeout=5.0).agent.automate(
     task="Find the top 3 trending repositories and extract their names, descriptions, and star counts",
 )
+for event in stream:
+    if event.event == "complete":
+        print(event.data.final_answer)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -268,8 +299,10 @@ response = client.agent.with_raw_response.automate(
 )
 print(response.headers.get('X-My-Header'))
 
-agent = response.parse()  # get the object that `agent.automate()` would have returned
-print(agent)
+stream = response.parse()  # get the object that `agent.automate()` would have returned
+for event in stream:
+    if event.event == "complete":
+        print(event.data.final_answer)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Mozilla-Ocho/tabstack-python/tree/main/src/tabstack/_response.py) object.
@@ -278,7 +311,7 @@ The async client returns an [`AsyncAPIResponse`](https://github.com/Mozilla-Ocho
 
 #### `.with_streaming_response`
 
-The above interface eagerly reads the full response body when you make the request, which may not always be what you want.
+The above interface eagerly reads the full response body when you make the request, which may not always be what you want. Streaming methods are the exception: for `client.agent.automate()` and `client.agent.research()`, `parse()` returns the event `Stream`, which reads the body as you iterate it.
 
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
