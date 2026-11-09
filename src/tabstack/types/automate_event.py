@@ -2464,9 +2464,8 @@ class V1AutomateEventTaskStarted(BaseModel):
 
 
 class V1AutomateEventTaskTraceContextData(BaseModel):
-    """Payload for the task:trace_context event.
-
-    Carries the OpenTelemetry trace ID for this /v1/automate request so consumers can deep-link to distributed-tracing UIs (e.g. Cloud Trace, Cloud Logging) for the run.
+    """
+    Payload for the task:trace_context event, the first event on /v1/automate and /v1/research streams. Carries the OpenTelemetry trace ID for this request, the same value as the X-Trace-Id response header. Quote it when contacting support, or use it to match a request to its usage.
     """
 
     trace_id: str = FieldInfo(alias="traceId")
@@ -2477,11 +2476,11 @@ class V1AutomateEventTaskTraceContext(BaseModel):
     """Envelope for the "task:trace_context" event from /v1/automate."""
 
     data: V1AutomateEventTaskTraceContextData
-    """Payload for the task:trace_context event.
-
-    Carries the OpenTelemetry trace ID for this /v1/automate request so consumers
-    can deep-link to distributed-tracing UIs (e.g. Cloud Trace, Cloud Logging) for
-    the run.
+    """
+    Payload for the task:trace_context event, the first event on /v1/automate and
+    /v1/research streams. Carries the OpenTelemetry trace ID for this request, the
+    same value as the X-Trace-Id response header. Quote it when contacting support,
+    or use it to match a request to its usage.
     """
 
     event: Literal["task:trace_context"]

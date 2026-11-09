@@ -28,6 +28,7 @@ __all__ = [
     "V1ResearchEventCompleteDataMetadataMetricsTokens",
     "V1ResearchEventCompleteDataMetadataOutline",
     "V1ResearchEventCompleteDataMetadataURLSources",
+    "V1ResearchEventCompleteDataUsage",
     "V1ResearchEventError",
     "V1ResearchEventErrorData",
     "V1ResearchEventErrorDataError",
@@ -66,6 +67,8 @@ __all__ = [
     "V1ResearchEventSearchingStartData",
     "V1ResearchEventStart",
     "V1ResearchEventStartData",
+    "V1ResearchEventTaskTraceContext",
+    "V1ResearchEventTaskTraceContextData",
     "V1ResearchEventWritingEnd",
     "V1ResearchEventWritingEndData",
     "V1ResearchEventWritingStart",
@@ -366,6 +369,19 @@ class V1ResearchEventCompleteDataMetadata(BaseModel):
     url_sources: Optional[V1ResearchEventCompleteDataMetadataURLSources] = FieldInfo(alias="urlSources", default=None)
 
 
+class V1ResearchEventCompleteDataUsage(BaseModel):
+    """What this request consumed.
+
+    Added by Tabstack, not by the research engine. Multiply actions by the per-action rate for the research mode to get the cost of this request. Requests that end in an error event are not charged.
+    """
+
+    actions: int
+    """Billable actions this request used.
+
+    Research charges one action per research iteration.
+    """
+
+
 class V1ResearchEventCompleteData(BaseModel):
     """complete - Research finished successfully"""
 
@@ -381,6 +397,14 @@ class V1ResearchEventCompleteData(BaseModel):
     report: str
 
     timestamp: float
+
+    usage: Optional[V1ResearchEventCompleteDataUsage] = None
+    """What this request consumed.
+
+    Added by Tabstack, not by the research engine. Multiply actions by the
+    per-action rate for the research mode to get the cost of this request. Requests
+    that end in an error event are not charged.
+    """
 
 
 class V1ResearchEventComplete(BaseModel):
@@ -799,6 +823,29 @@ class V1ResearchEventStart(BaseModel):
     event: Literal["start"]
 
 
+class V1ResearchEventTaskTraceContextData(BaseModel):
+    """
+    Payload for the task:trace_context event, the first event on /v1/automate and /v1/research streams. Carries the OpenTelemetry trace ID for this request, the same value as the X-Trace-Id response header. Quote it when contacting support, or use it to match a request to its usage.
+    """
+
+    trace_id: str = FieldInfo(alias="traceId")
+    """W3C trace ID — 32-character lowercase hexadecimal string."""
+
+
+class V1ResearchEventTaskTraceContext(BaseModel):
+    """Envelope for the "task:trace_context" event from /v1/research."""
+
+    data: V1ResearchEventTaskTraceContextData
+    """
+    Payload for the task:trace_context event, the first event on /v1/automate and
+    /v1/research streams. Carries the OpenTelemetry trace ID for this request, the
+    same value as the X-Trace-Id response header. Quote it when contacting support,
+    or use it to match a request to its usage.
+    """
+
+    event: Literal["task:trace_context"]
+
+
 class V1ResearchEventWritingEndData(BaseModel):
     attempt: float
 
@@ -863,6 +910,7 @@ ResearchEvent: TypeAlias = Annotated[
         V1ResearchEventSearchingEnd,
         V1ResearchEventSearchingStart,
         V1ResearchEventStart,
+        V1ResearchEventTaskTraceContext,
         V1ResearchEventWritingEnd,
         V1ResearchEventWritingStart,
     ],

@@ -181,7 +181,9 @@ class AgentResource(SyncAPIResource):
         **Lifecycle:**
 
         - Input requests expire after 2 minutes by default
-        - Expired or already-answered requests return `410 Gone`
+        - Expired, already-answered, or unknown requests return `410 Gone`
+        - A `requestID` belonging to another organization is not visible to you and
+          returns `410 Gone`
         - Successful submissions return `202 Accepted` (fire-and-forget from caller's
           perspective)
 
@@ -238,6 +240,11 @@ class AgentResource(SyncAPIResource):
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates as research progresses through phases
+        - The first event, `task:trace_context`, carries the trace ID for this request
+          (also sent as the `X-Trace-Id` header)
+        - The `complete` event carries a `usage` object with the number of billable
+          actions the request used. Requests that end in an `error` event are not
+          charged
 
         **Research Modes:**
 
@@ -447,7 +454,9 @@ class AsyncAgentResource(AsyncAPIResource):
         **Lifecycle:**
 
         - Input requests expire after 2 minutes by default
-        - Expired or already-answered requests return `410 Gone`
+        - Expired, already-answered, or unknown requests return `410 Gone`
+        - A `requestID` belonging to another organization is not visible to you and
+          returns `410 Gone`
         - Successful submissions return `202 Accepted` (fire-and-forget from caller's
           perspective)
 
@@ -504,6 +513,11 @@ class AsyncAgentResource(AsyncAPIResource):
 
         - All responses are streamed using Server-Sent Events (`text/event-stream`)
         - Real-time progress updates as research progresses through phases
+        - The first event, `task:trace_context`, carries the trace ID for this request
+          (also sent as the `X-Trace-Id` header)
+        - The `complete` event carries a `usage` object with the number of billable
+          actions the request used. Requests that end in an `error` event are not
+          charged
 
         **Research Modes:**
 
