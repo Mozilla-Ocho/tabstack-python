@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.5...v2.9.0) (2026-11-09)
+
+
+### Features
+
+* **api:** add research trace context event and usage ([#68](https://github.com/Mozilla-Ocho/tabstack-python/issues/68)) ([33d5c09](https://github.com/Mozilla-Ocho/tabstack-python/commit/33d5c09e4d1a4a304392233a1da05e9da0c145c1))
+
 ## [2.8.5](https://github.com/Mozilla-Ocho/tabstack-python/compare/v2.8.4...v2.8.5) (2026-08-11)
 
 
