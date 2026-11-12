@@ -384,7 +384,7 @@ print(tabstack.__version__)
 
 ## Feedback
 
-Report a problem or request a feature in [tabstack-feedback](https://github.com/Mozilla-Ocho/tabstack-feedback/issues/new/choose). Include the SDK version (`tabstack.__version__`) and the `x-trace-id` from the failing response when relevant. Never paste API keys or personal data into an issue.
+Report a problem or request a feature in [tabstack-feedback](https://github.com/Mozilla-Ocho/tabstack-feedback/issues/new/choose). Include the SDK version (`tabstack.__version__`) and the `x-trace-id` header from the failing response when relevant (see [Accessing raw response data](#accessing-raw-response-data-eg-headers)). Never paste API keys or personal data into an issue.
 
 ## Requirements
 
