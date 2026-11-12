@@ -371,8 +371,6 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/Mozilla-Ocho/tabstack-python/issues) with questions, bugs, or suggestions.
-
 ### Determining the installed version
 
 If you've upgraded to the latest version but aren't seeing any new features you were expecting then your python environment is likely still using an older version.
@@ -383,6 +381,10 @@ You can determine the version that is being used at runtime with:
 import tabstack
 print(tabstack.__version__)
 ```
+
+## Feedback
+
+Report a problem or request a feature in [tabstack-feedback](https://github.com/Mozilla-Ocho/tabstack-feedback/issues/new/choose). Include the SDK version (`tabstack.__version__`) and the `x-trace-id` header from the failing response when relevant (see [Accessing raw response data](#accessing-raw-response-data-eg-headers)). Never paste API keys or personal data into an issue.
 
 ## Requirements
 
